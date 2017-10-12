@@ -1,13 +1,39 @@
-﻿using System.IO;
+﻿using NUnrar.Archive;
+using System.IO;
+using System.IO.Compression;
 
 namespace Obmen_wpf
 {
     class Copy
     {
-        public void CopyFile(string from, string to)
+        private string[] pathFrom;
+
+        public string[] PathFrom
         {
-            DirectoryInfo directoryFrom = new DirectoryInfo(from);
-            DirectoryInfo directoryTo = new DirectoryInfo(to);
+            get { return pathFrom; }
+            set { pathFrom = value; }
+        }
+
+        private string[] pathTo;
+
+        public string[] PathTo
+        {
+            get { return pathTo; }
+            set { pathTo = value; }
+        }
+
+
+
+        public Copy(string[] from, string[] to)
+        {
+            PathFrom = from;
+            PathTo = to;
+        }
+
+        public void CopyFile(string pathFrom, string pathTo)
+        {
+            DirectoryInfo directoryFrom = new DirectoryInfo(pathFrom);
+            DirectoryInfo directoryTo = new DirectoryInfo(pathTo);
 
             if (directoryFrom.Exists && directoryTo.Exists)
             {
@@ -16,13 +42,13 @@ namespace Obmen_wpf
 
                 foreach (FileInfo file in files)
                 {
-                    file.CopyTo(to + file.Name, true);
+                    file.CopyTo(pathTo + file.Name, true);
                 }
 
                 foreach (DirectoryInfo dir in dirs)
                 {
-                    Directory.CreateDirectory(to + dir.Name);
-                    CopyFile(from + "\\" + dir.Name, to + dir.Name + "\\");
+                    Directory.CreateDirectory(pathTo + dir.Name);
+                    CopyFile(pathFrom + "\\" + dir.Name, pathTo + dir.Name + "\\");
                 }
             }
             else
@@ -30,7 +56,29 @@ namespace Obmen_wpf
                 directoryFrom.Create();
                 directoryTo.Create();
 
-                CopyFile(from, to);
+                CopyFile(pathFrom, pathTo);
+
+            }
+        }
+
+        public void ExtractArchive(string pathFrom, string pathTo)
+        {
+            try
+            {
+                DirectoryInfo dirFrom = new DirectoryInfo(pathFrom);
+                DirectoryInfo dirTo = new DirectoryInfo(pathTo);
+                FileInfo[] files = dirFrom.GetFiles();
+
+                if (dirTo.Exists) dirTo.Delete(true);
+                for (int i = 0; i < files.Length; i++)
+                {
+                    string _pathFrom = dirFrom + files[i].Name;
+                    ZipFile.ExtractToDirectory(_pathFrom, pathTo); // Разархивация .zip
+                    RarArchive.WriteToDirectory(pathFrom, pathTo); // Разархивация .rar 
+                }
+            }
+            catch (IOException)
+            {
 
             }
         }
