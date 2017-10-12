@@ -29,6 +29,7 @@ namespace Obmen_wpf
         {
             Copy copy = new Copy();
             copy.CopyFile("C:\\TestFrom","C:\\TestTo\\");
+            RemovableDisk disk = new RemovableDisk();
         }
     }
 }

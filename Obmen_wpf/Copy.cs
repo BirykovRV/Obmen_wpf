@@ -6,13 +6,13 @@ namespace Obmen_wpf
     {
         public void CopyFile(string from, string to)
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(from);
+            DirectoryInfo directoryFrom = new DirectoryInfo(from);
             DirectoryInfo directoryTo = new DirectoryInfo(to);
 
-            if (directoryInfo.Exists && directoryTo.Exists)
+            if (directoryFrom.Exists && directoryTo.Exists)
             {
-                DirectoryInfo[] dirs = directoryInfo.GetDirectories();
-                FileInfo[] files = directoryInfo.GetFiles();
+                DirectoryInfo[] dirs = directoryFrom.GetDirectories();
+                FileInfo[] files = directoryFrom.GetFiles();
 
                 foreach (FileInfo file in files)
                 {
@@ -27,7 +27,11 @@ namespace Obmen_wpf
             }
             else
             {
-                throw new System.Exception("Ошибка Копирования, проверьте наличие папок");
+                directoryFrom.Create();
+                directoryTo.Create();
+
+                CopyFile(from, to);
+
             }
         }
     }
