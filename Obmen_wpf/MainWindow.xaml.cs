@@ -27,9 +27,6 @@ namespace Obmen_wpf
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Copy copy = new Copy();
-            copy.CopyFile("C:\\TestFrom","C:\\TestTo\\");
-            RemovableDisk disk = new RemovableDisk();
         }
     }
 }
