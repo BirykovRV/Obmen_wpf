@@ -6,30 +6,6 @@ namespace Obmen_wpf
 {
     class Copy
     {
-        private string[] pathFrom;
-
-        public string[] PathFrom
-        {
-            get { return pathFrom; }
-            set { pathFrom = value; }
-        }
-
-        private string[] pathTo;
-
-        public string[] PathTo
-        {
-            get { return pathTo; }
-            set { pathTo = value; }
-        }
-
-
-
-        public Copy(string[] from, string[] to)
-        {
-            PathFrom = from;
-            PathTo = to;
-        }
-
         public void CopyFile(string pathFrom, string pathTo)
         {
             DirectoryInfo directoryFrom = new DirectoryInfo(pathFrom);
