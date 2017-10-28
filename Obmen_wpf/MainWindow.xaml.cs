@@ -30,16 +30,13 @@ namespace Obmen_wpf
                 foreach (var item in disk.RemovableDrives)
                 {
                     operation.CopyFile($"{item.Key}\\F130", to, false);
-                    //operation.CopyFile(fromArchive, toArchive, true);
-
                 }
                 disk.RemovableDrives.Clear();
             }
             catch (Exception ex)
             {
                 log.Debug(ex.ToString());
-            }            
-            
+            }              
         }
     }
 }

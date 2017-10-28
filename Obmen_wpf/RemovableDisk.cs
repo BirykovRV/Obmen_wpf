@@ -7,6 +7,7 @@ namespace Obmen_wpf
     class RemovableDisk
     {
         private static Logger log = LogManager.GetCurrentClassLogger();
+        private int count;
         /// <summary>
         /// Возвращает словарь, где Key - это буква диска, а Value - название
         /// </summary>
@@ -17,7 +18,7 @@ namespace Obmen_wpf
         /// <summary>
         /// Метод для поика съемных USB устройств
         /// </summary>
-        public void FindDisk()
+        public int FindDisk()
         {
             DriveInfo[] driveInfo = DriveInfo.GetDrives();
             foreach (var item in driveInfo)
@@ -25,8 +26,10 @@ namespace Obmen_wpf
                 if (item.DriveType == DriveType.Removable)
                 {
                     removableDrive.Add(item.Name, item.VolumeLabel);
+                    count++;
                 }
             }
+            return count;
         }
     }
 }

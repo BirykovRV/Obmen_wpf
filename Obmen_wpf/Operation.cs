@@ -36,7 +36,6 @@ namespace Obmen_wpf
 
                     foreach (FileInfo file in files)
                     {
-                        log.Debug($"Копирование [{file.Name}] в {pathTo}");
                         string newPathTo = pathTo + file.Name;
                         file.CopyTo(newPathTo, true);                        
                     }
