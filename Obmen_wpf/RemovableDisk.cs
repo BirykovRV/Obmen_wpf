@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using NLog;
 
 namespace Obmen_wpf
 {
     class RemovableDisk
     {
+        private static Logger log = LogManager.GetCurrentClassLogger();
         /// <summary>
         /// Возвращает словарь, где Key - это буква диска, а Value - название
         /// </summary>
@@ -18,11 +20,11 @@ namespace Obmen_wpf
         public void FindDisk()
         {
             DriveInfo[] driveInfo = DriveInfo.GetDrives();
-            for (int i = 0; i < driveInfo.Length; i++)
+            foreach (var item in driveInfo)
             {
-                if (driveInfo[i].DriveType == DriveType.Removable)
+                if (item.DriveType == DriveType.Removable)
                 {
-                    removableDrive.Add(driveInfo[i].Name, driveInfo[i].VolumeLabel);
+                    removableDrive.Add(item.Name, item.VolumeLabel);
                 }
             }
         }

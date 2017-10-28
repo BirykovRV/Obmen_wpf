@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using NLog;
 
 namespace Obmen_wpf
 {
@@ -21,7 +10,9 @@ namespace Obmen_wpf
     public partial class MainWindow : Window
     {
         private Operation operation;
-        private RemovableDisk disk; 
+        private RemovableDisk disk;
+
+        private static Logger log = LogManager.GetCurrentClassLogger();
 
         public MainWindow()
         {
@@ -32,19 +23,23 @@ namespace Obmen_wpf
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            disk.FindDisk();
-            //string from = "D:\\TestFrom";
-            string to = "C:\\TestTo\\";
-            //string fromArchive = "D:\\TestFrom";
-            //string toArchive = "C:\\TestTo\\Archive\\";
-            //operation.CopyFile(from, to, false);
-            //operation.CopyFile(fromArchive, toArchive, true);
-            foreach (var item in disk.RemovableDrives)
+            try
             {
-                operation.CopyFile($"{item.Key}\\PostPay\\DB", to, true);
-                //operation.CopyFile(fromArchive, toArchive, true);
+                disk.FindDisk();
+                string to = "C:\\TestTo\\";
+                foreach (var item in disk.RemovableDrives)
+                {
+                    operation.CopyFile($"{item.Key}\\F130", to, false);
+                    //operation.CopyFile(fromArchive, toArchive, true);
+
+                }
+                disk.RemovableDrives.Clear();
             }
-            disk.RemovableDrives.Clear();
+            catch (Exception ex)
+            {
+                log.Debug(ex.ToString());
+            }            
+            
         }
     }
 }

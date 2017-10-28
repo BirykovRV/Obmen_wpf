@@ -1,4 +1,5 @@
 ﻿using NUnrar.Archive;
+using NLog;
 using System.IO;
 using System.IO.Compression;
 
@@ -9,6 +10,8 @@ namespace Obmen_wpf
     /// </summary>
     class Operation
     {
+        // Логирование Nlogs
+        private static Logger log = LogManager.GetCurrentClassLogger();
         /// <summary>
         /// Позволяет копировать файлы, папки, подпапки и разархивировать zip и rar
         /// </summary>
@@ -33,8 +36,9 @@ namespace Obmen_wpf
 
                     foreach (FileInfo file in files)
                     {
+                        log.Debug($"Копирование [{file.Name}] в {pathTo}");
                         string newPathTo = pathTo + file.Name;
-                        file.CopyTo(newPathTo, true);
+                        file.CopyTo(newPathTo, true);                        
                     }
 
                     foreach (DirectoryInfo dir in dirs)
