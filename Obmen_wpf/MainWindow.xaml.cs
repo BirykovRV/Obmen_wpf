@@ -20,13 +20,31 @@ namespace Obmen_wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Operation operation;
+        private RemovableDisk disk; 
+
         public MainWindow()
         {
             InitializeComponent();
+            operation = new Operation();
+            disk = new RemovableDisk();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            disk.FindDisk();
+            //string from = "D:\\TestFrom";
+            string to = "C:\\TestTo\\";
+            //string fromArchive = "D:\\TestFrom";
+            //string toArchive = "C:\\TestTo\\Archive\\";
+            //operation.CopyFile(from, to, false);
+            //operation.CopyFile(fromArchive, toArchive, true);
+            foreach (var item in disk.RemovableDrives)
+            {
+                operation.CopyFile($"{item.Key}\\PostPay\\DB", to, true);
+                //operation.CopyFile(fromArchive, toArchive, true);
+            }
+            disk.RemovableDrives.Clear();
         }
     }
 }

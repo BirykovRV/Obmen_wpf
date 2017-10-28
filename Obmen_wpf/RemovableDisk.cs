@@ -1,25 +1,30 @@
-﻿
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace Obmen_wpf
 {
     class RemovableDisk
     {
-        public string GetDiskVolumeLable { get; private set; }
-        public string GetDiskChar { get; private set; }
+        /// <summary>
+        /// Возвращает словарь, где Key - это буква диска, а Value - название
+        /// </summary>
+        public Dictionary<string, string> RemovableDrives { get { return removableDrive; } }
+        // Словарь для буквы диска и имени
+        Dictionary<string, string> removableDrive = new Dictionary<string, string>();
 
-        public string FindDiskChar()
+        /// <summary>
+        /// Метод для поика съемных USB устройств
+        /// </summary>
+        public void FindDisk()
         {
             DriveInfo[] driveInfo = DriveInfo.GetDrives();
             for (int i = 0; i < driveInfo.Length; i++)
             {
                 if (driveInfo[i].DriveType == DriveType.Removable)
                 {
-                    GetDiskChar = driveInfo[i].Name;
-                    GetDiskVolumeLable = driveInfo[i].VolumeLabel;
+                    removableDrive.Add(driveInfo[i].Name, driveInfo[i].VolumeLabel);
                 }
             }
-            return null;
         }
     }
 }
