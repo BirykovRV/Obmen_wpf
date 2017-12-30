@@ -21,21 +21,31 @@ namespace Obmen_wpf
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                RemovableDisk.FindDisk();
-                string to = "D:\\TEST\\";
-                foreach (var item in RemovableDisk.RemovableDrives)
-                {
-                    operation.CopyFile($"{item.Key}\\F130", to, false);
-                }
-                RemovableDisk.RemovableDrives.Clear();
 
-            }
-            catch (Exception ex)
-            {
-                log.Debug(ex.ToString());
-            }              
+            GetSettings set = new GetSettings();
+            set.CreateXml();
+
+            //try
+            //{
+            //    if (RemovableDisk.FindDisk())
+            //    {                    
+            //        foreach (var item in RemovableDisk.RemovableDrives)
+            //        {
+            //            string to = $"D:\\TEST\\{item.Value}\\";
+            //            string from = $"{item.Key}\\F130";
+            //            operation.CopyFile(from, to, false);
+            //        }
+            //        RemovableDisk.RemovableDrives.Clear();
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Не найдены USB накопители");
+            //    }                
+            //}
+            //catch (Exception ex)
+            //{
+            //    log.Debug(ex.ToString());
+            //}              
         }
     }
 }

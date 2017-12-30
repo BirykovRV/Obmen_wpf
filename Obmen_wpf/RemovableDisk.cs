@@ -4,6 +4,9 @@ using NLog;
 
 namespace Obmen_wpf
 {
+    /// <summary>
+    /// Возвращает словарь где key - буква диска, value - название
+    /// </summary>
     class RemovableDisk
     {
         private static Logger log = LogManager.GetCurrentClassLogger();
@@ -17,16 +20,19 @@ namespace Obmen_wpf
         /// <summary>
         /// Метод для поика съемных USB устройств
         /// </summary>
-        public static void FindDisk()
+        public static bool FindDisk()
         {
             DriveInfo[] driveInfo = DriveInfo.GetDrives();
+            bool isEmpty = false;
             foreach (var item in driveInfo)
             {
                 if (item.DriveType == DriveType.Removable)
                 {
                     removableDrive.Add(item.Name, item.VolumeLabel);
+                    isEmpty = true;
                 }
             }
+            return isEmpty;
         }
     }
 }

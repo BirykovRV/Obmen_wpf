@@ -38,7 +38,7 @@ namespace Obmen_wpf
                     foreach (FileInfo file in files)
                     {
                         string newPathTo = pathTo + file.Name;
-                        file.CopyTo(newPathTo, true);                        
+                        file.CopyTo(newPathTo, true);
                     }
 
                     foreach (DirectoryInfo dir in dirs)

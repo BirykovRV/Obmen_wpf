@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GetSettings.cs" />
     <Compile Include="RemovableDisk.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SettingsView.xaml.cs">
