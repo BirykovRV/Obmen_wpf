@@ -9,29 +9,28 @@ namespace Obmen_wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Operation operation;
-        private RemovableDisk disk;
+        private Operations operation;
 
         private static Logger log = LogManager.GetCurrentClassLogger();
 
         public MainWindow()
         {
             InitializeComponent();
-            operation = new Operation();
-            disk = new RemovableDisk();
+            operation = new Operations();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                disk.FindDisk();
-                string to = "C:\\TestTo\\";
-                foreach (var item in disk.RemovableDrives)
+                RemovableDisk.FindDisk();
+                string to = "D:\\TEST\\";
+                foreach (var item in RemovableDisk.RemovableDrives)
                 {
                     operation.CopyFile($"{item.Key}\\F130", to, false);
                 }
-                disk.RemovableDrives.Clear();
+                RemovableDisk.RemovableDrives.Clear();
+
             }
             catch (Exception ex)
             {

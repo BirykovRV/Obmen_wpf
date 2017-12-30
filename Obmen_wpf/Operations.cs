@@ -2,13 +2,14 @@
 using NLog;
 using System.IO;
 using System.IO.Compression;
+using System.Text;
 
 namespace Obmen_wpf
 {
     /// <summary>
     /// Определяет методы для копирования файлов, папок, разархивации zip и rar
     /// </summary>
-    class Operation
+    class Operations
     {
         // Логирование Nlogs
         private static Logger log = LogManager.GetCurrentClassLogger();
@@ -66,25 +67,29 @@ namespace Obmen_wpf
         /// </summary>
         /// <param name="pathFrom">От куда брать архив</param>
         /// <param name="pathTo">Куда разархивировать</param>
-        private void ExtractArchive(string pathFrom, string pathTo)
+        public bool ExtractArchive(string pathFrom, string pathTo)
         {
             DirectoryInfo dirFrom = new DirectoryInfo(pathFrom);
             DirectoryInfo dirTo = new DirectoryInfo(pathTo);
             FileInfo[] files = dirFrom.GetFiles();
 
-            if (dirTo.Exists) dirTo.Delete(true);
+            //
             for (int i = 0; i < files.Length; i++)
             {
-                string _pathFrom = dirFrom + "\\" + files[i].Name;
+                string _pathFrom = pathFrom + "\\" + files[i].Name;
                 if (files[i].Name.Contains(".zip"))
                 {
+                    if (dirTo.Exists) dirTo.Delete(true);
                     ZipFile.ExtractToDirectory(_pathFrom, pathTo); // Разархивация .zip
+                    return true;
                 }
                 else if (files[i].Name.Contains(".rar"))
                 {
                     RarArchive.WriteToDirectory(_pathFrom, pathTo); // Разархивация .rar 
+                    return true;
                 }
             }
+            return false;
         }
     }
 }
