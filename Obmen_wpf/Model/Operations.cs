@@ -4,7 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Text;
 
-namespace Obmen_wpf
+namespace Obmen_wpf.Model
 {
     /// <summary>
     /// Определяет методы для копирования файлов, папок, разархивации zip и rar
