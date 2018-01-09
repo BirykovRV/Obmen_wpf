@@ -2,7 +2,7 @@
 using System.IO;
 using NLog;
 
-namespace Obmen_wpf
+namespace Obmen_wpf.Model
 {
     /// <summary>
     /// Возвращает словарь где key - буква диска, value - название

@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace Obmen_wpf
+namespace Obmen_wpf.Model
 {
     class GetSettings
     {
