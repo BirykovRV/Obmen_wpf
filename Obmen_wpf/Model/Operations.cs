@@ -3,6 +3,7 @@ using NLog;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Obmen_wpf.Model
 {
@@ -19,7 +20,7 @@ namespace Obmen_wpf.Model
         /// <param name="pathFrom">От куда копировать</param>
         /// <param name="pathTo">Куда копировать</param>
         /// <param name="isArchive">Это архив?</param>
-        public void CopyFile(string pathFrom, string pathTo, bool isArchive)
+        public static async void CopyFileAsync(string pathFrom, string pathTo, bool isArchive)
         {
             DirectoryInfo directoryFrom = new DirectoryInfo(pathFrom);
             DirectoryInfo directoryTo = new DirectoryInfo(pathTo);
@@ -28,7 +29,7 @@ namespace Obmen_wpf.Model
             {
                 if (isArchive)
                 {
-                    ExtractArchive(pathFrom, pathTo);
+                    await ExtractArchive(pathFrom, pathTo);
                 }
                 else
                 {
@@ -46,7 +47,7 @@ namespace Obmen_wpf.Model
                         string newPathTo = pathTo + dir.Name;
                         string newPathFrom = pathFrom + "\\" + dir.Name;
                         Directory.CreateDirectory(newPathTo);
-                        CopyFile(newPathFrom, newPathTo + "\\", isArchive);
+                        CopyFileAsync(newPathFrom, newPathTo + "\\", isArchive);
                     }
                 }
             }
@@ -56,9 +57,9 @@ namespace Obmen_wpf.Model
                 directoryTo.Create();
 
                 if (isArchive)
-                    ExtractArchive(pathFrom, pathTo);
+                    await ExtractArchive(pathFrom, pathTo);
                 else
-                    CopyFile(pathFrom, pathTo, isArchive);
+                    CopyFileAsync(pathFrom, pathTo, isArchive);
             }
         }
 
@@ -67,7 +68,7 @@ namespace Obmen_wpf.Model
         /// </summary>
         /// <param name="pathFrom">От куда брать архив</param>
         /// <param name="pathTo">Куда разархивировать</param>
-        public bool ExtractArchive(string pathFrom, string pathTo)
+        public static async Task ExtractArchive(string pathFrom, string pathTo)
         {
             DirectoryInfo dirFrom = new DirectoryInfo(pathFrom);
             DirectoryInfo dirTo = new DirectoryInfo(pathTo);
@@ -80,16 +81,19 @@ namespace Obmen_wpf.Model
                 if (files[i].Name.Contains(".zip"))
                 {
                     if (dirTo.Exists) dirTo.Delete(true);
-                    ZipFile.ExtractToDirectory(_pathFrom, pathTo); // Разархивация .zip
-                    return true;
+                    await Task.Factory.StartNew(() =>
+                     {
+                         ZipFile.ExtractToDirectory(_pathFrom, pathTo); // Разархивация .zip
+                    });
                 }
                 else if (files[i].Name.Contains(".rar"))
                 {
-                    RarArchive.WriteToDirectory(_pathFrom, pathTo); // Разархивация .rar 
-                    return true;
+                    await Task.Factory.StartNew(() =>
+                    {
+                        RarArchive.WriteToDirectory(_pathFrom, pathTo); // Разархивация .rar 
+                    });                    
                 }
             }
-            return false;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Obmen_wpf.Model
                     new XElement("from", "\\PostPay"),
                     new XElement("to", "D:\\TEST\\"))));
 
-            xdoc.Save("D:\\TEST\\config.xml");           
+            xdoc.Save("D:\\TEST\\config.xml");
         }
     }
 }
