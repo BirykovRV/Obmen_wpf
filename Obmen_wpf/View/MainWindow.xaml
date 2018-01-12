@@ -4,9 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Obmen_wpf"
+        xmlns:p="clr-namespace:Obmen_wpf.Properties"
+        xmlns:viewmodel="clr-namespace:Obmen_wpf.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="150" Width="300">
-    <Grid>        
-        <Button>Выполнить обмен</Button>
-    </Grid>
+        Title="MainWindow"
+        Height="150" 
+        Width="300">
+    
+    <Window.DataContext>
+        <viewmodel:ViewModelBase/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Control.Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+        <TextBox
+            Margin="5"
+            Text="{Binding Source={x:Static p:Settings.Default}, Path=configFrom, Mode=TwoWay}"/>
+        <TextBox
+            Text="{Binding Source={x:Static p:Settings.Default}, Path=configTo, Mode=TwoWay}"/>
+        <Button 
+            Command="{Binding OnClick}" Content="Сохранить"/>
+    </StackPanel>    
 </Window>

@@ -1,7 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Obmen_wpf.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="configFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Config</Value>
+    </Setting>
+    <Setting Name="configTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\ИПФ Сервер\Дневник Ф130</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

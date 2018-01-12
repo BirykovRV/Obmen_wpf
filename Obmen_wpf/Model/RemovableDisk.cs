@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.IO;
+using System.Linq;
 using NLog;
 
 namespace Obmen_wpf.Model
@@ -26,7 +28,10 @@ namespace Obmen_wpf.Model
             bool isEmpty = false;
             foreach (var item in driveInfo)
             {
-                if (item.DriveType == DriveType.Removable)
+                string lable = item.VolumeLabel;
+                Regex regex = new Regex(@"^\d{6}&");
+
+                if ( item.DriveType == DriveType.Removable & (regex.IsMatch(lable)) )
                 {
                     removableDrive.Add(item.Name, item.VolumeLabel);
                     isEmpty = true;
