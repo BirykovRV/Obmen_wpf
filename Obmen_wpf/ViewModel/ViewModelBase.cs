@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Obmen_wpf.ViewModel
 {
     class ViewModelBase 
     {
-        public Command OnClick
+        public ICommand OnClick
         {
             get
             {
@@ -18,16 +19,29 @@ namespace Obmen_wpf.ViewModel
                 {     
                     if (RemovableDisk.FindDisk())
                     {
+                        string from = Properties.Settings.Default.configFrom;
+                        string to = Properties.Settings.Default.configTo;
+
                         foreach (var item in RemovableDisk.RemovableDrives)
                         {
-                            Console.WriteLine(item.Key + " " + item.Value);
+                            Operations.CopyFileAsync(from, to, false);
                         }
-                        RemovableDisk.RemovableDrives.Clear();
                     }
                     else
                     {
                         MessageBox.Show("Нет USB");
                     }
+                });
+            }
+        }
+
+        public ICommand OnSave
+        {
+            get
+            {
+                return new Command( o =>
+                {
+                    Properties.Settings.Default.Save();
                 });
             }
         }

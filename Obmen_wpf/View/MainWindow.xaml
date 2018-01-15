@@ -8,14 +8,17 @@
         xmlns:viewmodel="clr-namespace:Obmen_wpf.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow"
-        Height="150" 
+        Height="170" 
         Width="300">
     
     <Window.DataContext>
         <viewmodel:ViewModelBase/>
     </Window.DataContext>
     <Window.Resources>
-        <Style TargetType="TextBox">
+        <Style TargetType="TextBox" >
+            <Setter Property="Control.Margin" Value="5"/>            
+        </Style>
+        <Style TargetType="Button">
             <Setter Property="Control.Margin" Value="5"/>
         </Style>
     </Window.Resources>
@@ -26,6 +29,8 @@
         <TextBox
             Text="{Binding Source={x:Static p:Settings.Default}, Path=configTo, Mode=TwoWay}"/>
         <Button 
-            Command="{Binding OnClick}" Content="Сохранить"/>
+            Command="{Binding OnClick}" Content="Выполнить"/>
+        <Button 
+            Command="{Binding OnSave}" Content="Сохранить"/>
     </StackPanel>    
 </Window>

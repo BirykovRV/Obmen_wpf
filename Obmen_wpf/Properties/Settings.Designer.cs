@@ -25,7 +25,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Config")]
+        [global::System.Configuration.DefaultSettingValueAttribute("E:\\test")]
         public string configFrom {
             get {
                 return ((string)(this["configFrom"]));
@@ -37,7 +37,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\ИПФ Сервер\\Дневник Ф130")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\test\\")]
         public string configTo {
             get {
                 return ((string)(this["configTo"]));

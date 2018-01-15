@@ -27,14 +27,17 @@ namespace Obmen_wpf.Model
             DriveInfo[] driveInfo = DriveInfo.GetDrives();
             bool isEmpty = false;
             foreach (var item in driveInfo)
-            {
-                string lable = item.VolumeLabel;
-                Regex regex = new Regex(@"^\d{6}&");
-
-                if ( item.DriveType == DriveType.Removable & (regex.IsMatch(lable)) )
+            {           
+                if ( item.DriveType == DriveType.Removable )
                 {
-                    removableDrive.Add(item.Name, item.VolumeLabel);
-                    isEmpty = true;
+                    string lable = item.VolumeLabel;
+                    Regex regex = new Regex(@"^\d{6}&");
+
+                    if (regex.IsMatch(lable))
+                    {
+                        removableDrive.Add(item.Name, item.VolumeLabel);
+                        isEmpty = true;
+                    }
                 }
             }
             return isEmpty;
