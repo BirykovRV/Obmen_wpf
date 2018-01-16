@@ -24,20 +24,15 @@ namespace Obmen_wpf.Model
         /// </summary>
         public static bool FindDisk()
         {
+            Regex regex = new Regex(@"^\d{6}$");
             DriveInfo[] driveInfo = DriveInfo.GetDrives();
             bool isEmpty = false;
             foreach (var item in driveInfo)
-            {           
-                if ( item.DriveType == DriveType.Removable )
+            {
+                if (item.DriveType == DriveType.Removable && regex.IsMatch(item.VolumeLabel))
                 {
-                    string lable = item.VolumeLabel;
-                    Regex regex = new Regex(@"^\d{6}&");
-
-                    if (regex.IsMatch(lable))
-                    {
-                        removableDrive.Add(item.Name, item.VolumeLabel);
-                        isEmpty = true;
-                    }
+                    removableDrive.Add(item.Name, item.VolumeLabel);
+                    isEmpty = true;
                 }
             }
             return isEmpty;

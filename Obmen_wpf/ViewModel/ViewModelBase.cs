@@ -3,35 +3,41 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace Obmen_wpf.ViewModel
 {
-    class ViewModelBase 
+    class ViewModelBase
     {
         public ICommand OnClick
         {
             get
             {
-                return new Command( o =>
-                {     
-                    if (RemovableDisk.FindDisk())
-                    {
-                        string from = Properties.Settings.Default.configFrom;
-                        string to = Properties.Settings.Default.configTo;
+                return new Command(o =>
+               {
 
-                        foreach (var item in RemovableDisk.RemovableDrives)
-                        {
-                            Operations.CopyFileAsync(from, to, false);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Нет USB");
-                    }
-                });
+
+                   if (RemovableDisk.FindDisk())
+                   {
+                       string from = Properties.Settings.Default.configFrom;
+                       string to = Properties.Settings.Default.configTo;
+
+                       foreach (var item in RemovableDisk.RemovableDrives)
+                       {
+                           Operations.CopyFileAsync(from, to, false);
+                           
+                       }
+                       RemovableDisk.RemovableDrives.Clear();
+                   }
+                   else
+                   {
+                       //TODO: 
+                       MessageBox.Show("Нет USB");
+                   }
+               });
             }
         }
 
@@ -39,10 +45,10 @@ namespace Obmen_wpf.ViewModel
         {
             get
             {
-                return new Command( o =>
-                {
-                    Properties.Settings.Default.Save();
-                });
+                return new Command(o =>
+               {
+                   Properties.Settings.Default.Save();
+               });
             }
         }
     }

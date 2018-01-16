@@ -16,7 +16,7 @@
     </Window.DataContext>
     <Window.Resources>
         <Style TargetType="TextBox" >
-            <Setter Property="Control.Margin" Value="5"/>            
+            <Setter Property="Control.Margin" Value="5"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Control.Margin" Value="5"/>
