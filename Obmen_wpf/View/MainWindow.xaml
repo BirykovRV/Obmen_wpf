@@ -25,9 +25,9 @@
     <StackPanel>
         <TextBox
             Margin="5"
-            Text="{Binding Source={x:Static p:Settings.Default}, Path=configFrom, Mode=TwoWay}"/>
+            Text="{Binding Source={x:Static p:Settings.Default}, Path=configFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox
-            Text="{Binding Source={x:Static p:Settings.Default}, Path=configTo, Mode=TwoWay}"/>
+            Text="{Binding Source={x:Static p:Settings.Default}, Path=configTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Button 
             Command="{Binding OnClick}" Content="Выполнить"/>
         <Button 
