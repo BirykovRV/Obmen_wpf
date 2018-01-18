@@ -8,6 +8,7 @@
         xmlns:viewmodel="clr-namespace:Obmen_wpf.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow"
+        ResizeMode="NoResize"
         Height="170" 
         Width="300">
     

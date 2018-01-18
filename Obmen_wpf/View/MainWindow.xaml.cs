@@ -13,6 +13,6 @@ namespace Obmen_wpf.View
         public MainWindow()
         {
             InitializeComponent();
-        }
+        }        
     }
 }
