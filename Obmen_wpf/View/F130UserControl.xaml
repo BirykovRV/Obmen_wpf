@@ -18,6 +18,10 @@
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="3"/>
         </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
         
@@ -41,10 +45,10 @@
             Grid.Row="1"/>
 
         <TextBox
-            Text="{Binding Path=From}"
+            Text="{Binding Path=AskuTo}"
             Grid.Column="1"/>
         <TextBox
-            Text="{Binding Path=To}"
+            Text="{Binding Path=ConfigTo}"
             Grid.Column="1"
             Grid.Row="1"/>
         
