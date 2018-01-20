@@ -1,13 +1,6 @@
 ﻿using Obmen_wpf.Model;
 using Obmen_wpf.Properties;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using Obmen_wpf.View;
 using System.Windows;
 using System.Windows.Input;
 
@@ -25,8 +18,8 @@ namespace Obmen_wpf.ViewModel
 
                    if (RemovableDisk.FindDisk())
                    {
-                       string from = Properties.Settings.Default.configFrom;
-                       string to = Properties.Settings.Default.configTo;
+                       string from = Settings.Default.configFrom;
+                       string to = Settings.Default.configTo;
 
                        foreach (var item in RemovableDisk.RemovableDrives)
                        {
@@ -52,6 +45,18 @@ namespace Obmen_wpf.ViewModel
                {
                    Settings.Default.Save();
                }, o => Settings.IsMyPropertyChanged);
+            }
+        }
+
+        public ICommand OnSettings
+        {
+            get
+            {
+                return new Command(o =>
+                {
+                    SettingsView settingsView = new SettingsView();
+                    settingsView.Show();
+                });
             }
         }
     }

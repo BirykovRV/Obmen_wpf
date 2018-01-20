@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Obmen_wpf.View
 {
     /// <summary>
-    /// Логика взаимодействия для SettingUserControl.xaml
+    /// Логика взаимодействия для PostPayUserControl.xaml
     /// </summary>
-    public partial class SettingUserControl : UserControl
+    public partial class PostPayUserControl : UserControl
     {
-        public SettingUserControl()
+        public PostPayUserControl()
         {
             InitializeComponent();
         }

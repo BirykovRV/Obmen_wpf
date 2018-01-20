@@ -25,7 +25,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("E:\\test")]
+        [global::System.Configuration.DefaultSettingValueAttribute("F130\\Config")]
         public string configFrom {
             get {
                 return ((string)(this["configFrom"]));
@@ -37,13 +37,205 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\test\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string configTo {
             get {
                 return ((string)(this["configTo"]));
             }
             set {
                 this["configTo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string postPayFrom {
+            get {
+                return ((string)(this["postPayFrom"]));
+            }
+            set {
+                this["postPayFrom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string postPayTo {
+            get {
+                return ((string)(this["postPayTo"]));
+            }
+            set {
+                this["postPayTo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string f130From {
+            get {
+                return ((string)(this["f130From"]));
+            }
+            set {
+                this["f130From"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F130\\ASKU")]
+        public string f130To {
+            get {
+                return ((string)(this["f130To"]));
+            }
+            set {
+                this["f130To"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string esppFrom {
+            get {
+                return ((string)(this["esppFrom"]));
+            }
+            set {
+                this["esppFrom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string esppTo {
+            get {
+                return ((string)(this["esppTo"]));
+            }
+            set {
+                this["esppTo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string postPayDBFrom {
+            get {
+                return ((string)(this["postPayDBFrom"]));
+            }
+            set {
+                this["postPayDBFrom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string postPayDBTo {
+            get {
+                return ((string)(this["postPayDBTo"]));
+            }
+            set {
+                this["postPayDBTo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pensionFrom {
+            get {
+                return ((string)(this["pensionFrom"]));
+            }
+            set {
+                this["pensionFrom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pensionTo {
+            get {
+                return ((string)(this["pensionTo"]));
+            }
+            set {
+                this["pensionTo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string cashFsgFrom {
+            get {
+                return ((string)(this["cashFsgFrom"]));
+            }
+            set {
+                this["cashFsgFrom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string cashFsgTo {
+            get {
+                return ((string)(this["cashFsgTo"]));
+            }
+            set {
+                this["cashFsgTo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string fsgRegFrom {
+            get {
+                return ((string)(this["fsgRegFrom"]));
+            }
+            set {
+                this["fsgRegFrom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string fsgRegTo {
+            get {
+                return ((string)(this["fsgRegTo"]));
+            }
+            set {
+                this["fsgRegTo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string postPayUpdateFrom {
+            get {
+                return ((string)(this["postPayUpdateFrom"]));
+            }
+            set {
+                this["postPayUpdateFrom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string postPayUpdateTo {
+            get {
+                return ((string)(this["postPayUpdateTo"]));
+            }
+            set {
+                this["postPayUpdateTo"] = value;
             }
         }
     }

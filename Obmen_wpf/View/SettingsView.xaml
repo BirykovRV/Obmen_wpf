@@ -4,11 +4,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Obmen_wpf.View"
+        xmlns:viewmodel="clr-namespace:Obmen_wpf.ViewModel"
         mc:Ignorable="d"
         Title="SettingsView"
-        Height="300" 
-        Width="300">
-    <Grid>
+        Height="300"
+        Width="400">
+    <Window.DataContext>
+        <viewmodel:SettingsViewModel/>
+    </Window.DataContext>
+    <Grid>        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ListBox Grid.Column="0" ItemsSource="{Binding Controls}" SelectedItem="{Binding SelectedOperation}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Column="1" DataContext="{Binding SelectedOperation}">
+            <UserControl Content="{Binding Path=Control, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button Margin="2" Content="Сохранить"/>
+            <Button Margin="2" Content="По умолчанию"/>
+        </StackPanel>
         
     </Grid>
 </Window>

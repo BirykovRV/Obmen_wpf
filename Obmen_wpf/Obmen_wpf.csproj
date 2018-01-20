@@ -63,13 +63,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Command.cs" />
+    <Compile Include="Model\OperationType.cs" />
     <Compile Include="Model\RemovableDisk.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="View\PostPayUserControl.xaml.cs">
+      <DependentUpon>PostPayUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SettingUserControl.xaml.cs">
-      <DependentUpon>SettingUserControl.xaml</DependentUpon>
+    <Compile Include="View\F130UserControl.xaml.cs">
+      <DependentUpon>F130UserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -85,11 +90,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\PostPayUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SettingUserControl.xaml">
+    <Page Include="View\F130UserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

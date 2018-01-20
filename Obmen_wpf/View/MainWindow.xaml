@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="MainWindow"
         ResizeMode="NoResize"
-        Height="170" 
+        Height="200" 
         Width="300">
     
     <Window.DataContext>
@@ -33,5 +33,7 @@
             Command="{Binding OnClick}" Content="Выполнить"/>
         <Button 
             Command="{Binding OnSave}" Content="Сохранить"/>
+        <Button 
+            Command="{Binding OnSettings}" Content="По умолчанию"/>
     </StackPanel>    
 </Window>

@@ -3,10 +3,58 @@
   <Profiles />
   <Settings>
     <Setting Name="configFrom" Type="System.String" Scope="User">
-      <Value Profile="(Default)">E:\test</Value>
+      <Value Profile="(Default)">F130\Config</Value>
     </Setting>
     <Setting Name="configTo" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\test\</Value>
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="postPayFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="postPayTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="f130From" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="f130To" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F130\ASKU</Value>
+    </Setting>
+    <Setting Name="esppFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="esppTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="postPayDBFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="postPayDBTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="pensionFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="pensionTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="cashFsgFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="cashFsgTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="fsgRegFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="fsgRegTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="postPayUpdateFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="postPayUpdateTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
