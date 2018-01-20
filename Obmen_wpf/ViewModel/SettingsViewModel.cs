@@ -24,8 +24,8 @@ namespace Obmen_wpf.ViewModel
             Controls = new ObservableCollection<OperationType>
             {
                 new OperationType {Name = "F130", Control = new F130UserControl()},
-                new OperationType {Name = "PostPay", Control = new PostPayUserControl()}
-
+                new OperationType {Name = "PostPay", Control = new PostPayUserControl()},
+                new OperationType { Name = "ESPP", Control = new EsppUserControl()}
             };
         }        
 

@@ -1,5 +1,4 @@
-﻿using Obmen_wpf.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Obmen_wpf.View
 {
     /// <summary>
-    /// Логика взаимодействия для SettingsView.xaml
+    /// Логика взаимодействия для EsppUserControl.xaml
     /// </summary>
-    public partial class SettingsView : Window
+    public partial class EsppUserControl : UserControl
     {
-        public SettingsView()
+        public EsppUserControl()
         {
             InitializeComponent();
         }

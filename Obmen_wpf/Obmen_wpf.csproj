@@ -67,6 +67,9 @@
     <Compile Include="Model\RemovableDisk.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="View\EsppUserControl.xaml.cs">
+      <DependentUpon>EsppUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PostPayUserControl.xaml.cs">
       <DependentUpon>PostPayUserControl.xaml</DependentUpon>
     </Compile>
@@ -76,6 +79,10 @@
     <Compile Include="View\F130UserControl.xaml.cs">
       <DependentUpon>F130UserControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\EsppUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
