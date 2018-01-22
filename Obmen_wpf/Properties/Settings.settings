@@ -8,10 +8,10 @@
     <Setting Name="configTo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="postPayFrom" Type="System.String" Scope="User">
+    <Setting Name="postPayRegFrom" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="postPayTo" Type="System.String" Scope="User">
+    <Setting Name="postPayRegTo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="f130From" Type="System.String" Scope="User">

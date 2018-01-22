@@ -7,8 +7,9 @@
         xmlns:viewmodel="clr-namespace:Obmen_wpf.ViewModel"
         mc:Ignorable="d"
         Title="SettingsView"
+        ResizeMode="NoResize"
         Height="300"
-        Width="400">
+        Width="450">
     <Window.DataContext>
         <viewmodel:SettingsViewModel/>
     </Window.DataContext>
@@ -18,11 +19,11 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="9*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
 
-        <ListBox Grid.Column="0" ItemsSource="{Binding Controls}" SelectedItem="{Binding SelectedOperation}">
+        <ListBox Grid.Column="0" Grid.RowSpan="2" ItemsSource="{Binding Controls}" SelectedItem="{Binding SelectedOperation}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
@@ -32,13 +33,13 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Column="1" DataContext="{Binding SelectedOperation}">
+        <StackPanel Grid.Column="1" Margin="0 10 0 0" DataContext="{Binding SelectedOperation}">
             <UserControl Content="{Binding Path=Control, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button Margin="2" Content="Сохранить"/>
-            <Button Margin="2" Content="По умолчанию"/>
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="5" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button Margin="2" Content="Сохранить" Command="{Binding OnSave}"/>
+            <Button Margin="2" Content="По умолчанию" Command="{Binding OnDefault}"/>
         </StackPanel>
         
     </Grid>

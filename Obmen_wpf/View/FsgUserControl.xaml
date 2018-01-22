@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Obmen_wpf.View.EsppUserControl"
+﻿<UserControl x:Class="Obmen_wpf.View.FsgUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -22,7 +22,7 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="2*"/>
@@ -31,36 +31,33 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
-        </Grid.RowDefinitions>
-
+        </Grid.RowDefinitions>      
+        <!--#region first section-->
         <TextBlock 
-            Text="ESPP:"
+            Text="Реестр:"
             Grid.Column="0"
             Grid.Row="0"/>
-
         <TextBox
-            Text="{Binding Source={x:Static p:Settings.Default}, Path=esppTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Source={x:Static p:Settings.Default}, Path=fsgRegFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Grid.Column="1"/>
-
         <Button
             Content="..."
             Grid.Column="2"/>
-
+        <!--#endregion-->
+        
+        <!--#region second section-->
         <TextBlock 
-            Text="Пенсия:"
+            Text="Кэш:"
             Grid.Column="0"
             Grid.Row="1"/>
-
         <TextBox
-            Text="{Binding Source={x:Static p:Settings.Default}, Path=pensionFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Source={x:Static p:Settings.Default}, Path=pensionTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Grid.Column="1"
             Grid.Row="1"/>
-
         <Button
             Content="..."
             Grid.Column="2"
-            Grid.Row="1"/>
-
+            Grid.Row="2"/>
+        <!--#endregion-->
     </Grid>
 </UserControl>
-

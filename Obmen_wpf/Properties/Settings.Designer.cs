@@ -50,24 +50,24 @@ namespace Obmen_wpf.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string postPayFrom {
+        public string postPayRegFrom {
             get {
-                return ((string)(this["postPayFrom"]));
+                return ((string)(this["postPayRegFrom"]));
             }
             set {
-                this["postPayFrom"] = value;
+                this["postPayRegFrom"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string postPayTo {
+        public string postPayRegTo {
             get {
-                return ((string)(this["postPayTo"]));
+                return ((string)(this["postPayRegTo"]));
             }
             set {
-                this["postPayTo"] = value;
+                this["postPayRegTo"] = value;
             }
         }
         

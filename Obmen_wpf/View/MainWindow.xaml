@@ -25,7 +25,6 @@
     </Window.Resources>
     <StackPanel>
         <TextBox
-            Margin="5"
             Text="{Binding Source={x:Static p:Settings.Default}, Path=configFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox
             Text="{Binding Source={x:Static p:Settings.Default}, Path=configTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -34,6 +33,6 @@
         <Button 
             Command="{Binding OnSave}" Content="Сохранить"/>
         <Button 
-            Command="{Binding OnSettings}" Content="По умолчанию"/>
+            Command="{Binding OnSettings}" Content="Настройки"/>
     </StackPanel>    
 </Window>

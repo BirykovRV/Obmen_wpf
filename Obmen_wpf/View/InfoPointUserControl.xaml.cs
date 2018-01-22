@@ -1,5 +1,4 @@
-﻿using Obmen_wpf.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +16,11 @@ using System.Windows.Shapes;
 namespace Obmen_wpf.View
 {
     /// <summary>
-    /// Логика взаимодействия для SettingUserControl.xaml
+    /// Логика взаимодействия для InfoPointUserControl.xaml
     /// </summary>
-    public partial class F130UserControl : UserControl
+    public partial class InfoPointUserControl : UserControl
     {
-        public F130UserControl()
+        public InfoPointUserControl()
         {
             InitializeComponent();
         }
