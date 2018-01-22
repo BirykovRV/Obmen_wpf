@@ -17,10 +17,18 @@ namespace Obmen_wpf.ViewModel
 {
     class SettingsViewModel : INotifyPropertyChanged
     {
-
+        /// <summary>
+        /// Выбраная операция
+        /// </summary>
         private OperationType selectedOperation;
+        /// <summary>
+        /// Коллекция контролов для каждой операции
+        /// </summary>
         public ObservableCollection<OperationType> Controls { get; set; }
 
+        /// <summary>
+        /// Создается новая коллеция контролов
+        /// </summary>
         public SettingsViewModel()
         {
             Controls = new ObservableCollection<OperationType>
@@ -32,7 +40,9 @@ namespace Obmen_wpf.ViewModel
                 new OperationType { Name = "Инфо. пункт", Control = new InfoPointUserControl()}
             };
         }        
-
+        /// <summary>
+        /// Выбранный элемент в списке
+        /// </summary>
         public OperationType SelectedOperation
         {
             get { return selectedOperation; }
@@ -42,7 +52,9 @@ namespace Obmen_wpf.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// Сохраняет настройки программы
+        /// </summary>
         public ICommand OnSave
         {
             get
@@ -53,7 +65,9 @@ namespace Obmen_wpf.ViewModel
                 }, o => Settings.IsMyPropertyChanged);
             }
         }
-
+        /// <summary>
+        /// Возвращает все значения настроек по умолчанию
+        /// </summary>
         public ICommand OnDefault
         {
             get
@@ -63,21 +77,7 @@ namespace Obmen_wpf.ViewModel
                     Settings.Default.Reset();
                 });
             }
-        }
-
-        public ICommand OnOpenDialog
-        {
-            get
-            {
-                return new Command(o =>
-                {
-                    if (o.ToString() == "asku")
-                    {
-                        MessageBox.Show("Test");
-                    }
-                });
-            }
-        }
+        }        
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string sender = "")

@@ -7,6 +7,9 @@ using System.Windows.Input;
 
 namespace Obmen_wpf.Model
 {
+    /// <summary>
+    /// Класс для реализации команд по паттерну MVVM
+    /// </summary>
     class Command : ICommand
     {
         private Action<object> execute;

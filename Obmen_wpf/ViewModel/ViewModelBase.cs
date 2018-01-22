@@ -8,6 +8,9 @@ namespace Obmen_wpf.ViewModel
 {
     class ViewModelBase
     {
+        /// <summary>
+        /// Запускает программу на выполнение
+        /// </summary>
         public ICommand OnClick
         {
             get
@@ -36,18 +39,9 @@ namespace Obmen_wpf.ViewModel
                });
             }
         }
-
-        public ICommand OnSave
-        {
-            get
-            {
-                return new Command(o =>
-               {
-                   Settings.Default.Save();
-               }, o => Settings.IsMyPropertyChanged);
-            }
-        }
-
+        /// <summary>
+        /// Открывает окно с настройками программы
+        /// </summary>
         public ICommand OnSettings
         {
             get

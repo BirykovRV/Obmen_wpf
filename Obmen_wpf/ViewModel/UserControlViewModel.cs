@@ -11,19 +11,48 @@ using System.Windows.Input;
 
 namespace Obmen_wpf.ViewModel
 {
-    class UserControlViewModel : INotifyPropertyChanged
+    class UserControlViewModel
     {
-
+        /// <summary>
+        /// Файлы Ф130 для АСКУ
+        /// </summary>
         public TypeOfOperation Asku { get; } = TypeOfOperation.ASKU;
+        /// <summary>
+        /// Настройки для Ф130
+        /// </summary>
         public TypeOfOperation Config { get; } = TypeOfOperation.CONFIG;
+        /// <summary>
+        /// Обновление модуля PoastPay
+        /// </summary>
         public TypeOfOperation PostPayUpdate { get; } = TypeOfOperation.POSTPAY_UPDATE;
+        /// <summary>
+        /// БД для postpay
+        /// </summary>
         public TypeOfOperation PostPayDB { get; } = TypeOfOperation.POSTPAY_DB;
+        /// <summary>
+        /// Реестр Postpay
+        /// </summary>
         public TypeOfOperation PostPayReg { get; } = TypeOfOperation.POSTPAY_REG;
+        /// <summary>
+        /// Справочники по переводам
+        /// </summary>
         public TypeOfOperation Espp { get; } = TypeOfOperation.ESPP;
+        /// <summary>
+        /// Файлы по выплате пенсии
+        /// </summary>
         public TypeOfOperation Pension { get; } = TypeOfOperation.PENSION;
+        /// <summary>
+        /// Реестр ФСГ
+        /// </summary>
         public TypeOfOperation FsgReg { get; } = TypeOfOperation.FSG_REG;
+        /// <summary>
+        /// Кэш для ФСГ
+        /// </summary>
         public TypeOfOperation FsgCash { get; } = TypeOfOperation.FSG_CASH;
 
+        /// <summary>
+        /// Открывает диалог выбора каталога и сохраняет его в настройках программы
+        /// </summary>
         public ICommand OnOpenDialog
         {
             get
@@ -68,13 +97,7 @@ namespace Obmen_wpf.ViewModel
                     }
                 });
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(string sender = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(sender));
-        }        
+        }                    
     }
 }
 

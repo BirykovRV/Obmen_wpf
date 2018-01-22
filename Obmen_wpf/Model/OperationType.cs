@@ -10,9 +10,17 @@ namespace Obmen_wpf.Model
 {
     class OperationType : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Название операции
+        /// </summary>
         private string name;
+        /// <summary>
+        /// Контрол для операций
+        /// </summary>
         private UserControl control;
-
+        /// <summary>
+        /// Устанавливает или получает тип контрола
+        /// </summary>
         public UserControl Control
         {
             get { return control; }
@@ -22,6 +30,9 @@ namespace Obmen_wpf.Model
                 OnPropertyChanged("Control");
             }
         }
+        /// <summary>
+        /// Получает или устанавливает имя операции
+        /// </summary>
         public string Name
         {
             get => name;
