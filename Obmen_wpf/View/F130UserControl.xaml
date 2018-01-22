@@ -48,7 +48,7 @@
             Content="..."
             Grid.Column="2"
             Command="{Binding OnOpenDialog}"
-            CommandParameter="asku"/>
+            CommandParameter="{Binding Asku}"/>
 
         <TextBlock 
             Text="Config:"
@@ -63,7 +63,7 @@
             Grid.Column="2"
             Grid.Row="2"
             Command="{Binding OnOpenDialog}"
-            CommandParameter="config"/>
+            CommandParameter="{Binding Config}"/>
 
     </Grid>
 </UserControl>

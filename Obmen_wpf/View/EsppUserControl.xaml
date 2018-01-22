@@ -50,7 +50,7 @@
             Content="..."
             Grid.Column="2"
             Command="{Binding OnOpenDialog}"
-            CommandParameter="espp"/>
+            CommandParameter="{Binding Espp}"/>
 
         <TextBlock 
             Text="Пенсия:"
@@ -67,7 +67,7 @@
             Grid.Column="2"
             Grid.Row="1"
             Command="{Binding OnOpenDialog}"
-            CommandParameter="pension"/>
+            CommandParameter="{Binding Pension}"/>
 
     </Grid>
 </UserControl>

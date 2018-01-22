@@ -14,40 +14,55 @@ namespace Obmen_wpf.ViewModel
     class UserControlViewModel : INotifyPropertyChanged
     {
 
+        public TypeOfOperation Asku { get; } = TypeOfOperation.ASKU;
+        public TypeOfOperation Config { get; } = TypeOfOperation.CONFIG;
+        public TypeOfOperation PostPayUpdate { get; } = TypeOfOperation.POSTPAY_UPDATE;
+        public TypeOfOperation PostPayDB { get; } = TypeOfOperation.POSTPAY_DB;
+        public TypeOfOperation PostPayReg { get; } = TypeOfOperation.POSTPAY_REG;
+        public TypeOfOperation Espp { get; } = TypeOfOperation.ESPP;
+        public TypeOfOperation Pension { get; } = TypeOfOperation.PENSION;
+        public TypeOfOperation FsgReg { get; } = TypeOfOperation.FSG_REG;
+        public TypeOfOperation FsgCash { get; } = TypeOfOperation.FSG_CASH;
+
         public ICommand OnOpenDialog
         {
             get
             {
                 return new Command(o =>
                 {
-                    switch (o.ToString())
+                    FolderBrowserDialog dialog = new FolderBrowserDialog();
+                    dialog.ShowDialog();
+
+                    switch (o)
                     {
-                        case "asku":
-                            DoOperation(TypeOfOperation.ASKU);
+                        case TypeOfOperation.ASKU:
+                            Properties.Settings.Default.f130From = dialog.SelectedPath;
                             break;
-                        case "config":
-                            DoOperation(TypeOfOperation.CONFIG);
+                        case TypeOfOperation.CONFIG:
+                            Properties.Settings.Default.configTo = dialog.SelectedPath;
                             break;
-                        case "post_update":
-                            DoOperation(TypeOfOperation.POSTPAY_UPDATE);
+                        case TypeOfOperation.POSTPAY_UPDATE:
+                            Properties.Settings.Default.postPayUpdateTo = dialog.SelectedPath;
                             break;
-                        case "post_db":
-                            DoOperation(TypeOfOperation.POSTPAY_DB);
+                        case TypeOfOperation.POSTPAY_DB:
+                            Properties.Settings.Default.postPayDBTo = dialog.SelectedPath;
                             break;
-                        case "post_reg":
-                            DoOperation(TypeOfOperation.POSTPAY_REG);
+                        case TypeOfOperation.POSTPAY_REG:
+                            Properties.Settings.Default.postPayRegFrom = dialog.SelectedPath;
                             break;
-                        case "espp":
-                            DoOperation(TypeOfOperation.ESPP);
+                        case TypeOfOperation.ESPP:
+                            Properties.Settings.Default.esppTo = dialog.SelectedPath;
                             break;
-                        case "pension":
-                            DoOperation(TypeOfOperation.PENSION);
+                        case TypeOfOperation.PENSION:
+                            Properties.Settings.Default.pensionFrom = dialog.SelectedPath;
                             break;
-                        case "fsg_reg":
-                            DoOperation(TypeOfOperation.FSG_REG);
+                        case TypeOfOperation.FSG_REG:
+                            Properties.Settings.Default.fsgRegFrom = dialog.SelectedPath;
                             break;
-                        case "fsg_cash":
-                            DoOperation(TypeOfOperation.FSG_CASH);
+                        case TypeOfOperation.FSG_CASH:
+                            Properties.Settings.Default.cashFsgTo = dialog.SelectedPath;
+                            break;
+                        default:
                             break;
 
                     }
@@ -59,45 +74,7 @@ namespace Obmen_wpf.ViewModel
         public void OnPropertyChanged(string sender = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(sender));
-        }
-
-        private void DoOperation(TypeOfOperation type)
-        {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-            dialog.ShowDialog();
-            switch (type)
-            {
-                case TypeOfOperation.ASKU:
-                    Properties.Settings.Default.f130From = dialog.SelectedPath;
-                    break;
-                case TypeOfOperation.CONFIG:
-                    Properties.Settings.Default.configTo = dialog.SelectedPath;
-                    break;
-                case TypeOfOperation.POSTPAY_UPDATE:
-                    Properties.Settings.Default.postPayUpdateTo = dialog.SelectedPath;
-                    break;
-                case TypeOfOperation.POSTPAY_DB:
-                    Properties.Settings.Default.postPayDBTo = dialog.SelectedPath;
-                    break;
-                case TypeOfOperation.POSTPAY_REG:
-                    Properties.Settings.Default.postPayRegFrom = dialog.SelectedPath;
-                    break;
-                case TypeOfOperation.ESPP:
-                    Properties.Settings.Default.esppTo = dialog.SelectedPath;
-                    break;
-                case TypeOfOperation.PENSION:
-                    Properties.Settings.Default.pensionFrom = dialog.SelectedPath;
-                    break;
-                case TypeOfOperation.FSG_REG:
-                    Properties.Settings.Default.fsgRegFrom = dialog.SelectedPath;
-                    break;
-                case TypeOfOperation.FSG_CASH:
-                    Properties.Settings.Default.cashFsgTo = dialog.SelectedPath;
-                    break;
-                default:
-                    break;
-            }
-        }
+        }        
     }
 }
 
