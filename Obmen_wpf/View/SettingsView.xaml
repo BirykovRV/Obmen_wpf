@@ -9,7 +9,7 @@
         Title="SettingsView"
         ResizeMode="NoResize"
         Height="300"
-        Width="450">
+        Width="500">
     <Window.DataContext>
         <viewmodel:SettingsViewModel/>
     </Window.DataContext>
@@ -33,7 +33,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Column="1" Margin="0 10 0 0" DataContext="{Binding SelectedOperation}">
+        <StackPanel Grid.Column="1" Margin="5 10" DataContext="{Binding SelectedOperation}">
             <UserControl Content="{Binding Path=Control, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
 
