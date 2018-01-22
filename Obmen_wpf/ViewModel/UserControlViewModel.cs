@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Obmen_wpf.ViewModel
@@ -23,8 +23,9 @@ namespace Obmen_wpf.ViewModel
                     switch (o.ToString())
                     {
                         case "asku":
-                            OpenFileDialog dialog = new OpenFileDialog();
+                            FolderBrowserDialog dialog = new FolderBrowserDialog();
                             dialog.ShowDialog();
+                            Properties.Settings.Default.f130From = dialog.SelectedPath;
                             break;
                         case "config":
                             MessageBox.Show("config");
