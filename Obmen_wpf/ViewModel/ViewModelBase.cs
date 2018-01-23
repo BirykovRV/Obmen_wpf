@@ -49,7 +49,7 @@ namespace Obmen_wpf.ViewModel
                 return new Command(o =>
                 {
                     SettingsView settingsView = new SettingsView();
-                    settingsView.Show();
+                    settingsView.ShowDialog();
                 });
             }
         }

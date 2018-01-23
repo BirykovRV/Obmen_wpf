@@ -4,9 +4,101 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Obmen_wpf.View"
+             xmlns:p="clr-namespace:Obmen_wpf.Properties"
+             xmlns:viewmodel="clr-namespace:Obmen_wpf.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="375"
+             d:DesignWidth="300">
+    <UserControl.DataContext>
+        <viewmodel:UserControlViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+    </UserControl.Resources>
+
+    <DockPanel>
+        <GroupBox Header="Сервер:" Padding="5" DockPanel.Dock="Top">
+            <StackPanel>
+                <!--#region first section-->
+                <TextBlock 
+                    Text="IP адрес:"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+                <TextBox
+                    Text="{Binding Source={x:Static p:Settings.Default}, Path=serverIp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Grid.Column="1"/>
+                <!--#endregion-->
+
+                <!--#region first section-->
+                <TextBlock 
+                    Text="Логин:"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+                <TextBox
+                    Text="{Binding Source={x:Static p:Settings.Default}, Path=serverLogin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Grid.Column="1"/>
+                <!--#endregion-->
+
+                <!--#region second section-->
+                <TextBlock 
+                    Text="Пароль:"
+                    Grid.Column="0"
+                    Grid.Row="1"/>
+                <PasswordBox
+                    Password="{x:Static p:Settings.Default}"
+                    Grid.Column="1"
+                    Grid.Row="1"/>
+                <!--#endregion-->
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox  Header="АСКУ:" Padding="5" DockPanel.Dock="Bottom">
+            <StackPanel>
+                <!--#region first section-->
+                <TextBlock 
+                    Text="IP адрес:"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+                <TextBox
+                    Text="{Binding Source={x:Static p:Settings.Default}, Path=askuIp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Grid.Column="1"/>
+                <!--#endregion-->
+
+                <!--#region first section-->
+                <TextBlock 
+                    Text="Логин:"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+                <TextBox
+                    Text="{Binding Source={x:Static p:Settings.Default}, Path=askuLogin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Grid.Column="1"/>
+                <!--#endregion-->
+
+                <!--#region second section-->
+                <TextBlock 
+                    Text="Пароль:"
+                    Grid.Column="0"
+                    Grid.Row="1"/>
+                <PasswordBox                    
+                    Grid.Column="1"
+                    Grid.Row="1"/>
+                <!--#endregion-->
+
+                <!--#region second section-->
+                <TextBlock 
+                    Text="Путь:"
+                    Grid.Column="0"
+                    Grid.Row="1"/>
+                <TextBox
+                    Text="{Binding Source={x:Static p:Settings.Default}, Path=askuPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Grid.Column="1"
+                    Grid.Row="1"/>
+                <!--#endregion-->
+
+            </StackPanel>
+        </GroupBox>
+    </DockPanel>
 </UserControl>

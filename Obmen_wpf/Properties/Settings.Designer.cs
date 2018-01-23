@@ -238,5 +238,101 @@ namespace Obmen_wpf.Properties {
                 this["postPayUpdateTo"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string serverIp {
+            get {
+                return ((string)(this["serverIp"]));
+            }
+            set {
+                this["serverIp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string serverLogin {
+            get {
+                return ((string)(this["serverLogin"]));
+            }
+            set {
+                this["serverLogin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string serverPass {
+            get {
+                return ((string)(this["serverPass"]));
+            }
+            set {
+                this["serverPass"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string askuIp {
+            get {
+                return ((string)(this["askuIp"]));
+            }
+            set {
+                this["askuIp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string askuLogin {
+            get {
+                return ((string)(this["askuLogin"]));
+            }
+            set {
+                this["askuLogin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string askuPass {
+            get {
+                return ((string)(this["askuPass"]));
+            }
+            set {
+                this["askuPass"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string askuPath {
+            get {
+                return ((string)(this["askuPath"]));
+            }
+            set {
+                this["askuPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsPosChecked {
+            get {
+                return ((bool)(this["IsPosChecked"]));
+            }
+            set {
+                this["IsPosChecked"] = value;
+            }
+        }
     }
 }
