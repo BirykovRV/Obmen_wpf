@@ -8,14 +8,14 @@
         mc:Ignorable="d"
         Title="SettingsView"
         ResizeMode="NoResize"
-        Height="350"
+        Height="400"
         Width="550">
     <Window.DataContext>
         <viewmodel:SettingsViewModel/>
     </Window.DataContext>
     <Grid>        
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>

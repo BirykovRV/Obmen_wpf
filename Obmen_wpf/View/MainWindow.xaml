@@ -15,24 +15,22 @@
     <Window.DataContext>
         <viewmodel:ViewModelBase/>
     </Window.DataContext>
-    <Window.Resources>
-        <Style TargetType="TextBox" >
-            <Setter Property="Control.Margin" Value="5"/>
-        </Style>
+    <Window.Resources>        
         <Style TargetType="Button">
             <Setter Property="Control.Margin" Value="5"/>
         </Style>
     </Window.Resources>
-    <StackPanel>
-        <TextBox
-            Text="{Binding Source={x:Static p:Settings.Default}, Path=configFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox
-            Text="{Binding Source={x:Static p:Settings.Default}, Path=configTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Height="25" VerticalAlignment="Top">
+            <MenuItem Header="Настройки"/>
+        </Menu>
+        
+            <Button 
+            
+            Command="{Binding OnClick}"
+            Content="Выполнить обмен"/>
         <Button 
-            Command="{Binding OnClick}" Content="Выполнить"/>
-        <Button 
-            Command="{Binding OnSave}" Content="Сохранить"/>
-        <Button 
-            Command="{Binding OnSettings}" Content="Настройки"/>
-    </StackPanel>    
+            Command="{Binding OnSettings}"
+            Content="Настройки"/>        
+    </DockPanel>    
 </Window>

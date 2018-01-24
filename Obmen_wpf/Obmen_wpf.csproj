@@ -65,6 +65,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\Command.cs" />
     <Compile Include="Model\OperationType.cs" />
+    <Compile Include="Model\PasswordHelper.cs" />
     <Compile Include="Model\RemovableDisk.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
