@@ -11,26 +11,27 @@
         ResizeMode="NoResize"
         Height="200" 
         Width="300">
-    
+
     <Window.DataContext>
         <viewmodel:ViewModelBase/>
     </Window.DataContext>
-    <Window.Resources>        
+    <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Control.Margin" Value="5"/>
         </Style>
     </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top" Height="25" VerticalAlignment="Top">
-            <MenuItem Header="Настройки"/>
+            <MenuItem 
+                Header="Настройки"
+                Command="{Binding OnSettings}"/>
         </Menu>
-        
-            <Button 
-            
+
+        <Button             
             Command="{Binding OnClick}"
             Content="Выполнить обмен"/>
-        <Button 
-            Command="{Binding OnSettings}"
-            Content="Настройки"/>        
-    </DockPanel>    
+        <Button             
+            Command="{Binding OnClick}"
+            Content="Выход"/>
+    </DockPanel>
 </Window>
