@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="configFrom" Type="System.String" Scope="User">
-      <Value Profile="(Default)">F130\Config</Value>
+      <Value Profile="(Default)">test</Value>
     </Setting>
     <Setting Name="configTo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -18,7 +18,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="f130To" Type="System.String" Scope="User">
-      <Value Profile="(Default)">F130\ASKU</Value>
+      <Value Profile="(Default)">test1</Value>
     </Setting>
     <Setting Name="esppFrom" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

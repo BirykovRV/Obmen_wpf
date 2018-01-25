@@ -25,7 +25,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("F130\\Config")]
+        [global::System.Configuration.DefaultSettingValueAttribute("test")]
         public string configFrom {
             get {
                 return ((string)(this["configFrom"]));
@@ -85,7 +85,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("F130\\ASKU")]
+        [global::System.Configuration.DefaultSettingValueAttribute("test1")]
         public string f130To {
             get {
                 return ((string)(this["f130To"]));

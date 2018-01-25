@@ -20,7 +20,7 @@ namespace Obmen_wpf.Model
         /// <param name="pathFrom">От куда копировать</param>
         /// <param name="pathTo">Куда копировать</param>
         /// <param name="isArchive">Это архив?</param>
-        public static async void CopyFileAsync(string pathFrom, string pathTo, bool isArchive)
+        public static void CopyFileAsync(string pathFrom, string pathTo, bool isArchive)
         {
             DirectoryInfo directoryFrom = new DirectoryInfo(pathFrom);
             DirectoryInfo directoryTo = new DirectoryInfo(pathTo);
@@ -29,7 +29,7 @@ namespace Obmen_wpf.Model
             {
                 if (isArchive)
                 {
-                    await ExtractArchive(pathFrom, pathTo);
+                    ExtractArchive(pathFrom, pathTo);
                 }
                 else
                 {
@@ -57,7 +57,7 @@ namespace Obmen_wpf.Model
                 directoryTo.Create();
 
                 if (isArchive)
-                    await ExtractArchive(pathFrom, pathTo);
+                    ExtractArchive(pathFrom, pathTo);
                 else
                     CopyFileAsync(pathFrom, pathTo, isArchive);
             }
@@ -68,7 +68,7 @@ namespace Obmen_wpf.Model
         /// </summary>
         /// <param name="pathFrom">От куда брать архив</param>
         /// <param name="pathTo">Куда разархивировать</param>
-        public static async Task ExtractArchive(string pathFrom, string pathTo)
+        public static void ExtractArchive(string pathFrom, string pathTo)
         {
             DirectoryInfo dirFrom = new DirectoryInfo(pathFrom);
             DirectoryInfo dirTo = new DirectoryInfo(pathTo);
@@ -81,17 +81,13 @@ namespace Obmen_wpf.Model
                 if (files[i].Name.Contains(".zip"))
                 {
                     if (dirTo.Exists) dirTo.Delete(true);
-                    await Task.Factory.StartNew(() =>
-                     {
-                         ZipFile.ExtractToDirectory(_pathFrom, pathTo); // Разархивация .zip
-                    });
+
+                    ZipFile.ExtractToDirectory(_pathFrom, pathTo); // Разархивация .zip
+
                 }
                 else if (files[i].Name.Contains(".rar"))
                 {
-                    await Task.Factory.StartNew(() =>
-                    {
-                        RarArchive.WriteToDirectory(_pathFrom, pathTo); // Разархивация .rar 
-                    });                    
+                    RarArchive.WriteToDirectory(_pathFrom, pathTo); // Разархивация .rar 
                 }
             }
         }

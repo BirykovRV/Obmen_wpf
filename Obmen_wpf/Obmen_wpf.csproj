@@ -64,6 +64,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Command.cs" />
+    <Compile Include="Model\CopyEspp.cs" />
+    <Compile Include="Model\CopyF130.cs" />
+    <Compile Include="Model\CopyFSG.cs" />
+    <Compile Include="Model\CopyPostPay.cs" />
+    <Compile Include="Model\ICopyFiles.cs" />
     <Compile Include="Model\OperationType.cs" />
     <Compile Include="Model\PasswordHelper.cs" />
     <Compile Include="Model\RemovableDisk.cs" />

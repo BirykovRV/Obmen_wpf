@@ -1,6 +1,8 @@
 ﻿using Obmen_wpf.Model;
 using Obmen_wpf.Properties;
 using Obmen_wpf.View;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -8,6 +10,18 @@ namespace Obmen_wpf.ViewModel
 {
     class ViewModelBase
     {
+        private List<ICopyFiles> listOfOperations;
+        
+        public ViewModelBase()
+        {
+            listOfOperations = new List<ICopyFiles>()
+            {
+                new CopyF130(),
+                new CopyPostPay(),
+                new CopyEspp(),
+                new CopyFSG()
+            };
+        }
         /// <summary>
         /// Запускает программу на выполнение
         /// </summary>
@@ -17,25 +31,24 @@ namespace Obmen_wpf.ViewModel
             {
                 return new Command(o =>
                {
-
-
-                   if (RemovableDisk.FindDisk())
+                   Task.Factory.StartNew(() =>
                    {
-                       string from = Settings.Default.configFrom;
-                       string to = Settings.Default.configTo;
-
-                       foreach (var item in RemovableDisk.RemovableDrives)
+                       if (RemovableDisk.FindDisk())
                        {
-                           Operations.CopyFileAsync(from, to, false);
-                           
+                           foreach (var item in RemovableDisk.RemovableDrives)
+                           {
+                               foreach (var oper in listOfOperations)
+                               {
+                                   oper.Start(item.Key);                                   
+                               }                               
+                           }
+                           RemovableDisk.RemovableDrives.Clear();
                        }
-                       RemovableDisk.RemovableDrives.Clear();
-                   }
-                   else
-                   {
-                       //TODO: 
-                       MessageBox.Show("Нет USB");
-                   }
+                       else
+                       {
+                           MessageBox.Show("Нет USB");
+                       }
+                   });
                });
             }
         }
