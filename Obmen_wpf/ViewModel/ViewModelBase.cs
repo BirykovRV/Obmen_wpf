@@ -82,9 +82,7 @@ namespace Obmen_wpf.ViewModel
 
                            Task.Delay(1000).Wait();
                            // Очистка списка usb drives
-                           RemovableDisk.RemovableDrives.Clear();
-                           // Открываем доступ к кнопке
-                           IsComplited = true;
+                           RemovableDisk.RemovableDrives.Clear();                           
                            // Сброс полоски прогрессбара
                            Progress = 0;
                            MessageBox.Show("Копирование файлов завершено.\nМожете закрыть программу.", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -93,6 +91,8 @@ namespace Obmen_wpf.ViewModel
                        {
                            MessageBox.Show("Нет USB");
                        }
+                       // Открываем доступ к кнопке
+                       IsComplited = true;
                    });
                }, o => isComplited);
             }
