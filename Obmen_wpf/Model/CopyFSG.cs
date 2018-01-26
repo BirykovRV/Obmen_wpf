@@ -19,9 +19,9 @@ namespace Obmen_wpf.Model
         public void Start(string key)
         {
             // FSG Reg
-            Operations.CopyFileAsync(fsgRegFrom, key + fsgRegTo, false);
+            Operations.CopyFile(fsgRegFrom, key + fsgRegTo, false);
             // FSG Cash
-            Operations.CopyFileAsync(key + cashFsgFrom, cashFsgTo, false);
+            Operations.CopyFile(key + cashFsgFrom, cashFsgTo, false);
         }
     }
 }

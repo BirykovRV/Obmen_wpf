@@ -20,7 +20,7 @@ namespace Obmen_wpf.Model
         /// <param name="pathFrom">От куда копировать</param>
         /// <param name="pathTo">Куда копировать</param>
         /// <param name="isArchive">Это архив?</param>
-        public static void CopyFileAsync(string pathFrom, string pathTo, bool isArchive)
+        public static void CopyFile(string pathFrom, string pathTo, bool isArchive)
         {
             DirectoryInfo directoryFrom = new DirectoryInfo(pathFrom);
             DirectoryInfo directoryTo = new DirectoryInfo(pathTo);
@@ -47,7 +47,7 @@ namespace Obmen_wpf.Model
                         string newPathTo = pathTo + dir.Name;
                         string newPathFrom = pathFrom + "\\" + dir.Name;
                         Directory.CreateDirectory(newPathTo);
-                        CopyFileAsync(newPathFrom, newPathTo + "\\", isArchive);
+                        CopyFile(newPathFrom, newPathTo + "\\", isArchive);
                     }
                 }
             }
@@ -59,7 +59,7 @@ namespace Obmen_wpf.Model
                 if (isArchive)
                     ExtractArchive(pathFrom, pathTo);
                 else
-                    CopyFileAsync(pathFrom, pathTo, isArchive);
+                    CopyFile(pathFrom, pathTo, isArchive);
             }
         }
 

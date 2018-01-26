@@ -19,9 +19,9 @@ namespace Obmen_wpf.Model
         public void Start(string key)
         {
             // Config
-            Operations.CopyFileAsync(key + configFrom, configTo, false);
+            Operations.CopyFile(key + configFrom, configTo, false);
             // ASKU
-            Operations.CopyFileAsync(f130From, key + f130To, false);
+            Operations.CopyFile(f130From, key + f130To, false);
         }
     }
 }

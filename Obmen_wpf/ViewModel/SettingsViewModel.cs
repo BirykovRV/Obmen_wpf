@@ -39,7 +39,7 @@ namespace Obmen_wpf.ViewModel
                 new OperationType { Name = "FSG", Control = new FsgUserControl()},
                 new OperationType { Name = "Инфо. пункт", Control = new InfoPointUserControl()}
             };
-        }        
+        }
         /// <summary>
         /// Выбранный элемент в списке
         /// </summary>
@@ -62,6 +62,8 @@ namespace Obmen_wpf.ViewModel
                 return new Command(o =>
                 {
                     Settings.Default.Save();
+                    System.Windows.Forms.Application.Restart();
+                    Application.Current.Shutdown();
                 }, o => Settings.IsMyPropertyChanged);
             }
         }

@@ -24,7 +24,7 @@ namespace Obmen_wpf.Model
         public void Start(string key)
         {
             // Reg PostPay
-            Operations.CopyFileAsync(postPayRegFrom, key + postPayRegTo, false);
+            Operations.CopyFile(postPayRegFrom, key + postPayRegTo, false);
             try
             {
                 foreach (Process process in Process.GetProcesses())
@@ -48,14 +48,14 @@ namespace Obmen_wpf.Model
                     }
                 }
                 // Update PostPay
-                Operations.CopyFileAsync(key + postPayUpdateFrom, postPayUpdateTo, true);
+                Operations.CopyFile(key + postPayUpdateFrom, postPayUpdateTo, true);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
             // DB PostPay
-            Operations.CopyFileAsync(key + postPayDBFrom, postPayDBTo, true);            
+            Operations.CopyFile(key + postPayDBFrom, postPayDBTo, true);            
         }
     }
 }

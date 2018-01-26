@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="configFrom" Type="System.String" Scope="User">
-      <Value Profile="(Default)">test</Value>
+      <Value Profile="(Default)">F130\Config</Value>
     </Setting>
     <Setting Name="configTo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -12,22 +12,22 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="postPayRegTo" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">PostPay\Reg</Value>
     </Setting>
     <Setting Name="f130From" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="f130To" Type="System.String" Scope="User">
-      <Value Profile="(Default)">test1</Value>
+      <Value Profile="(Default)">F130\ASKU</Value>
     </Setting>
     <Setting Name="esppFrom" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">ESPP\DB</Value>
     </Setting>
     <Setting Name="esppTo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="postPayDBFrom" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">PostPay\DB</Value>
     </Setting>
     <Setting Name="postPayDBTo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -36,10 +36,10 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="pensionTo" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">ESPP\Pension</Value>
     </Setting>
     <Setting Name="cashFsgFrom" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">FSG\Cash</Value>
     </Setting>
     <Setting Name="cashFsgTo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -48,10 +48,10 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="fsgRegTo" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">FSG\Reg</Value>
     </Setting>
     <Setting Name="postPayUpdateFrom" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">PostPay\Update</Value>
     </Setting>
     <Setting Name="postPayUpdateTo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

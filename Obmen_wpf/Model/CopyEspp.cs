@@ -19,9 +19,9 @@ namespace Obmen_wpf.Model
         public void Start(string key)
         {
             // Pension
-            Operations.CopyFileAsync(pensionFrom, key + pensionTo, false);
+            Operations.CopyFile(pensionFrom, key + pensionTo, false);
             // ESPP
-            Operations.CopyFileAsync(key + esppFrom, esppTo, false);
+            Operations.CopyFile(key + esppFrom, esppTo, false);
         }
     }
 }
