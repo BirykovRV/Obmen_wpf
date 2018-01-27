@@ -62,8 +62,8 @@ namespace Obmen_wpf.ViewModel
                 return new Command(o =>
                 {
                     Settings.Default.Save();
-                    System.Windows.Forms.Application.Restart();
-                    Application.Current.Shutdown();
+                    //System.Windows.Forms.Application.Restart();
+                    //Application.Current.Shutdown();
                 }, o => Settings.IsMyPropertyChanged);
             }
         }

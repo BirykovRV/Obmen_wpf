@@ -19,6 +19,7 @@
         <Style TargetType="Button">
             <Setter Property="Control.Margin" Value="5"/>
             <Setter Property="Control.Padding" Value="5"/>
+            <Setter Property="Height" Value="40"/>
         </Style>
     </Window.Resources>
     <DockPanel>
@@ -27,16 +28,13 @@
                 Header="Настройки"
                 Command="{Binding OnSettings}"/>
         </Menu>
-        <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Orientation="Horizontal">
+        <StackPanel Margin="0 5 0 0" HorizontalAlignment="Center" DockPanel.Dock="Top" Orientation="Horizontal">
             <Button             
             Command="{Binding OnClick}"
-            Content="Выполнить обмен"
-            Height="40"
-            />
+            Content="Выполнить обмен"/>
             <Button            
             Command="{Binding OnClose}"
-            Content="Выход"
-            Height="40"/>
+            Content="Выход"/>
         </StackPanel>
         <ProgressBar
             DockPanel.Dock="Bottom"
