@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Obmen_wpf.Model
@@ -27,8 +28,8 @@ namespace Obmen_wpf.Model
         /// <param name="localPath">Путь куда скачивать файлы на локальном компьютере</param>
         public void Download(string remotePath, string localPath)
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(remotePath);
-            request.Method = WebRequestMethods.Ftp.ListDirectory;
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Url + remotePath);
+            request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
             request.Credentials = new NetworkCredential(Username, Password);
 
             List<string> lines = new List<string>();
@@ -46,24 +47,37 @@ namespace Obmen_wpf.Model
             foreach (var line in lines)
             {
                 string combinedLocalPath = Path.Combine(localPath, line);
-                string fileUrl = remotePath + line;
+                string fileUrl = Url + remotePath + line;
                 Console.WriteLine(combinedLocalPath);
+                string pattern = "/$";
+                Regex regex = new Regex(pattern);
+                //if (regex.IsMatch(fileUrl))
+                //{
+                //    if (!Directory.Exists(combinedLocalPath))
+                //    {
+                //        Directory.CreateDirectory(combinedLocalPath);
+                //    }
 
-                FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(fileUrl);
-                downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
-                downloadRequest.Credentials = new NetworkCredential(Username, Password);
+                //    Download(fileUrl + "/", combinedLocalPath);
+                //}
+                //else
+                //{
+                    //FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(fileUrl);
+                    //downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
+                    //downloadRequest.Credentials = new NetworkCredential(Username, Password);
 
-                using (FtpWebResponse response = (FtpWebResponse)downloadRequest.GetResponse())
-                using (Stream responseStream = response.GetResponseStream())
-                using (Stream targetStream = File.Create(combinedLocalPath))
-                {
-                    byte[] buffer = new byte[256];
-                    int bytesRead;
-                    while ((bytesRead = responseStream.Read(buffer, 0, buffer.Length)) > 0)
-                    {
-                        targetStream.Write(buffer, 0, bytesRead);
-                    }
-                }
+                    //using (FtpWebResponse response = (FtpWebResponse)downloadRequest.GetResponse())
+                    //using (Stream responseStream = response.GetResponseStream())
+                    //using (Stream targetStream = File.Create(combinedLocalPath))
+                    //{
+                    //    byte[] buffer = new byte[256];
+                    //    int bytesRead;
+                    //    while ((bytesRead = responseStream.Read(buffer, 0, buffer.Length)) > 0)
+                    //    {
+                    //        targetStream.Write(buffer, 0, bytesRead);
+                    //    }
+                    //}
+                //}
             }
 
             Console.WriteLine("Загрузка и сохранение файла завершены");

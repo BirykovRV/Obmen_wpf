@@ -15,7 +15,7 @@ namespace Testing
         {
             Ftp ftp = new Ftp("ftp://10.87.6.143/", "support", "trd19afo");
 
-            ftp.Download("ftp://10.87.6.143/test/", "D:\\TEST\\");
+            ftp.Download("test/", "D:\\TEST\\");
         }        
     }
 }
