@@ -86,13 +86,18 @@ namespace Obmen_wpf.Model
             Console.Read();
         }
 
-        public void Uploader(string localPath, string remotePath)
+        public void Upload(string localPath, string remotePath)
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Url);
             request.Method = WebRequestMethods.Ftp.UploadFile;
             request.Credentials = new NetworkCredential(Username, Password);
 
-
+            using (Stream stream = request.GetRequestStream())
+            using (FileStream uploadedFile = new FileStream(localPath, FileMode.Open, FileAccess.Read))
+            {
+                byte[] byteBuffer = new byte[uploadedFile.Length];
+                uploadedFile.Read(byteBuffer, 0, byteBuffer.Length);
+            }      
         }
     }
 }
