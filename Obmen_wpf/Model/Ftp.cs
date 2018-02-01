@@ -11,16 +11,10 @@ namespace Obmen_wpf.Model
 {
     public class Ftp
     {
-        public string Url { get; set; } ;
+        public string Url { get; set; }
         public string Username { get; set; } 
-        public string Password { get; set; } 
+        public string Password { private get; set; } 
 
-        public Ftp(string url, string username, string password)
-        {
-            Url = url;
-            Username = username;
-            Password = password;
-        }
         /// <summary>
         /// Скачивание файлов с ftp
         /// </summary>
@@ -47,6 +41,7 @@ namespace Obmen_wpf.Model
             foreach (var line in lines)
             {
                 string[] tokens = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                // имя файла
                 string name = tokens[8];
                 // Тип файла ('d' - папка)
                 string category = tokens[0];
@@ -81,23 +76,25 @@ namespace Obmen_wpf.Model
                     }
                 }
             }
-
-            Console.WriteLine("Загрузка и сохранение файла завершены");
-            Console.Read();
         }
-
+        /// <summary>
+        /// Загрузка файлов на сервер
+        /// </summary>
+        /// <param name="localPath">Полный путь до файла включая его имя</param>
+        /// <param name="remotePath">Путь к папке на сервере с именем файла</param>
         public void Upload(string localPath, string remotePath)
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Url);
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Url + remotePath);
             request.Method = WebRequestMethods.Ftp.UploadFile;
             request.Credentials = new NetworkCredential(Username, Password);
-
-            using (Stream stream = request.GetRequestStream())
+                        
             using (FileStream uploadedFile = new FileStream(localPath, FileMode.Open, FileAccess.Read))
             {
                 byte[] byteBuffer = new byte[uploadedFile.Length];
                 uploadedFile.Read(byteBuffer, 0, byteBuffer.Length);
-            }      
+                using (Stream writer = request.GetRequestStream())
+                    writer.Write(byteBuffer, 0, byteBuffer.Length);
+            }
         }
     }
 }

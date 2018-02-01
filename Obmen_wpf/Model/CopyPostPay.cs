@@ -52,9 +52,12 @@ namespace Obmen_wpf.Model
                 {
                     MessageBox.Show(ex.Message);
                 }
-            }            
-            // DB PostPay
-            Operations.CopyFile(key + postPayDBFrom, postPayDBTo, true);            
+            }
+            if (CheckForUpdate(key + postPayDBFrom, postPayDBTo))
+            {
+                // DB PostPay
+                Operations.CopyFile(key + postPayDBFrom, postPayDBTo, true);
+            }                       
         }
 
         private bool CheckForUpdate(string from, string to)
@@ -69,7 +72,7 @@ namespace Obmen_wpf.Model
             {
                 foreach (var file in files)
                 {
-                    if (file.CreationTimeUtc > pluginUpdateTime)
+                    if (file.LastWriteTimeUtc > pluginUpdateTime)
                     {
                         return true;
                     }
