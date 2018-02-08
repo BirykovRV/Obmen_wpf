@@ -13,33 +13,35 @@ namespace Testing
     {
         static void Main(string[] args)
         {
-            Ftp ftp = new Ftp
+            string url = "10.87.6.143";
+
+            Ftp server = new Ftp
             {
-                Url = "ftp://10.87.6.143/",
+                Url = $"ftp://{url}/",
                 Username = "support",
                 Password = "trd19afo"
             };
 
             string localPath = "D:\\TEST\\";
             string remotePath = "test/";
-            ftp.CreateDir(remotePath + "1");
-            //DirectoryInfo info = new DirectoryInfo(localPath);
-            //FileInfo [] files = info.GetFiles();
-            //DirectoryInfo[] dirs = info.GetDirectories(localPath);
+            server.CreateDir(remotePath + "1");
+            DirectoryInfo info = new DirectoryInfo(localPath);
+            FileInfo[] files = info.GetFiles();
+            DirectoryInfo[] dirs = info.GetDirectories(localPath);
 
 
-            //foreach (var file in files)
-            //{
-            //    Task.Factory.StartNew(()=>
-            //    {
-            //        Console.WriteLine($"Копирование:\t{file.FullName}\t{DateTime.Now}");
-            //        ftp.Upload($"{file.FullName}", remotePath + file.Name);
-            //    });
-            //}
-            //foreach (var dir in dirs)
-            //{
+            foreach (var file in files)
+            {
+                Task.Factory.StartNew(() =>
+                {
+                    Console.WriteLine($"Копирование:\t{file.FullName}\t{DateTime.Now}");
+                    server.Upload($"{file.FullName}", remotePath + file.Name);
+                });
+            }
+            foreach (var dir in dirs)
+            {
 
-            //}
+            }
             Console.ReadKey();
         }        
     }

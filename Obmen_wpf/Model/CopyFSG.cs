@@ -9,7 +9,7 @@ namespace Obmen_wpf.Model
 {
     class CopyFSG : ICopyFiles
     {
-        public void Start(string key)
+        public void Start(string key, string value)
         {
             // FSG Reg
             string fsgRegFrom = Settings.Default.fsgRegFrom;

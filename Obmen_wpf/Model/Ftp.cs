@@ -113,12 +113,12 @@ namespace Obmen_wpf.Model
         /// <summary>
         /// Создание папки на сервере
         /// </summary>
-        /// <param name="path">Путь где создать папку</param>
-        public void CreateDir(string path)
+        /// <param name="remotePath">Путь где создать папку</param>
+        public void CreateDir(string remotePath)
         {
             try
             {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Url + path);
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Url + remotePath);
                 request.Method = WebRequestMethods.Ftp.MakeDirectory;
                 request.Credentials = new NetworkCredential(Username, Password);
 

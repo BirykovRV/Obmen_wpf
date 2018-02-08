@@ -77,7 +77,7 @@ namespace Obmen_wpf.ViewModel
                            {
                                foreach (var oper in listOfOperations)
                                {
-                                   oper.Start(item.Key);
+                                   oper.Start(item.Key, item.Value);
                                    Progress++;
                                }
                            }

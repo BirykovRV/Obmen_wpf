@@ -8,6 +8,6 @@ namespace Obmen_wpf.Model
 {
     interface ICopyFiles
     {
-        void Start(string key);
+        void Start(string key, string value);
     }
 }

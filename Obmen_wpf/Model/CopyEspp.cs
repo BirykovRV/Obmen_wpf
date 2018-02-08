@@ -9,7 +9,7 @@ namespace Obmen_wpf.Model
 {
     class CopyEspp : ICopyFiles
     {   
-        public void Start(string key)
+        public void Start(string key, string value)
         {
             // Pension
             string pensionFrom = Settings.Default.pensionFrom;

@@ -8,7 +8,7 @@ namespace Obmen_wpf.Model
 {
     class CopyPostPay : ICopyFiles
     {
-        public void Start(string key)
+        public void Start(string key, string value)
         {
             // Reg PostPay
             string postPayRegFrom = Settings.Default.postPayRegFrom;
@@ -21,6 +21,7 @@ namespace Obmen_wpf.Model
             string postPayUpdateTo = Settings.Default.postPayUpdateTo + "\\";
             // Reg PostPay
             Operations.CopyFile(postPayRegFrom, key + postPayRegTo, false);
+
             if (CheckForUpdate(key + postPayUpdateFrom, postPayUpdateTo))
             {
                 try
