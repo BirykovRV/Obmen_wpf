@@ -9,7 +9,7 @@ namespace Obmen_wpf.Model
 {
     class CopyF130 : ICopyFiles
     {
-        public void Start(string key, string value)
+        public void Start(string key, string value, bool isInfoPoint)
         {
             // Config
             string configFrom = Settings.Default.configFrom;

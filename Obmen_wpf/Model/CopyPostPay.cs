@@ -8,7 +8,7 @@ namespace Obmen_wpf.Model
 {
     class CopyPostPay : ICopyFiles
     {
-        public void Start(string key, string value)
+        public void Start(string key, string value, bool isInfoPoint)
         {
             // Reg PostPay
             string postPayRegFrom = Settings.Default.postPayRegFrom;

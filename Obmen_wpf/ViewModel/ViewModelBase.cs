@@ -70,14 +70,29 @@ namespace Obmen_wpf.ViewModel
                    Task.Factory.StartNew(() =>
                    {
                        IsComplited = false;
-                      
+                       bool isInfoPoint = Settings.Default.IsInfoPoinChecked;
+
+                       Ftp server = new Ftp
+                       {
+                           Url = Settings.Default.serverIp,
+                           Username = Settings.Default.serverLogin,
+                           Password = Settings.Default.serverPass
+                       };
+
+                       Ftp asku = new Ftp
+                       {
+                           Url = Settings.Default.askuIp,
+                           Username = Settings.Default.askuLogin,
+                           Password = Settings.Default.askuPass
+                       };
+
                        if (RemovableDisk.FindDisk())
                        {
                            foreach (var item in RemovableDisk.RemovableDrives)
                            {
                                foreach (var oper in listOfOperations)
                                {
-                                   oper.Start(item.Key, item.Value);
+                                   oper.Start(item.Key, item.Value, isInfoPoint);
                                    Progress++;
                                }
                            }

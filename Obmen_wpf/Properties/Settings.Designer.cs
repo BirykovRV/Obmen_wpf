@@ -326,12 +326,12 @@ namespace Obmen_wpf.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPosChecked {
+        public bool IsInfoPoinChecked {
             get {
-                return ((bool)(this["IsPosChecked"]));
+                return ((bool)(this["IsInfoPoinChecked"]));
             }
             set {
-                this["IsPosChecked"] = value;
+                this["IsInfoPoinChecked"] = value;
             }
         }
     }

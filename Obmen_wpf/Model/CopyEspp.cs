@@ -9,7 +9,7 @@ namespace Obmen_wpf.Model
 {
     class CopyEspp : ICopyFiles
     {   
-        public void Start(string key, string value)
+        public void Start(string key, string value, bool isInfoPoint)
         {
             // Pension
             string pensionFrom = Settings.Default.pensionFrom;
@@ -17,10 +17,18 @@ namespace Obmen_wpf.Model
             // ESPP
             string esppFrom = Settings.Default.esppFrom;
             string esppTo = Settings.Default.esppTo + "\\";
-            // Pension
-            Operations.CopyFile(pensionFrom, key + pensionTo, false);
-            // ESPP
-            Operations.CopyFile(key + esppFrom, esppTo, false);            
+
+            if (isInfoPoint)
+            {
+
+            }
+            else
+            {
+                // Pension
+                Operations.CopyFile(pensionFrom, key + pensionTo, false);
+                // ESPP
+                Operations.CopyFile(key + esppFrom, esppTo, false);
+            }                        
         }
     }
 }
