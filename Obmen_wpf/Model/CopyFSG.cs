@@ -1,6 +1,7 @@
 ﻿using Obmen_wpf.Properties;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,14 +14,26 @@ namespace Obmen_wpf.Model
         {
             // FSG Reg
             string fsgRegFrom = Settings.Default.fsgRegFrom;
-            string fsgRegTo = Settings.Default.fsgRegTo + "\\";
+            string fsgRegTo = key + Settings.Default.fsgRegTo + "\\";
             // FSG Cash
-            string cashFsgFrom = Settings.Default.cashFsgFrom;
+            string cashFsgFrom = key + Settings.Default.cashFsgFrom;
             string cashFsgTo = Settings.Default.cashFsgTo + "\\";
-            // FSG Reg
-            Operations.CopyFile(fsgRegFrom, key + fsgRegTo, false);
-            // FSG Cash
-            Operations.CopyFile(key + cashFsgFrom, cashFsgTo, false);
+
+            string serverPathTo = $"{value}/FSG/Reg/";
+            string serverPathFrom = $"ToOPS/FSG/{value}/";
+
+            if (isInfoPoint)
+            {
+                ServerFtpModel.StartUpload(fsgRegTo, serverPathTo);
+                ServerFtpModel.StartDownload(serverPathFrom, cashFsgFrom);
+            }
+            else
+            {
+                // FSG Reg
+                Operations.CopyFile(fsgRegFrom, fsgRegTo, false);
+                // FSG Cash
+                Operations.CopyFile(cashFsgFrom, cashFsgTo, false);
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Testing
 
             Ftp server = new Ftp
             {
-                Url = $"ftp://{url}/",
+                Uri = $"ftp://{url}/",
                 Username = "support",
                 Password = "trd19afo"
             };

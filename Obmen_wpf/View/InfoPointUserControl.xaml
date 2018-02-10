@@ -33,7 +33,7 @@
             Content="Режим для ИП"
             DockPanel.Dock="Top" 
             Margin="15 5"
-            IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=IsPosChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=IsInfoPoinChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <DockPanel>
             <GroupBox Header="Сервер:" Padding="5" DockPanel.Dock="Top">
                 <StackPanel>

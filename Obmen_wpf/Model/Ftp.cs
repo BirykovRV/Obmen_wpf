@@ -11,9 +11,16 @@ namespace Obmen_wpf.Model
 {
     public class Ftp
     {
-        public string Url { get; set; }
+        public string Uri { get; set; }
         public string Username { get; set; } 
-        public string Password { private get; set; } 
+        public string Password { private get; set; }
+
+        //public Ftp(string uri, string login, string pass)
+        //{
+        //    Uri = uri;
+        //    Username = login;
+        //    Password = pass;
+        //}
 
         /// <summary>
         /// Скачивание файлов с ftp
@@ -24,7 +31,7 @@ namespace Obmen_wpf.Model
         {
             try
             {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Url + remotePath);
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Uri + remotePath);
                 request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
                 request.Credentials = new NetworkCredential(Username, Password);
 
@@ -61,7 +68,7 @@ namespace Obmen_wpf.Model
                     }
                     else
                     {
-                        FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(Url + fileUrl);
+                        FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(Uri + fileUrl);
                         downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
                         downloadRequest.Credentials = new NetworkCredential(Username, Password);
 
@@ -69,7 +76,7 @@ namespace Obmen_wpf.Model
                         using (Stream responseStream = response.GetResponseStream())
                         using (Stream targetStream = File.Create(combinedLocalPath))
                         {
-                            byte[] buffer = new byte[256];
+                            byte[] buffer = new byte[32768];
                             int bytesRead;
                             while ((bytesRead = responseStream.Read(buffer, 0, buffer.Length)) > 0)
                             {
@@ -93,7 +100,7 @@ namespace Obmen_wpf.Model
         {
             try
             {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Url + remotePath);
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Uri + remotePath);
                 request.Method = WebRequestMethods.Ftp.UploadFile;
                 request.Credentials = new NetworkCredential(Username, Password);
 
@@ -113,12 +120,12 @@ namespace Obmen_wpf.Model
         /// <summary>
         /// Создание папки на сервере
         /// </summary>
-        /// <param name="remotePath">Путь где создать папку</param>
+        /// <param name="remotePath">Название папки, которую создать на сервере</param>
         public void CreateDir(string remotePath)
         {
             try
             {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Url + remotePath);
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Uri + remotePath);
                 request.Method = WebRequestMethods.Ftp.MakeDirectory;
                 request.Credentials = new NetworkCredential(Username, Password);
 

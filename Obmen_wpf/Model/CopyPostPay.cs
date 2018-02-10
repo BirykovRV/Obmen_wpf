@@ -12,53 +12,67 @@ namespace Obmen_wpf.Model
         {
             // Reg PostPay
             string postPayRegFrom = Settings.Default.postPayRegFrom;
-            string postPayRegTo = Settings.Default.postPayRegTo + "\\";
+            string postPayRegTo = key + Settings.Default.postPayRegTo + "\\";
             // DB PostPay
-            string postPayDBFrom = Settings.Default.postPayDBFrom;
+            string postPayDBFrom = key + Settings.Default.postPayDBFrom;
             string postPayDBTo = Settings.Default.postPayDBTo + "\\";
             // Update PostPay
-            string postPayUpdateFrom = Settings.Default.postPayUpdateFrom;
+            string postPayUpdateFrom = key + Settings.Default.postPayUpdateFrom;
             string postPayUpdateTo = Settings.Default.postPayUpdateTo + "\\";
+
+            string serverRegTo = $"{value}/PostPay/";
+            string serverUpdateFrom = "ToOPS/PostPay/DB/";
+            string serverDBFrom = "ToOPS/PostPay/Update/";
+
             // Reg PostPay
-            Operations.CopyFile(postPayRegFrom, key + postPayRegTo, false);
-
-            if (CheckForUpdate(key + postPayUpdateFrom, postPayUpdateTo))
+            if (isInfoPoint)
             {
-                try
+                ServerFtpModel.StartUpload(postPayRegTo, serverRegTo);
+                ServerFtpModel.StartDownload(serverUpdateFrom, postPayUpdateFrom);
+                ServerFtpModel.StartDownload(serverDBFrom, postPayDBFrom);
+            }
+            else
+            {
+                Operations.CopyFile(postPayRegFrom, postPayRegTo, false);
+
+                if (CheckForUpdate(postPayUpdateFrom, postPayUpdateTo))
                 {
-                    foreach (Process process in Process.GetProcesses())
+                    try
                     {
-                        if (process.ProcessName.StartsWith("PpsPlugin.Scheduler"))
+                        foreach (Process process in Process.GetProcesses())
                         {
-                            process.Kill();
-                            process.WaitForExit();
-                        }
+                            if (process.ProcessName.StartsWith("PpsPlugin.Scheduler"))
+                            {
+                                process.Kill();
+                                process.WaitForExit();
+                            }
 
-                        if (process.ProcessName.StartsWith("GM_Scheduler"))
-                        {
-                            process.Kill();
-                            process.WaitForExit();
-                        }
+                            if (process.ProcessName.StartsWith("GM_Scheduler"))
+                            {
+                                process.Kill();
+                                process.WaitForExit();
+                            }
 
-                        if (process.ProcessName.StartsWith("POS"))
-                        {
-                            process.Kill();
-                            process.WaitForExit();
+                            if (process.ProcessName.StartsWith("POS"))
+                            {
+                                process.Kill();
+                                process.WaitForExit();
+                            }
                         }
+                        // Update PostPay
+                        Operations.CopyFile(postPayUpdateFrom, postPayUpdateTo, true);
                     }
-                    // Update PostPay
-                    Operations.CopyFile(key + postPayUpdateFrom, postPayUpdateTo, true);
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
-                catch (Exception ex)
+                if (CheckForUpdate(postPayDBFrom, postPayDBTo))
                 {
-                    MessageBox.Show(ex.Message);
+                    // DB PostPay
+                    Operations.CopyFile(postPayDBFrom, postPayDBTo, true);
                 }
             }
-            if (CheckForUpdate(key + postPayDBFrom, postPayDBTo))
-            {
-                // DB PostPay
-                Operations.CopyFile(key + postPayDBFrom, postPayDBTo, true);
-            }                       
         }
 
         private bool CheckForUpdate(string from, string to)

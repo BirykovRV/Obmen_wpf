@@ -69,47 +69,15 @@ namespace Obmen_wpf.ViewModel
                {
                    Task.Factory.StartNew(() =>
                    {
-                       IsComplited = false;
-                       bool isInfoPoint = Settings.Default.IsInfoPoinChecked;
+                       //Ftp asku = new Ftp
+                       //{
+                       //    Url = Settings.Default.askuIp,
+                       //    Username = Settings.Default.askuLogin,
+                       //    Password = Settings.Default.askuPass
+                       //};
 
-                       Ftp server = new Ftp
-                       {
-                           Url = Settings.Default.serverIp,
-                           Username = Settings.Default.serverLogin,
-                           Password = Settings.Default.serverPass
-                       };
-
-                       Ftp asku = new Ftp
-                       {
-                           Url = Settings.Default.askuIp,
-                           Username = Settings.Default.askuLogin,
-                           Password = Settings.Default.askuPass
-                       };
-
-                       if (RemovableDisk.FindDisk())
-                       {
-                           foreach (var item in RemovableDisk.RemovableDrives)
-                           {
-                               foreach (var oper in listOfOperations)
-                               {
-                                   oper.Start(item.Key, item.Value, isInfoPoint);
-                                   Progress++;
-                               }
-                           }
-
-                           Task.Delay(500).Wait();
-                           // Очистка списка usb drives
-                           RemovableDisk.RemovableDrives.Clear();
-                           // Сброс полоски прогрессбара
-                           Progress = 0;
-                           MessageBox.Show("Копирование файлов завершено.\nМожете закрыть программу.", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Information);
-                       }
-                       else
-                       {
-                           MessageBox.Show("Нет USB");
-                       }
-                       // Открываем доступ к кнопке
-                       IsComplited = true;
+                       DoJob();
+                       
                    });
                }, o => isComplited);
             }
@@ -145,6 +113,37 @@ namespace Obmen_wpf.ViewModel
         public void OnPropertyChanged(string param = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(param));
+        }
+
+        private void DoJob()
+        {
+            IsComplited = false;
+            bool isInfoPoint = Settings.Default.IsInfoPoinChecked;
+
+            if (RemovableDisk.FindDisk())
+            {
+                foreach (var item in RemovableDisk.RemovableDrives)
+                {
+                    foreach (var oper in listOfOperations)
+                    {
+                        oper.Start(item.Key, item.Value, isInfoPoint);
+                        Progress++;
+                    }
+                }
+
+                Task.Delay(500).Wait();
+                // Очистка списка usb drives
+                RemovableDisk.RemovableDrives.Clear();
+                // Сброс полоски прогрессбара
+                Progress = 0;
+                MessageBox.Show("Копирование файлов завершено.\nМожете закрыть программу.", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Нет USB");
+            }
+            // Открываем доступ к кнопке
+            IsComplited = true;
         }
     }
 }
