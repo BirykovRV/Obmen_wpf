@@ -25,7 +25,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("F130\\Config")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Config")]
         public string configFrom {
             get {
                 return ((string)(this["configFrom"]));
@@ -61,7 +61,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("PostPay\\Reg")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Реестр коммунальных платежей")]
         public string postPayRegTo {
             get {
                 return ((string)(this["postPayRegTo"]));
@@ -85,7 +85,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("F130\\ASKU")]
+        [global::System.Configuration.DefaultSettingValueAttribute("F130")]
         public string f130To {
             get {
                 return ((string)(this["f130To"]));
@@ -97,7 +97,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ESPP\\DB")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Гибридные переводы")]
         public string esppFrom {
             get {
                 return ((string)(this["esppFrom"]));
@@ -157,7 +157,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ESPP\\Pension")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Пенсия")]
         public string pensionTo {
             get {
                 return ((string)(this["pensionTo"]));
@@ -169,7 +169,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("FSG\\Cash")]
+        [global::System.Configuration.DefaultSettingValueAttribute("FSG\\Кэш")]
         public string cashFsgFrom {
             get {
                 return ((string)(this["cashFsgFrom"]));
@@ -205,7 +205,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("FSG\\Reg")]
+        [global::System.Configuration.DefaultSettingValueAttribute("FSG\\Реестры платежей")]
         public string fsgRegTo {
             get {
                 return ((string)(this["fsgRegTo"]));

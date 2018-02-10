@@ -69,15 +69,7 @@ namespace Obmen_wpf.ViewModel
                {
                    Task.Factory.StartNew(() =>
                    {
-                       //Ftp asku = new Ftp
-                       //{
-                       //    Url = Settings.Default.askuIp,
-                       //    Username = Settings.Default.askuLogin,
-                       //    Password = Settings.Default.askuPass
-                       //};
-
-                       DoJob();
-                       
+                       DoJob();                       
                    });
                }, o => isComplited);
             }

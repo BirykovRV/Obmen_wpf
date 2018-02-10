@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="configFrom" Type="System.String" Scope="User">
-      <Value Profile="(Default)">F130\Config</Value>
+      <Value Profile="(Default)">Config</Value>
     </Setting>
     <Setting Name="configTo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -12,16 +12,16 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="postPayRegTo" Type="System.String" Scope="User">
-      <Value Profile="(Default)">PostPay\Reg</Value>
+      <Value Profile="(Default)">Реестр коммунальных платежей</Value>
     </Setting>
     <Setting Name="f130From" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="f130To" Type="System.String" Scope="User">
-      <Value Profile="(Default)">F130\ASKU</Value>
+      <Value Profile="(Default)">F130</Value>
     </Setting>
     <Setting Name="esppFrom" Type="System.String" Scope="User">
-      <Value Profile="(Default)">ESPP\DB</Value>
+      <Value Profile="(Default)">Гибридные переводы</Value>
     </Setting>
     <Setting Name="esppTo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -36,10 +36,10 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="pensionTo" Type="System.String" Scope="User">
-      <Value Profile="(Default)">ESPP\Pension</Value>
+      <Value Profile="(Default)">Пенсия</Value>
     </Setting>
     <Setting Name="cashFsgFrom" Type="System.String" Scope="User">
-      <Value Profile="(Default)">FSG\Cash</Value>
+      <Value Profile="(Default)">FSG\Кэш</Value>
     </Setting>
     <Setting Name="cashFsgTo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -48,7 +48,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="fsgRegTo" Type="System.String" Scope="User">
-      <Value Profile="(Default)">FSG\Reg</Value>
+      <Value Profile="(Default)">FSG\Реестры платежей</Value>
     </Setting>
     <Setting Name="postPayUpdateFrom" Type="System.String" Scope="User">
       <Value Profile="(Default)">PostPay\Update</Value>

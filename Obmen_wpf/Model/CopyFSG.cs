@@ -19,7 +19,7 @@ namespace Obmen_wpf.Model
             string cashFsgFrom = key + Settings.Default.cashFsgFrom;
             string cashFsgTo = Settings.Default.cashFsgTo + "\\";
 
-            string serverPathTo = $"{value}/FSG/Reg/";
+            string serverPathTo = $"{value}/FSG/";
             string serverPathFrom = $"ToOPS/FSG/{value}/";
 
             if (isInfoPoint)

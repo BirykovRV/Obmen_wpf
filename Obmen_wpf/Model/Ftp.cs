@@ -11,16 +11,20 @@ namespace Obmen_wpf.Model
 {
     public class Ftp
     {
-        public string Uri { get; set; }
-        public string Username { get; set; } 
+        public string Uri { get; }
+        public string Username { get; } 
         public string Password { private get; set; }
+        private FtpWebRequest ftpRequest = null;
+        private FtpWebResponse ftpResponse = null;
+        private Stream ftpStream = null;
+        private int bufferSize = 2048;
 
-        //public Ftp(string uri, string login, string pass)
-        //{
-        //    Uri = uri;
-        //    Username = login;
-        //    Password = pass;
-        //}
+        public Ftp(string uri, string login, string pass)
+        {
+            Uri = uri;
+            Username = login;
+            Password = pass;
+        }
 
         /// <summary>
         /// Скачивание файлов с ftp
@@ -31,14 +35,14 @@ namespace Obmen_wpf.Model
         {
             try
             {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Uri + remotePath);
-                request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-                request.Credentials = new NetworkCredential(Username, Password);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + remotePath);
+                ftpRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+                ftpRequest.Credentials = new NetworkCredential(Username, Password);
 
                 List<string> lines = new List<string>();
 
-                using (FtpWebResponse listResponse = (FtpWebResponse)request.GetResponse())
-                using (Stream listStream = listResponse.GetResponseStream())
+                using (ftpResponse = (FtpWebResponse)ftpRequest.GetResponse())
+                using (Stream listStream = ftpResponse.GetResponseStream())
                 using (StreamReader listReader = new StreamReader(listStream))
                 {
                     while (!listReader.EndOfStream)
@@ -76,7 +80,7 @@ namespace Obmen_wpf.Model
                         using (Stream responseStream = response.GetResponseStream())
                         using (Stream targetStream = File.Create(combinedLocalPath))
                         {
-                            byte[] buffer = new byte[32768];
+                            byte[] buffer = new byte[bufferSize];
                             int bytesRead;
                             while ((bytesRead = responseStream.Read(buffer, 0, buffer.Length)) > 0)
                             {
@@ -100,22 +104,32 @@ namespace Obmen_wpf.Model
         {
             try
             {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Uri + remotePath);
-                request.Method = WebRequestMethods.Ftp.UploadFile;
-                request.Credentials = new NetworkCredential(Username, Password);
+                /* Create an FTP Request */
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + remotePath);
+                /* Log in to the FTP Server with the User Name and Password Provided */
+                ftpRequest.Credentials = new NetworkCredential(Username, Password);
+                /* When in doubt, use these options */
+                ftpRequest.UseBinary = true;
+                ftpRequest.UsePassive = true;
+                ftpRequest.KeepAlive = true;
+                /* Specify the Type of FTP Request */
+                ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
+                /* Establish Return Communication with the FTP Server */
+                ftpStream = ftpRequest.GetRequestStream();
+                /* Open a File Stream to Read the File for Upload */
+                FileStream uploadedFile = new FileStream(localPath, FileMode.Open, FileAccess.Read);
+                /* Buffer for the Downloaded Data */
+                byte[] byteBuffer = new byte[uploadedFile.Length];
+                uploadedFile.Read(byteBuffer, 0, byteBuffer.Length);
+                /* Upload the File by Sending the Buffered Data Until the Transfer is Complete */
+                uploadedFile.Close();
 
-                using (FileStream uploadedFile = new FileStream(localPath, FileMode.Open, FileAccess.Read))
-                {
-                    byte[] byteBuffer = new byte[uploadedFile.Length];
-                    uploadedFile.Read(byteBuffer, 0, byteBuffer.Length);
-                    using (Stream writer = request.GetRequestStream())
-                        writer.Write(byteBuffer, 0, byteBuffer.Length);
-                }
+                ftpStream.Write(byteBuffer, 0, byteBuffer.Length);
+                ftpStream.Close();
+                ftpRequest = null;
             }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            return;
         }
         /// <summary>
         /// Создание папки на сервере
@@ -125,17 +139,22 @@ namespace Obmen_wpf.Model
         {
             try
             {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Uri + remotePath);
-                request.Method = WebRequestMethods.Ftp.MakeDirectory;
-                request.Credentials = new NetworkCredential(Username, Password);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + remotePath);
+                ftpRequest.UseBinary = true;
+                ftpRequest.UsePassive = true;
+                ftpRequest.KeepAlive = true;
+                ftpRequest.Method = WebRequestMethods.Ftp.MakeDirectory;
+                ftpRequest.Credentials = new NetworkCredential(Username, Password);
 
-                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-                response.Close();
+                ftpResponse = (FtpWebResponse)ftpRequest.GetResponse();
+                ftpResponse.Close();
+                ftpRequest = null;
             }
             catch (Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show(ex.Message);
             }
+            return;
         }
     }
 }

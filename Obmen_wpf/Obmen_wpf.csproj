@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ftp.cs" />
     <Compile Include="Model\AskuFtpModel.cs" />
     <Compile Include="Model\Command.cs" />
     <Compile Include="Model\CopyEspp.cs" />

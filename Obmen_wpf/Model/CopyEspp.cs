@@ -19,7 +19,7 @@ namespace Obmen_wpf.Model
             string esppFrom = key + Settings.Default.esppFrom;
             string esppTo = Settings.Default.esppTo + "\\";
 
-            string serverPathTo = $"{value}/ESPP/Pension/";
+            string serverPathTo = $"{value}/Пенсия/";
             string serverPathFrom = "ToOPS/ESPP/";
 
             if (isInfoPoint)

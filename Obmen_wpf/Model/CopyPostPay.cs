@@ -1,4 +1,5 @@
-﻿using Obmen_wpf.Properties;
+﻿using Obmen;
+using Obmen_wpf.Properties;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -20,16 +21,16 @@ namespace Obmen_wpf.Model
             string postPayUpdateFrom = key + Settings.Default.postPayUpdateFrom;
             string postPayUpdateTo = Settings.Default.postPayUpdateTo + "\\";
 
-            string serverRegTo = $"{value}/PostPay/";
-            string serverUpdateFrom = "ToOPS/PostPay/DB/";
-            string serverDBFrom = "ToOPS/PostPay/Update/";
+            string serverRegTo = $"{value}/Реестр коммунальных платежей/";
+            string serverUpdateFrom = "ToOPS/PostPay/Update/";
+            string serverDBFrom = "ToOPS/PostPay/DB/";
 
             // Reg PostPay
             if (isInfoPoint)
             {
-                ServerFtpModel.StartUpload(postPayRegTo, serverRegTo);
+                ServerFtpModel.StartUpload(postPayRegTo, serverRegTo);                
                 ServerFtpModel.StartDownload(serverUpdateFrom, postPayUpdateFrom);
-                ServerFtpModel.StartDownload(serverDBFrom, postPayDBFrom);
+                //ServerFtpModel.StartDownload(serverDBFrom, postPayDBFrom);
             }
             else
             {

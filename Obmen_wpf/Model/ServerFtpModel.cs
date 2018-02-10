@@ -1,4 +1,5 @@
-﻿using Obmen_wpf.Properties;
+﻿using Obmen;
+using Obmen_wpf.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,12 +11,14 @@ namespace Obmen_wpf.Model
 {
     class ServerFtpModel
     {
-        private static Ftp Server = new Ftp
-        {
-            Uri = $"ftp://{Settings.Default.serverIp}/",
-            Username = Settings.Default.serverLogin,
-            Password = Settings.Default.serverPass
-        };
+        //private static Ftp Server = new Ftp
+        //(
+        //    $"ftp://{Settings.Default.serverIp}/",
+        //    Settings.Default.serverLogin,
+        //    Settings.Default.serverPass
+        //);
+
+        private static ftp Server = new ftp(Settings.Default.serverIp, Settings.Default.serverLogin, Settings.Default.serverPass);
 
         public static void StartUpload(string pathFrom, string pathTo)
         {
@@ -28,14 +31,14 @@ namespace Obmen_wpf.Model
             {
                 Task.Factory.StartNew(() =>
                 {
-                    Server.Upload(file.FullName, pathTo + file.Name);
+                    Server.Upload(pathTo + file.Name, file.FullName);
                 });
             }
             foreach (var dir in dirs)
             {
                 Task.Factory.StartNew(() =>
                 {
-                    Server.CreateDir($"{pathTo}/{dir.Name}");
+                    Server.CreateDirectory($"{pathTo}/{dir.Name}");
                     StartUpload($"{pathFrom}{dir.Name}", $"{pathTo}/{dir.Name}/");
                 });
             }

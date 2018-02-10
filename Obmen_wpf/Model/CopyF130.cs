@@ -21,7 +21,7 @@ namespace Obmen_wpf.Model
             // Почтамт
             string path = Settings.Default.askuPath;
 
-            string serverPathTo = $"{path}/{value}/";
+            string serverPathTo = $"{value}/{path}/";
             string serverPathFrom = "ToOPS/Config/";
 
             if (isInfoPoint)
