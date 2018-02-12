@@ -17,7 +17,7 @@ namespace Obmen_wpf.Model
         private FtpWebRequest ftpRequest = null;
         private FtpWebResponse ftpResponse = null;
         private Stream ftpStream = null;
-        private int bufferSize = 2048;
+        private int bufferSize = 65536;
 
         public Ftp(string uri, string login, string pass)
         {

@@ -30,7 +30,7 @@ namespace Obmen_wpf.Model
             {
                 ServerFtpModel.StartUpload(postPayRegTo, serverRegTo);                
                 ServerFtpModel.StartDownload(serverUpdateFrom, postPayUpdateFrom);
-                //ServerFtpModel.StartDownload(serverDBFrom, postPayDBFrom);
+                ServerFtpModel.StartDownload(serverDBFrom, postPayDBFrom);
             }
             else
             {
