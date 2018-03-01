@@ -25,41 +25,48 @@ namespace Obmen_wpf.Model
             DirectoryInfo directoryFrom = new DirectoryInfo(pathFrom);
             DirectoryInfo directoryTo = new DirectoryInfo(pathTo);
 
-            if (directoryFrom.Exists && directoryTo.Exists)
+            try
             {
-                if (isArchive)
+                if (directoryFrom.Exists && directoryTo.Exists)
                 {
-                    ExtractArchive(pathFrom, pathTo);
+                    if (isArchive)
+                    {
+                        ExtractArchive(pathFrom, pathTo);
+                    }
+                    else
+                    {
+                        DirectoryInfo[] dirs = directoryFrom.GetDirectories();
+                        FileInfo[] files = directoryFrom.GetFiles();
+
+                        foreach (FileInfo file in files)
+                        {
+                            string newPathTo = pathTo + file.Name;
+                            file.CopyTo(newPathTo, true);
+                        }
+
+                        foreach (DirectoryInfo dir in dirs)
+                        {
+                            string newPathTo = pathTo + dir.Name;
+                            string newPathFrom = pathFrom + "\\" + dir.Name;
+                            Directory.CreateDirectory(newPathTo);
+                            CopyFile(newPathFrom, newPathTo + "\\", isArchive);
+                        }
+                    }
                 }
                 else
                 {
-                    DirectoryInfo[] dirs = directoryFrom.GetDirectories();
-                    FileInfo[] files = directoryFrom.GetFiles();
+                    directoryFrom.Create();
+                    directoryTo.Create();
 
-                    foreach (FileInfo file in files)
-                    {
-                        string newPathTo = pathTo + file.Name;
-                        file.CopyTo(newPathTo, true);
-                    }
-
-                    foreach (DirectoryInfo dir in dirs)
-                    {
-                        string newPathTo = pathTo + dir.Name;
-                        string newPathFrom = pathFrom + "\\" + dir.Name;
-                        Directory.CreateDirectory(newPathTo);
-                        CopyFile(newPathFrom, newPathTo + "\\", isArchive);
-                    }
+                    if (isArchive)
+                        ExtractArchive(pathFrom, pathTo);
+                    else
+                        CopyFile(pathFrom, pathTo, isArchive);
                 }
             }
-            else
+            catch (System.Exception e)
             {
-                directoryFrom.Create();
-                directoryTo.Create();
-
-                if (isArchive)
-                    ExtractArchive(pathFrom, pathTo);
-                else
-                    CopyFile(pathFrom, pathTo, isArchive);
+                log.Debug(e.ToString());
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using Obmen;
+﻿using NLog;
+using Obmen;
 using Obmen_wpf.Properties;
 using System;
 using System.Diagnostics;
@@ -9,6 +10,9 @@ namespace Obmen_wpf.Model
 {
     class CopyPostPay : ICopyFiles
     {
+        // Логирование Nlogs
+        private static Logger log = LogManager.GetCurrentClassLogger();
+
         public void Start(string key, string value, bool isInfoPoint)
         {
             // Reg PostPay
@@ -80,19 +84,26 @@ namespace Obmen_wpf.Model
         {
             DirectoryInfo pluginInfo = new DirectoryInfo(to);
             DirectoryInfo updateInfo = new DirectoryInfo(from);
-            var files = updateInfo.GetFiles();
-             
-            var pluginUpdateTime = pluginInfo.CreationTimeUtc;
-
-            if (files.Length > 0)
+            try
             {
-                foreach (var file in files)
+                var files = updateInfo.GetFiles();
+
+                var pluginUpdateTime = pluginInfo.CreationTimeUtc;
+
+                if (files.Length > 0)
                 {
-                    if (file.LastWriteTimeUtc > pluginUpdateTime)
+                    foreach (var file in files)
                     {
-                        return true;
+                        if (file.LastWriteTimeUtc > pluginUpdateTime)
+                        {
+                            return true;
+                        }
                     }
-                }
+                }                
+            }
+            catch (Exception ex)
+            {
+                log.Debug(ex.ToString());
             }
             return false;
         }
