@@ -1,10 +1,4 @@
 ﻿using Obmen_wpf.Properties;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Obmen_wpf.Model
 {
