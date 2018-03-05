@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.IO;
 using System.Net;
 
@@ -13,6 +14,8 @@ namespace Obmen
         private FtpWebResponse ftpResponse = null;
         private Stream ftpStream = null;
         private int bufferSize = 2048;
+
+        static Logger log = LogManager.GetCurrentClassLogger();
 
         /* Construct Object */
         public ftp(string hostIP, string userName, string password)
@@ -172,7 +175,7 @@ namespace Obmen
                 ftpResponse.Close();
                 ftpRequest = null;
             }
-            catch (Exception ex) { System.Windows.Forms.MessageBox.Show(ex.Message + "\n" + host + newDirectory + "\nПапка уже существует!"); }
+            catch (Exception ex) { log.Debug((DateTime.Now + " - " + ex.Message + "\n" + host + newDirectory + " - Папка уже существует!")); }
             return;
         }
 
