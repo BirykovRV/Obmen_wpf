@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net;
 
-namespace Obmen
+namespace Testing
 {
     class ftp
     {
@@ -72,7 +72,7 @@ namespace Obmen
             try
             {
                 /* Create an FTP Request */
-                ftpRequest = (FtpWebRequest)WebRequest.Create(host + remoteFile);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(host + "/" + remoteFile);
                 /* Log in to the FTP Server with the User Name and Password Provided */
                 ftpRequest.Credentials = new NetworkCredential(user, pass);
                 /* When in doubt, use these options */
@@ -157,7 +157,7 @@ namespace Obmen
             try
             {
                 /* Create an FTP Request */
-                ftpRequest = (FtpWebRequest)WebRequest.Create(host + newDirectory);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(host + "/" + newDirectory);
                 /* Log in to the FTP Server with the User Name and Password Provided */
                 ftpRequest.Credentials = new NetworkCredential(user, pass);
                 /* When in doubt, use these options */
@@ -172,7 +172,7 @@ namespace Obmen
                 ftpResponse.Close();
                 ftpRequest = null;
             }
-            catch (Exception ex) { System.Windows.Forms.MessageBox.Show(ex.Message + "\n" + host + newDirectory + "\nПапка уже существует!"); }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             return;
         }
 

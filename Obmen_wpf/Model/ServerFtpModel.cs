@@ -29,26 +29,18 @@ namespace Obmen_wpf.Model
 
             foreach (var file in files)
             {
-                Task.Factory.StartNew(() =>
-                {
-                    Server.Upload(pathTo + file.Name, file.FullName);
-                });
+                Server.Upload(pathTo + file.Name, file.FullName);
             }
             foreach (var dir in dirs)
-            {
-                Task.Factory.StartNew(() =>
-                {
-                    Server.CreateDirectory($"{pathTo}/{dir.Name}");
-                    StartUpload($"{pathFrom}{dir.Name}", $"{pathTo}/{dir.Name}/");
-                });
+            {                
+                Server.CreateDirectory($"{pathTo}{dir.Name}");
+                StartUpload($"{pathFrom}{dir.Name}", $"{pathTo}{dir.Name}/");
             }
         }
 
         public static void StartDownload(string pathFrom, string pathTo)
         {
-
             server.Download(pathFrom, pathTo);
-
         }
     }
 }

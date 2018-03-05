@@ -25,6 +25,8 @@ namespace Obmen_wpf.Model
             {
                 // Pension
                 Operations.CopyFile(pensionFrom, pensionTo, false);
+                //Delete old files
+               // Operations.DeleteOldObj(pensionFrom);
                 // ESPP
                 Operations.CopyFile(esppFrom, esppTo, false);
             }                        

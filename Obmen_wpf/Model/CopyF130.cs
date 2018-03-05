@@ -35,6 +35,8 @@ namespace Obmen_wpf.Model
                 Operations.CopyFile(configFrom, configTo, false);
                 // ASKU
                 Operations.CopyFile(f130From, f130To, false);
+                //Delete old files
+               // Operations.DeleteOldObj(f130From);
             }
         }
     }

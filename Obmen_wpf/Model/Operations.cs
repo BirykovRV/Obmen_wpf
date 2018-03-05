@@ -4,6 +4,8 @@ using System.IO;
 using System.IO.Compression;
 using System.Text;
 using System.Threading.Tasks;
+using System;
+using System.Linq;
 
 namespace Obmen_wpf.Model
 {
@@ -23,7 +25,7 @@ namespace Obmen_wpf.Model
         public static void CopyFile(string pathFrom, string pathTo, bool isArchive)
         {
             DirectoryInfo directoryFrom = new DirectoryInfo(pathFrom);
-            DirectoryInfo directoryTo = new DirectoryInfo(pathTo);
+            DirectoryInfo directoryTo = new DirectoryInfo(pathTo);            
 
             try
             {
@@ -51,6 +53,7 @@ namespace Obmen_wpf.Model
                             Directory.CreateDirectory(newPathTo);
                             CopyFile(newPathFrom, newPathTo + "\\", isArchive);
                         }
+                        DeleteOldObj(pathFrom);
                     }
                 }
                 else
@@ -64,7 +67,7 @@ namespace Obmen_wpf.Model
                         CopyFile(pathFrom, pathTo, isArchive);
                 }
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 log.Debug(e.ToString());
             }
@@ -96,6 +99,26 @@ namespace Obmen_wpf.Model
                 {
                     RarArchive.WriteToDirectory(_pathFrom, pathTo); // Разархивация .rar 
                 }
+            }
+        }
+
+        public static void DeleteOldObj(string path)
+        {
+            DirectoryInfo info = new DirectoryInfo(path);
+
+            var files = info.GetFiles().OrderBy(f => f.CreationTime).ToArray();
+            var dirs = info.GetDirectories().OrderBy(d => d.CreationTime).ToArray();
+            
+            for (int i = 0; i < files.Length - 9; i++)
+            {
+                files[i].Delete();
+                log.Debug($"{DateTime.Now} - Delite file - {files[i].FullName}");
+            }
+
+            for (int i = 0; i < dirs.Length - 9; i++)
+            {
+                dirs[i].Delete(true);
+                log.Debug($"{DateTime.Now} - Delite directory - {dirs[i].FullName}");
             }
         }
     }

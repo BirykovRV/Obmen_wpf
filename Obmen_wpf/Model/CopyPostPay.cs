@@ -38,7 +38,10 @@ namespace Obmen_wpf.Model
             }
             else
             {
+                // Копирование реестра
                 Operations.CopyFile(postPayRegFrom, postPayRegTo, false);
+                //Delete old files
+                //Operations.DeleteOldObj(postPayRegFrom);
 
                 if (CheckForUpdate(postPayUpdateFrom, postPayUpdateTo))
                 {

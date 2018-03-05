@@ -95,6 +95,7 @@ namespace Obmen_wpf.Model
                 System.Windows.Forms.MessageBox.Show(ex.Message);
             }
         }
+
         /// <summary>
         /// Загрузка файлов на сервер
         /// </summary>
@@ -155,6 +156,48 @@ namespace Obmen_wpf.Model
                 System.Windows.Forms.MessageBox.Show(ex.Message);
             }
             return;
+        }
+        /// <summary>
+        /// Возвращает время создания
+        /// </summary>
+        /// <param name="fileName">Имя файла</param>
+        /// <returns>Возвращает строку</returns>
+        public string GetFileCreatedDateTime(string fileName)
+        {
+            try
+            {
+                /* Create an FTP Request */
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + fileName);
+                /* Log in to the FTP Server with the User Name and Password Provided */
+                ftpRequest.Credentials = new NetworkCredential(Username, Password);
+                /* When in doubt, use these options */
+                ftpRequest.UseBinary = true;
+                ftpRequest.UsePassive = true;
+                ftpRequest.KeepAlive = true;
+                /* Specify the Type of FTP Request */
+                ftpRequest.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+                /* Establish Return Communication with the FTP Server */
+                ftpResponse = (FtpWebResponse)ftpRequest.GetResponse();
+                /* Establish Return Communication with the FTP Server */
+                ftpStream = ftpResponse.GetResponseStream();
+                /* Get the FTP Server's Response Stream */
+                StreamReader ftpReader = new StreamReader(ftpStream);
+                /* Store the Raw Response */
+                string fileInfo = null;
+                /* Read the Full Response Stream */
+                try { fileInfo = ftpReader.ReadToEnd(); }
+                catch (Exception ex) { System.Windows.Forms.MessageBox.Show(ex.Message); }
+                /* Resource Cleanup */
+                ftpReader.Close();
+                ftpStream.Close();
+                ftpResponse.Close();
+                ftpRequest = null;
+                /* Return File Created Date Time */
+                return fileInfo;
+            }
+            catch (Exception ex) { System.Windows.Forms.MessageBox.Show(ex.Message); }
+            /* Return an Empty string Array if an Exception Occurs */
+            return "";
         }
     }
 }
