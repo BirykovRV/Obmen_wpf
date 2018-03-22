@@ -66,12 +66,55 @@ namespace Obmen_wpf.ViewModel
             get
             {
                 return new Command(o =>
-               {
-                   Task.Factory.StartNew(() =>
-                   {
-                       DoJob();                       
-                   });
-               }, o => isComplited);
+                {
+                    // внешняя задача чтобы не зависал интерфейс
+                    var outer = Task.Factory.StartNew(() =>
+                    {
+                        // запрещаем нажимать на кнопки во премя выполнения
+                        IsComplited = false;
+                        // получаем значение из настроек для определения режима работы (ОПС или ИП)
+                        bool isInfoPoint = Settings.Default.IsInfoPoinChecked;
+                        // есть ли съемные носители
+                        if (RemovableDisk.FindDisk())
+                        {
+                            // создаем паралельную задачу
+                            Parallel.Invoke(() =>
+                            {
+                                // съемные носители найдены и получаем их список
+                                foreach (var item in RemovableDisk.RemovableDrives)
+                                {
+                                    // внутренняя задача чтобы все работало синхронно на разных ядрах
+                                    var inner = Task.Factory.StartNew(() =>
+                                    {
+                                        System.Console.WriteLine("Start working with - {0}", item.Value);
+                                        // для каждого списка операций вызываем выполнение
+                                        foreach (var oper in listOfOperations)
+                                        {
+                                            System.Console.WriteLine("{0} - Working with - {1}", item.Value, oper.ToString());
+                                            oper.Start(item.Key, item.Value, isInfoPoint);
+                                            // увеличиваем прогресбар
+                                            Progress++;
+                                        }
+                                        System.Console.WriteLine("End working with - {0}", item.Value);
+                                        // Если необходимо, чтобы вложенная задача выполнялась вместе с внешней, необходимо использовать значение TaskCreationOptions.AttachedToParent
+                                    }, TaskCreationOptions.AttachedToParent); 
+                                }
+                            });
+                            Task.Delay(500).Wait();
+                            // Очистка списка usb drives
+                            RemovableDisk.RemovableDrives.Clear();
+                            // Сброс полоски прогрессбара
+                            Progress = 0;
+                            MessageBox.Show("Копирование файлов завершено.\nМожете закрыть программу.", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Нет USB");
+                        }
+                        // Открываем доступ к кнопке
+                        IsComplited = true;
+                    });
+                }, o => isComplited);
             }
         }
         /// <summary>
@@ -109,33 +152,7 @@ namespace Obmen_wpf.ViewModel
 
         private void DoJob()
         {
-            IsComplited = false;
-            bool isInfoPoint = Settings.Default.IsInfoPoinChecked;
 
-            if (RemovableDisk.FindDisk())
-            {
-                foreach (var item in RemovableDisk.RemovableDrives)
-                {
-                    foreach (var oper in listOfOperations)
-                    {
-                        oper.Start(item.Key, item.Value, isInfoPoint);
-                        Progress++;
-                    }
-                }
-
-                Task.Delay(500).Wait();
-                // Очистка списка usb drives
-                RemovableDisk.RemovableDrives.Clear();
-                // Сброс полоски прогрессбара
-                Progress = 0;
-                MessageBox.Show("Копирование файлов завершено.\nМожете закрыть программу.", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                MessageBox.Show("Нет USB");
-            }
-            // Открываем доступ к кнопке
-            IsComplited = true;
         }
     }
 }

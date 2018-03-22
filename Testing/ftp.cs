@@ -157,7 +157,7 @@ namespace Testing
             try
             {
                 /* Create an FTP Request */
-                ftpRequest = (FtpWebRequest)WebRequest.Create(host + "/" + newDirectory);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(host + newDirectory);
                 /* Log in to the FTP Server with the User Name and Password Provided */
                 ftpRequest.Credentials = new NetworkCredential(user, pass);
                 /* When in doubt, use these options */

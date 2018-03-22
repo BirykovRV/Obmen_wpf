@@ -18,23 +18,36 @@ namespace Obmen_wpf.Model
             Settings.Default.serverPass
         );
 
-        private static ftp Server = new ftp(Settings.Default.serverIp, Settings.Default.serverLogin, Settings.Default.serverPass);
-
         public static void StartUpload(string pathFrom, string pathTo)
         {
+            ftp Server = new ftp(Settings.Default.serverIp, Settings.Default.serverLogin, Settings.Default.serverPass);
 
-            DirectoryInfo info = new DirectoryInfo(pathFrom);
-            FileInfo[] files = info.GetFiles();
-            DirectoryInfo[] dirs = info.GetDirectories();
+            //DirectoryInfo info = new DirectoryInfo(pathFrom);
+            //FileInfo[] files = info.GetFiles();
+            //DirectoryInfo[] dirs = info.GetDirectories();
 
-            foreach (var file in files)
+            //foreach (var file in files)
+            //{
+            //    Server.Upload(pathTo + file.Name, file.FullName);
+            //}
+            //foreach (var dir in dirs)
+            //{                
+            //    Server.CreateDirectory($"{pathTo}{dir.Name}");
+            //    StartUpload($"{pathFrom}{dir.Name}", $"{pathTo}{dir.Name}/");
+            //}
+
+            string[] files = Directory.GetFiles(pathFrom, "*.*");
+            string[] subDirs = Directory.GetDirectories(pathFrom);
+
+            foreach (string file in files)
             {
-                Server.Upload(pathTo + file.Name, file.FullName);
+                Server.Upload(pathTo + Path.GetFileName(file), file);
             }
-            foreach (var dir in dirs)
-            {                
-                Server.CreateDirectory($"{pathTo}{dir.Name}");
-                StartUpload($"{pathFrom}{dir.Name}", $"{pathTo}{dir.Name}/");
+
+            foreach (string subDir in subDirs)
+            {
+                Server.CreateDirectory(pathTo + Path.GetFileName(subDir));
+                StartUpload(subDir, pathTo + Path.GetFileName(subDir) + "/");
             }
         }
 

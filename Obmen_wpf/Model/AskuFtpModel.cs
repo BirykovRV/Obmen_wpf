@@ -26,18 +26,12 @@ namespace Obmen_wpf.Model
 
             foreach (var file in files)
             {
-                Task.Factory.StartNew(() =>
-                {
-                    AskuServer.Upload(file.FullName, pathTo + file.Name);
-                });
+                AskuServer.Upload(file.FullName, pathTo + file.Name);
             }
             foreach (var dir in dirs)
             {
-                Task.Factory.StartNew(() =>
-                {
-                    AskuServer.CreateDir($"{pathTo}/{dir.Name}");
-                    StartUpload($"{pathFrom}{dir.Name}", $"{pathTo}/{dir.Name}/");
-                });
+                AskuServer.CreateDir($"{pathTo}/{dir.Name}");
+                StartUpload($"{pathFrom}{dir.Name}", $"{pathTo}/{dir.Name}/");
             }
         }
     }
