@@ -66,7 +66,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="askuIp" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">10.86.1.252</Value>
     </Setting>
     <Setting Name="askuLogin" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -79,6 +79,21 @@
     </Setting>
     <Setting Name="IsInfoPoinChecked" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="listIp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10.86.1.252</Value>
+    </Setting>
+    <Setting Name="listLogin" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="listPass" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="listFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="listTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

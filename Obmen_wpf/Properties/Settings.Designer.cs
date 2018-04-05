@@ -277,7 +277,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10.86.1.252")]
         public string askuIp {
             get {
                 return ((string)(this["askuIp"]));
@@ -332,6 +332,66 @@ namespace Obmen_wpf.Properties {
             }
             set {
                 this["IsInfoPoinChecked"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10.86.1.252")]
+        public string listIp {
+            get {
+                return ((string)(this["listIp"]));
+            }
+            set {
+                this["listIp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string listLogin {
+            get {
+                return ((string)(this["listLogin"]));
+            }
+            set {
+                this["listLogin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string listPass {
+            get {
+                return ((string)(this["listPass"]));
+            }
+            set {
+                this["listPass"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string listFrom {
+            get {
+                return ((string)(this["listFrom"]));
+            }
+            set {
+                this["listFrom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string listTo {
+            get {
+                return ((string)(this["listTo"]));
+            }
+            set {
+                this["listTo"] = value;
             }
         }
     }

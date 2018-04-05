@@ -11,26 +11,10 @@ using Obmen_wpf;
 namespace Testing
 {
     class Program
-    {
-        private static Object syncObject = new Object();
-        private static void Write()
-        {
-            lock (syncObject)
-            {
-                Console.WriteLine("test");
-            }
-        }
-
+    {        
         static void Main(string[] args)
         {
-            Console.WriteLine("Press any key to start");
-
-            Console.ReadKey();
-
-            lock (syncObject)
-            {
-                Write();
-            }
+            
             //StartUpload(@"G:\Реестр коммунальных платежей", "200001/Реестр коммунальных платежей/");
 
             Console.ReadKey();

@@ -45,9 +45,7 @@
                     <TextBox
                     Text="{Binding Source={x:Static p:Settings.Default}, Path=serverIp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Grid.Column="1"/>
-                    <!--#endregion-->
-
-                    <!--#region first section-->
+                    
                     <TextBlock 
                     Text="Логин:"
                     Grid.Column="0"
@@ -71,7 +69,7 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox  Header="АСКУ:" Padding="5" DockPanel.Dock="Bottom">
+            <GroupBox  Header="АСКУ:" Padding="5" DockPanel.Dock="Top">
                 <StackPanel>
                     <!--#region first section-->
                     <TextBlock 
@@ -116,6 +114,38 @@
                     Grid.Row="1"/>
                     <!--#endregion-->
 
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Список:" Padding="5" DockPanel.Dock="Bottom">
+                <StackPanel>
+                    <!--#region third section-->
+                    <TextBlock 
+                    Text="IP адрес:"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+                    <TextBox
+                    Text="{Binding Source={x:Static p:Settings.Default}, Path=listIp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Grid.Column="1"/>
+
+                    <TextBlock 
+                    Text="Логин:"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+                    <TextBox
+                    Text="{Binding Source={x:Static p:Settings.Default}, Path=listLogin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Grid.Column="1"/>
+                    
+                    <TextBlock 
+                    Text="Пароль:"
+                    Grid.Column="0"
+                    Grid.Row="1"/>
+                    <PasswordBox
+                    w:PasswordHelper.Attach="True"
+                    w:PasswordHelper.Password="{Binding Source={x:Static p:Settings.Default}, Path=listPass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Grid.Column="1"
+                    Grid.Row="1"/>
+                    <!--#endregion-->
                 </StackPanel>
             </GroupBox>
         </DockPanel>
