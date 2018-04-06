@@ -21,13 +21,15 @@ namespace Obmen_wpf.Model
             // Почтамт
             string path = Settings.Default.askuPath;
 
-            string serverPathTo = $"{path}/{value}/";
+            string serverPathTo = $"{Settings.Default.askuIp}/{path}/{value}";
             string serverPathFrom = "ToOPS/Config/";
 
             if (isInfoPoint)
-            {
-                AskuFtpModel.StartUpload(f130To, serverPathTo);
-                ServerFtpModel.StartDownload(serverPathFrom, configFrom);               
+            {                 
+                ServerFtpModel server = new ServerFtpModel();
+                ServerFtpModel askuServer = new ServerFtpModel(serverPathTo, Settings.Default.askuLogin, Settings.Default.askuPass);
+                askuServer.StartUpload(f130To, serverPathTo);
+                server.StartDownload(serverPathFrom, configFrom);
             }
             else
             {

@@ -1,4 +1,5 @@
-﻿using Obmen_wpf.Properties;
+﻿using Obmen;
+using Obmen_wpf.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,12 +11,7 @@ namespace Obmen_wpf.Model
 {
     class AskuFtpModel
     {
-        public static Ftp AskuServer = new Ftp
-        (
-            $"ftp://{Settings.Default.askuIp}/",
-            Settings.Default.askuLogin,
-            Settings.Default.askuPass
-        );
+        private static ftp Server = new ftp(Settings.Default.askuIp, Settings.Default.askuLogin, Settings.Default.askuPass);
 
         public static void StartUpload(string pathFrom, string pathTo)
         {
@@ -26,11 +22,11 @@ namespace Obmen_wpf.Model
 
             foreach (var file in files)
             {
-                AskuServer.Upload(file.FullName, pathTo + file.Name);
+                Server.Upload(file.FullName, pathTo + file.Name);
             }
             foreach (var dir in dirs)
             {
-                AskuServer.CreateDir($"{pathTo}/{dir.Name}");
+                Server.CreateDirectory($"{pathTo}/{dir.Name}");
                 StartUpload($"{pathFrom}{dir.Name}", $"{pathTo}/{dir.Name}/");
             }
         }

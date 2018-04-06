@@ -11,17 +11,20 @@ namespace Obmen_wpf.Model
 {
     class ServerFtpModel
     {
-        private static Ftp server = new Ftp
-        (
-            $"ftp://{Settings.Default.serverIp}/",
-            Settings.Default.serverLogin,
-            Settings.Default.serverPass
-        );
+        private ftp Server;
 
-        public static void StartUpload(string pathFrom, string pathTo)
+        public ServerFtpModel()
         {
-            ftp Server = new ftp(Settings.Default.serverIp, Settings.Default.serverLogin, Settings.Default.serverPass);
+            Server = new ftp(Settings.Default.serverIp, Settings.Default.serverLogin, Settings.Default.serverPass);
+        }
 
+        public ServerFtpModel(string ip, string login, string pass)
+        {
+            Server = new ftp(ip, login, pass);
+        }
+
+        public void StartUpload(string pathFrom, string pathTo)
+        {         
             //DirectoryInfo info = new DirectoryInfo(pathFrom);
             //FileInfo[] files = info.GetFiles();
             //DirectoryInfo[] dirs = info.GetDirectories();
@@ -51,9 +54,9 @@ namespace Obmen_wpf.Model
             }
         }
 
-        public static void StartDownload(string pathFrom, string pathTo)
+        public void StartDownload(string pathFrom, string pathTo)
         {
-            server.Download(pathFrom, pathTo);
+            Server.Download(pathFrom, pathTo);
         }
     }
 }

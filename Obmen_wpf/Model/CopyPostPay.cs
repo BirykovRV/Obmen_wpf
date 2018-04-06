@@ -32,9 +32,10 @@ namespace Obmen_wpf.Model
             // Reg PostPay
             if (isInfoPoint)
             {
-                ServerFtpModel.StartUpload(postPayRegTo, serverRegTo);                
-                ServerFtpModel.StartDownload(serverUpdateFrom, postPayUpdateFrom);
-                ServerFtpModel.StartDownload(serverDBFrom, postPayDBFrom);
+                ServerFtpModel server = new ServerFtpModel();
+                server.StartUpload(postPayRegTo, serverRegTo);
+                server.StartDownload(serverUpdateFrom, postPayUpdateFrom);
+                server.StartDownload(serverDBFrom, postPayDBFrom);
             }
             else
             {

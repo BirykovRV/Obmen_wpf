@@ -18,8 +18,9 @@ namespace Obmen_wpf.Model
             string serverPathFrom = "/";
 
             if (isInfoPoint)
-            {                
-                ServerFtpModel.StartDownload(serverPathFrom, listFrom);
+            {
+                ServerFtpModel server = new ServerFtpModel();
+                server.StartDownload(serverPathFrom, listFrom);
             }
             else
             {

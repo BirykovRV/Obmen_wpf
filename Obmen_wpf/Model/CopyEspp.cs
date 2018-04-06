@@ -18,8 +18,9 @@ namespace Obmen_wpf.Model
 
             if (isInfoPoint)
             {
-                ServerFtpModel.StartUpload(pensionTo, serverPathTo);
-                ServerFtpModel.StartDownload(serverPathFrom, esppFrom);
+                ServerFtpModel server = new ServerFtpModel();
+                server.StartUpload(pensionTo, serverPathTo);
+                server.StartDownload(serverPathFrom, esppFrom);
             }
             else
             {

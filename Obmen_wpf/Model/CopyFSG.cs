@@ -24,8 +24,9 @@ namespace Obmen_wpf.Model
 
             if (isInfoPoint)
             {
-                ServerFtpModel.StartUpload(fsgRegTo, serverPathTo);
-                ServerFtpModel.StartDownload(serverPathFrom, cashFsgFrom);
+                ServerFtpModel server = new ServerFtpModel();
+                server.StartUpload(fsgRegTo, serverPathTo);
+                server.StartDownload(serverPathFrom, cashFsgFrom);
             }
             else
             {
