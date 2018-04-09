@@ -7,7 +7,7 @@
              xmlns:p="clr-namespace:Obmen_wpf.Properties"
              xmlns:viewmodel="clr-namespace:Obmen_wpf.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="100"
+             d:DesignHeight="300"
              d:DesignWidth="300">
     <UserControl.DataContext>
         <viewmodel:UserControlViewModel/>
@@ -30,9 +30,13 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -80,6 +84,38 @@
             Grid.Row="2"            
             Command="{Binding OnOpenDialog}"
             CommandParameter="{Binding PostPayReg}"/>
+
+        <TextBlock
+            Text="Расположение файлов на флешке:"
+            Grid.Column="0"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"/>
+        <TextBlock 
+            Text="БД:"
+            Grid.Column="0"
+            Grid.Row="4"/>
+        <TextBox
+            Text="{Binding Source={x:Static p:Settings.Default}, Path=postPayDBFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Grid.Column="1"
+            Grid.Row="4"/>
+
+        <TextBlock 
+            Text="Обновление:"
+            Grid.Column="0"
+            Grid.Row="5"/>
+        <TextBox
+            Text="{Binding Source={x:Static p:Settings.Default}, Path=postPayUpdateFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Grid.Column="1"
+            Grid.Row="5"/>
+
+        <TextBlock 
+            Text="Реестр:"
+            Grid.Column="0"
+            Grid.Row="6"/>
+        <TextBox
+            Text="{Binding Source={x:Static p:Settings.Default}, Path=postPayRegTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Grid.Column="1"
+            Grid.Row="6"/>
 
     </Grid>
 </UserControl>

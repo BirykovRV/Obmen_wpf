@@ -49,7 +49,11 @@ namespace Obmen_wpf.ViewModel
         /// Кэш для ФСГ
         /// </summary>
         public TypeOfOperation FsgCash { get; } = TypeOfOperation.FSG_CASH;
-
+        /// <summary>
+        /// Список
+        /// </summary>
+        public TypeOfOperation List_T { get; } = TypeOfOperation.LIST_T;
+ 
         /// <summary>
         /// Открывает диалог выбора каталога и сохраняет его в настройках программы
         /// </summary>
@@ -91,6 +95,9 @@ namespace Obmen_wpf.ViewModel
                         case TypeOfOperation.FSG_CASH:
                             Properties.Settings.Default.cashFsgTo = dialog.SelectedPath;
                             break;
+                        case TypeOfOperation.LIST_T:
+                            Properties.Settings.Default.listTo = dialog.SelectedPath;
+                            break;
                         default:
                             break;
 
@@ -111,5 +118,6 @@ enum TypeOfOperation
     ESPP,
     PENSION,
     FSG_REG,
-    FSG_CASH
+    FSG_CASH,
+    LIST_T
 }

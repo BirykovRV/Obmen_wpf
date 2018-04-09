@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         Title="SettingsView"
         ResizeMode="NoResize"
-        Height="400"
-        Width="550">
+        Height="455"
+        Width="631">
     <Window.DataContext>
         <viewmodel:SettingsViewModel/>
     </Window.DataContext>

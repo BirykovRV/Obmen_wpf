@@ -9,7 +9,7 @@
       <Value Profile="(Default)">C:\Program Files (x86)\ИПФ Сервер\Дневник Ф130\Config</Value>
     </Setting>
     <Setting Name="postPayRegFrom" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">C:\Users\Public\Documents\LttPpsPlugin\ExportFiles</Value>
     </Setting>
     <Setting Name="postPayRegTo" Type="System.String" Scope="User">
       <Value Profile="(Default)">PostPay\Reg</Value>
@@ -90,7 +90,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="listFrom" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\List</Value>
+      <Value Profile="(Default)">List</Value>
     </Setting>
     <Setting Name="listTo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

@@ -14,7 +14,15 @@ namespace Testing
     {        
         static void Main(string[] args)
         {
+            ftp server = new ftp("10.87.6.143", "support", "trd19afo");
+            var path = @"ToOPS/PostPay/DB";
+            var pathRar = @"E:\PostPay\DB";
+            DirectoryInfo ftpFile = new DirectoryInfo(path);
+            DirectoryInfo update = new DirectoryInfo(pathRar);
+
             
+
+            //Console.WriteLine(Environment.ExpandEnvironmentVariables(path));
             //StartUpload(@"G:\Реестр коммунальных платежей", "200001/Реестр коммунальных платежей/");
 
             Console.ReadKey();

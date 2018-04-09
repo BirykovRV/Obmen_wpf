@@ -77,6 +77,8 @@ namespace Obmen_wpf.ViewModel
                 return new Command(o =>
                 {
                     Settings.Default.Reset();
+                    Settings.Default.pensionFrom = Environment.ExpandEnvironmentVariables("C:\\Users\\%USERNAME%\\Desktop\\Пенсия");
+                    Settings.Default.listTo = Environment.ExpandEnvironmentVariables("C:\\Users\\%USERNAME%\\Desktop");                    
                 });
             }
         }        

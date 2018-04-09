@@ -7,7 +7,7 @@
              xmlns:p="clr-namespace:Obmen_wpf.Properties"
              xmlns:viewmodel="clr-namespace:Obmen_wpf.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="100"
+             d:DesignHeight="200"
              d:DesignWidth="300">
     <UserControl.DataContext>
         <viewmodel:UserControlViewModel/>
@@ -30,9 +30,12 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>      
@@ -61,9 +64,32 @@
         <Button
             Content="..."
             Grid.Column="2"
-            Grid.Row="2"
+            Grid.Row="1"
             Command="{Binding OnOpenDialog}"
             CommandParameter="{Binding Config}"/>
+        
+        <TextBlock
+            Text="Расположение файлов на флешке:"
+            Grid.Column="0"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"/>
+        <TextBlock 
+            Text="ASKU:"
+            Grid.Column="0"
+            Grid.Row="3"/>
+        <TextBox
+            Text="{Binding Source={x:Static p:Settings.Default}, Path=f130To, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Grid.Column="1"
+            Grid.Row="3"/>
+
+        <TextBlock 
+            Text="Config:"
+            Grid.Column="0"
+            Grid.Row="4"/>
+        <TextBox
+            Text="{Binding Source={x:Static p:Settings.Default}, Path=configFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Grid.Column="1"
+            Grid.Row="4"/>
 
     </Grid>
 </UserControl>

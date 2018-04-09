@@ -86,8 +86,7 @@ namespace Obmen_wpf.ViewModel
                                 {
                                     // внутренняя задача чтобы все работало синхронно на разных ядрах
                                     var inner = Task.Factory.StartNew(() =>
-                                    {
-                                        System.Console.WriteLine("Start working with - {0}", item.Value);
+                                    {                                        
                                         // для каждого списка операций вызываем выполнение
                                         foreach (var oper in listOfOperations)
                                         {
@@ -95,8 +94,7 @@ namespace Obmen_wpf.ViewModel
                                             oper.Start(item.Key, item.Value, isInfoPoint);
                                             // увеличиваем прогресбар
                                             Progress++;
-                                        }
-                                        System.Console.WriteLine("End working with - {0}", item.Value);
+                                        }                                        
                                         // Если необходимо, чтобы вложенная задача выполнялась вместе с внешней, необходимо использовать значение TaskCreationOptions.AttachedToParent
                                     }, TaskCreationOptions.AttachedToParent); 
                                 }

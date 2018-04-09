@@ -49,7 +49,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Public\\Documents\\LttPpsPlugin\\ExportFiles")]
         public string postPayRegFrom {
             get {
                 return ((string)(this["postPayRegFrom"]));
@@ -373,7 +373,7 @@ namespace Obmen_wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\List")]
+        [global::System.Configuration.DefaultSettingValueAttribute("List")]
         public string listFrom {
             get {
                 return ((string)(this["listFrom"]));

@@ -24,11 +24,11 @@ namespace Obmen_wpf.Model
         /// <param name="isArchive">Это архив?</param>
         public static void CopyFile(string pathFrom, string pathTo, bool isArchive)
         {
-            DirectoryInfo directoryFrom = new DirectoryInfo(pathFrom);
-            DirectoryInfo directoryTo = new DirectoryInfo(pathTo);            
-
             try
             {
+                DirectoryInfo directoryFrom = new DirectoryInfo(pathFrom);
+                DirectoryInfo directoryTo = new DirectoryInfo(pathTo);
+
                 if (directoryFrom.Exists && directoryTo.Exists)
                 {
                     if (isArchive)
@@ -69,7 +69,7 @@ namespace Obmen_wpf.Model
             }
             catch (Exception e)
             {
-                log.Debug(e.ToString());
+                System.Windows.Forms.MessageBox.Show(e.Message);
             }
         }
 

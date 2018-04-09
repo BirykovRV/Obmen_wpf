@@ -65,7 +65,7 @@ namespace Obmen
                 ftpResponse.Close();
                 ftpRequest = null;
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            catch (Exception ex) { System.Windows.Forms.MessageBox.Show(ex.ToString()); }
             return;
         }
 
@@ -98,7 +98,7 @@ namespace Obmen
                 ftpStream.Close();
                 ftpRequest = null;
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            catch (Exception ex) { System.Windows.Forms.MessageBox.Show(ex.ToString()); }
             return;
         }
 
@@ -123,7 +123,7 @@ namespace Obmen
                 ftpResponse.Close();
                 ftpRequest = null;
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            catch (Exception ex) { System.Windows.Forms.MessageBox.Show(ex.ToString()); }
             return;
         }
 
@@ -150,7 +150,7 @@ namespace Obmen
                 ftpResponse.Close();
                 ftpRequest = null;
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            catch (Exception ex) { System.Windows.Forms.MessageBox.Show(ex.ToString()); }
             return;
         }
 

@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using System.Linq;
 
 namespace Obmen_wpf.Model
 {
@@ -12,6 +13,7 @@ namespace Obmen_wpf.Model
     {
         // Логирование Nlogs
         private static Logger log = LogManager.GetCurrentClassLogger();
+        private object files;
 
         public void Start(string key, string value, bool isInfoPoint)
         {
@@ -85,29 +87,27 @@ namespace Obmen_wpf.Model
         }
 
         private bool CheckForUpdate(string from, string to)
-        {
-            DirectoryInfo pluginInfo = new DirectoryInfo(to);
-            DirectoryInfo updateInfo = new DirectoryInfo(from);
+        {           
             try
             {
-                var files = updateInfo.GetFiles();
+                DirectoryInfo plugin = new DirectoryInfo(to);           // Куда копировать БД или Модуль
+                DirectoryInfo update = new DirectoryInfo(from);     // От куда копировать
+                // Дата создания плагина или БД на компьютере                
+                var updateFile = update.GetFiles().FirstOrDefault();
 
-                var pluginUpdateTime = pluginInfo.CreationTimeUtc;
-
-                if (files.Length > 0)
+                if (plugin.GetDirectories().FirstOrDefault() == null)
                 {
-                    foreach (var file in files)
-                    {
-                        if (file.LastWriteTimeUtc > pluginUpdateTime)
-                        {
-                            return true;
-                        }
-                    }
-                }                
+                    return updateFile.LastWriteTime > plugin.GetFiles().FirstOrDefault().LastWriteTime;
+                }
+                else   // Дата и время изменения новой БД или плагина больше чем на компьютере?
+                {
+                    return updateFile.LastWriteTime > plugin.GetDirectories().FirstOrDefault().LastWriteTime;
+                }
+
             }
             catch (Exception ex)
             {
-                log.Debug(ex.ToString());
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
             }
             return false;
         }
