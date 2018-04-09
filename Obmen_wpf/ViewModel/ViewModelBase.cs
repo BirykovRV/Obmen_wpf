@@ -52,7 +52,8 @@ namespace Obmen_wpf.ViewModel
                 new CopyF130(),
                 new CopyPostPay(),
                 new CopyEspp(),
-                new CopyFSG()
+                new CopyFSG(),
+                new ListCopy()
             };
             IsComplited = true;
             progress = 0;
