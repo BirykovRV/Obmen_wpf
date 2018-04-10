@@ -1,32 +1,28 @@
-﻿using NLog;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
-namespace Obmen
+namespace Testing
 {
-    class ftp
+    class FTPClient
     {
-        private string host = null;
-        private string user = null;
-        private string pass = null;
+        public string Uri { get; }
+        public string Username { get; }
+        public string Password { private get; set; }
         private FtpWebRequest ftpRequest = null;
         private FtpWebResponse ftpResponse = null;
         private Stream ftpStream = null;
-        private int bufferSize = 2048;
-
-        static Logger log = LogManager.GetCurrentClassLogger();
-
-        /* Construct Object */
-        public ftp(string hostIP, string userName, string password)
-        {
-            host = "ftp://" + hostIP + "/";
-            user = userName;
-            pass = password;
-        }
+        private int bufferSize = 65536;
         
-        /* Download File */
+        /* Construct Object */
+        public FTPClient(string hostIP, string userName, string password)
+        {
+            Uri =  hostIP;
+            Username = userName;
+            Password = password;
+        }
+
         /// <summary>
         /// Скачивание файлов с ftp
         /// </summary>
@@ -36,21 +32,7 @@ namespace Obmen
         {
             try
             {
-                ftpRequest = (FtpWebRequest)WebRequest.Create(host + remotePath);
-                ftpRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-                ftpRequest.Credentials = new NetworkCredential(user, pass);
-
-                List<string> lines = new List<string>();
-
-                using (ftpResponse = (FtpWebResponse)ftpRequest.GetResponse())
-                using (Stream listStream = ftpResponse.GetResponseStream())
-                using (StreamReader listReader = new StreamReader(listStream))
-                {
-                    while (!listReader.EndOfStream)
-                    {
-                        lines.Add(listReader.ReadLine());
-                    }
-                }
+                var lines = DirectoryListDetailed(remotePath);               
 
                 foreach (var line in lines)
                 {
@@ -73,9 +55,9 @@ namespace Obmen
                     }
                     else
                     {
-                        FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(host + remotePath);
+                        FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(Uri + fileUrl);
                         downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
-                        downloadRequest.Credentials = new NetworkCredential(user, pass);
+                        downloadRequest.Credentials = new NetworkCredential(Username, Password);
 
                         using (FtpWebResponse response = (FtpWebResponse)downloadRequest.GetResponse())
                         using (Stream responseStream = response.GetResponseStream())
@@ -103,9 +85,9 @@ namespace Obmen
             try
             {
                 /* Create an FTP Request */
-                ftpRequest = (FtpWebRequest)WebRequest.Create(host + remoteFile);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + remoteFile);
                 /* Log in to the FTP Server with the User Name and Password Provided */
-                ftpRequest.Credentials = new NetworkCredential(user, pass);
+                ftpRequest.Credentials = new NetworkCredential(Username, Password);
                 /* When in doubt, use these options */
                 ftpRequest.UseBinary = true;
                 ftpRequest.UsePassive = true;
@@ -126,7 +108,7 @@ namespace Obmen
                 ftpStream.Close();
                 ftpRequest = null;
             }
-            catch (Exception ex) { System.Windows.Forms.MessageBox.Show(ex.ToString()); }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             return;
         }
 
@@ -136,9 +118,9 @@ namespace Obmen
             try
             {
                 /* Create an FTP Request */
-                ftpRequest = (FtpWebRequest)WebRequest.Create(host + "/" + deleteFile);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + deleteFile);
                 /* Log in to the FTP Server with the User Name and Password Provided */
-                ftpRequest.Credentials = new NetworkCredential(user, pass);
+                ftpRequest.Credentials = new NetworkCredential(Username, Password);
                 /* When in doubt, use these options */
                 ftpRequest.UseBinary = true;
                 ftpRequest.UsePassive = true;
@@ -151,7 +133,7 @@ namespace Obmen
                 ftpResponse.Close();
                 ftpRequest = null;
             }
-            catch (Exception ex) { System.Windows.Forms.MessageBox.Show(ex.ToString()); }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             return;
         }
 
@@ -161,9 +143,9 @@ namespace Obmen
             try
             {
                 /* Create an FTP Request */
-                ftpRequest = (FtpWebRequest)WebRequest.Create(host + "/" + currentFileNameAndPath);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + "/" + currentFileNameAndPath);
                 /* Log in to the FTP Server with the User Name and Password Provided */
-                ftpRequest.Credentials = new NetworkCredential(user, pass);
+                ftpRequest.Credentials = new NetworkCredential(Username, Password);
                 /* When in doubt, use these options */
                 ftpRequest.UseBinary = true;
                 ftpRequest.UsePassive = true;
@@ -178,7 +160,7 @@ namespace Obmen
                 ftpResponse.Close();
                 ftpRequest = null;
             }
-            catch (Exception ex) { System.Windows.Forms.MessageBox.Show(ex.ToString()); }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             return;
         }
 
@@ -188,9 +170,9 @@ namespace Obmen
             try
             {
                 /* Create an FTP Request */
-                ftpRequest = (FtpWebRequest)WebRequest.Create(host + newDirectory);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + newDirectory);
                 /* Log in to the FTP Server with the User Name and Password Provided */
-                ftpRequest.Credentials = new NetworkCredential(user, pass);
+                ftpRequest.Credentials = new NetworkCredential(Username, Password);
                 /* When in doubt, use these options */
                 ftpRequest.UseBinary = true;
                 ftpRequest.UsePassive = true;
@@ -203,7 +185,7 @@ namespace Obmen
                 ftpResponse.Close();
                 ftpRequest = null;
             }
-            catch (Exception ex) { log.Debug((DateTime.Now + " - " + ex.Message + "\n" + host + newDirectory + " - Папка уже существует!")); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             return;
         }
 
@@ -213,9 +195,9 @@ namespace Obmen
             try
             {
                 /* Create an FTP Request */
-                ftpRequest = (FtpWebRequest)WebRequest.Create(host + "/" + fileName);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + "/" + fileName);
                 /* Log in to the FTP Server with the User Name and Password Provided */
-                ftpRequest.Credentials = new NetworkCredential(user, pass);
+                ftpRequest.Credentials = new NetworkCredential(Username, Password);
                 /* When in doubt, use these options */
                 ftpRequest.UseBinary = true;
                 ftpRequest.UsePassive = true;
@@ -252,9 +234,9 @@ namespace Obmen
             try
             {
                 /* Create an FTP Request */
-                ftpRequest = (FtpWebRequest)WebRequest.Create(host + "/" + fileName);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + "/" + fileName);
                 /* Log in to the FTP Server with the User Name and Password Provided */
-                ftpRequest.Credentials = new NetworkCredential(user, pass);
+                ftpRequest.Credentials = new NetworkCredential(Username, Password);
                 /* When in doubt, use these options */
                 ftpRequest.UseBinary = true;
                 ftpRequest.UsePassive = true;
@@ -291,9 +273,9 @@ namespace Obmen
             try
             {
                 /* Create an FTP Request */
-                ftpRequest = (FtpWebRequest)WebRequest.Create(host + "/" + directory);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + "/" + directory);
                 /* Log in to the FTP Server with the User Name and Password Provided */
-                ftpRequest.Credentials = new NetworkCredential(user, pass);
+                ftpRequest.Credentials = new NetworkCredential(Username, Password);
                 /* When in doubt, use these options */
                 ftpRequest.UseBinary = true;
                 ftpRequest.UsePassive = true;
@@ -331,9 +313,9 @@ namespace Obmen
             try
             {
                 /* Create an FTP Request */
-                ftpRequest = (FtpWebRequest)WebRequest.Create(host + "/" + directory);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + directory);
                 /* Log in to the FTP Server with the User Name and Password Provided */
-                ftpRequest.Credentials = new NetworkCredential(user, pass);
+                ftpRequest.Credentials = new NetworkCredential(Username, Password);
                 /* When in doubt, use these options */
                 ftpRequest.UseBinary = true;
                 ftpRequest.UsePassive = true;

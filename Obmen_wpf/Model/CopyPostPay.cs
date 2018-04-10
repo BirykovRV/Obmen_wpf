@@ -12,8 +12,7 @@ namespace Obmen_wpf.Model
     class CopyPostPay : ICopyFiles
     {
         // Логирование Nlogs
-        private static Logger log = LogManager.GetCurrentClassLogger();
-        private object files;
+        private static Logger log = LogManager.GetCurrentClassLogger();        
 
         public void Start(string key, string value, bool isInfoPoint)
         {
