@@ -49,6 +49,10 @@ namespace Obmen_wpf.Model
                         {
                             if (name != Path.GetFileName(subDirs[i]))
                             {
+                                StartUpload(subDirs[i], pathTo + Path.GetFileName(subDirs[i]) + "/");
+                            }
+                            else
+                            {
                                 Server.CreateDirectory(pathTo + Path.GetFileName(subDirs[i]));
                                 StartUpload(subDirs[i], pathTo + Path.GetFileName(subDirs[i]) + "/");
                             }
