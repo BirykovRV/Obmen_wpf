@@ -1,5 +1,4 @@
 ﻿using NLog;
-using Obmen;
 using Obmen_wpf.Properties;
 using System;
 using System.Diagnostics;
