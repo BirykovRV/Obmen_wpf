@@ -15,7 +15,7 @@ namespace Obmen_wpf.Model
 
         public ServerFtpModel()
         {
-            Server = new FTPClient(Settings.Default.serverIp, Settings.Default.serverLogin, Settings.Default.serverPass);
+            Server = new FTPClient(Settings.Default.serverIp + "/", Settings.Default.serverLogin, Settings.Default.serverPass);
         }
 
         public ServerFtpModel(string ip, string login, string pass)
@@ -33,31 +33,34 @@ namespace Obmen_wpf.Model
                 Server.Upload(pathTo + Path.GetFileName(file), file);
             }
 
-            foreach (string subDir in subDirs)
+            for (int i = 0; i < subDirs.Length; i++)
             {
-
                 var list = Server.DirectoryListDetailed(pathTo);
-
-                for (int i = 0; i < list.Length - 1; i++)
+                if (list.FirstOrDefault() != "")
                 {
-                    string[] tokens = list[i].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    // имя файла
-                    string name = tokens[8];
-                    // тип файла. d - папка
-                    string category = tokens[0];
-                    if (category.StartsWith("d"))
+                    for (int j = 0; j < list.Length - 1; j++)
                     {
-                        if (name == Path.GetFileName(subDir))
+                        string[] tokens = list[j].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        // имя файла
+                        string name = tokens[8];
+                        // тип файла. d - папка
+                        string category = tokens[0];
+                        if (category.StartsWith("d"))
                         {
-                            StartUpload(subDir, pathTo + Path.GetFileName(subDir) + "/");
-                        }
-                        else
-                        {
-                            Server.CreateDirectory(pathTo + Path.GetFileName(subDir));
-                            StartUpload(subDir, pathTo + Path.GetFileName(subDir) + "/");
+                            if (name != Path.GetFileName(subDirs[i]))
+                            {
+                                Server.CreateDirectory(pathTo + Path.GetFileName(subDirs[i]));
+                                StartUpload(subDirs[i], pathTo + Path.GetFileName(subDirs[i]) + "/");
+                            }
                         }
                     }
                 }
+                else
+                {
+                    Server.CreateDirectory(pathTo + Path.GetFileName(subDirs[i]));
+                    StartUpload(subDirs[i], pathTo + Path.GetFileName(subDirs[i]) + "/");
+                }
+                
             }
         }
 

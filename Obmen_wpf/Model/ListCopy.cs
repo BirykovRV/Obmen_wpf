@@ -11,16 +11,15 @@ namespace Obmen_wpf.Model
     {
         public void Start(string key, string value, bool isInfoPoint)
         {
-            // Config
+            // list
             string listFrom = key + Settings.Default.listFrom;
             string listTo = Settings.Default.listTo + "\\";
                   
-            string serverPathFrom = "/";
 
             if (isInfoPoint)
             {
-                ServerFtpModel server = new ServerFtpModel();
-                server.StartDownload(serverPathFrom, listFrom);
+                ServerFtpModel server = new ServerFtpModel(Settings.Default.listIp + "/", Settings.Default.listLogin, Settings.Default.listPass);
+                server.StartDownload("", listFrom);
             }
             else
             {
