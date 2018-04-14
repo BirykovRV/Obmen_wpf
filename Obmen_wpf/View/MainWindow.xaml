@@ -17,8 +17,8 @@
     </Window.DataContext>
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="Control.Margin" Value="5"/>
-            <Setter Property="Control.Padding" Value="5"/>
+            <Setter Property="Control.Margin" Value="20 10 20 10"/>
+            <Setter Property="Control.Padding" Value="10"/>
             <Setter Property="Height" Value="40"/>
         </Style>
     </Window.Resources>
@@ -30,11 +30,11 @@
         </Menu>
         <StackPanel Margin="0 5 0 0" HorizontalAlignment="Center" DockPanel.Dock="Top" Orientation="Horizontal">
             <Button             
-            Command="{Binding OnClick}"
-            Content="Выполнить обмен"/>
+                Command="{Binding OnClick}"
+                Content="Выполнить обмен"/>
             <Button            
-            Command="{Binding OnClose}"
-            Content="Выход"/>
+                Command="{Binding OnClose}"
+                Content="Выход"/>
         </StackPanel>
         <ProgressBar
             DockPanel.Dock="Bottom"
