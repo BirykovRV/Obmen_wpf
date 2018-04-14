@@ -1,6 +1,7 @@
 ﻿using Obmen_wpf.Model;
 using Obmen_wpf.ViewModel;
 using System;
+using System.Reflection;
 using System.Windows;
 
 namespace Obmen_wpf.View
@@ -13,6 +14,8 @@ namespace Obmen_wpf.View
         public MainWindow()
         {
             InitializeComponent();
+            var ver = Assembly.GetExecutingAssembly().GetName().Version;
+            Title = "Офлайн транспорт\t ver. " + ver;
         }        
     }
 }

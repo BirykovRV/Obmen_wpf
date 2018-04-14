@@ -7,7 +7,7 @@
         xmlns:p="clr-namespace:Obmen_wpf.Properties"
         xmlns:viewmodel="clr-namespace:Obmen_wpf.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title=""
         ResizeMode="NoResize"
         Height="150" 
         Width="300">
