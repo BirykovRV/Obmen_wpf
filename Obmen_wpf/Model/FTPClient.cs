@@ -343,8 +343,20 @@ namespace Obmen_wpf.Model
                 ftpResponse.Close();
                 ftpRequest = null;
                 /* Return the Directory Listing as a string Array by Parsing 'directoryRaw' with the Delimiter you Append (I use | in This Example) */
-                try { string[] directoryList = directoryRaw.Split("|".ToCharArray()); return directoryList; }
-                catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                try
+                {
+                    if (!String.IsNullOrEmpty(directoryRaw))
+                    {
+                        string[] directoryList = directoryRaw.Split("|".ToCharArray());
+                        return directoryList;
+                    }
+                    return new string[] { "" };
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             /* Return an Empty string Array if an Exception Occurs */

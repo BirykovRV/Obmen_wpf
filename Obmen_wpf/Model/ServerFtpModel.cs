@@ -25,46 +25,35 @@ namespace Obmen_wpf.Model
 
         public void StartUpload(string pathFrom, string pathTo)
         {
-            string[] files = Directory.GetFiles(pathFrom, "*.*");
+            string[] files = Directory.GetFiles(pathFrom);
             string[] subDirs = Directory.GetDirectories(pathFrom);
+            // полный список файлов и папок с фтп                        
 
             foreach (string file in files)
             {
                 Server.Upload(pathTo + Path.GetFileName(file), file);
             }
-
+            // subDirs - список папок на компе
             for (int i = 0; i < subDirs.Length; i++)
             {
                 var list = Server.DirectoryListDetailed(pathTo);
-                if (list.FirstOrDefault() != "")
+                bool isSameFolder = false;
+
+                for (int j = 0; j < list.Length; j++)
                 {
-                    for (int j = 0; j < list.Length - 1; j++)
+                    // если это папка (d) и имя совпадает с именем из первого массива
+                    if (list[j].StartsWith("d") && list[j].Contains(Path.GetFileName(subDirs[i])))
                     {
-                        string[] tokens = list[j].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                        // имя файла
-                        string name = tokens[8];
-                        // тип файла. d - папка
-                        string category = tokens[0];
-                        if (category.StartsWith("d"))
-                        {
-                            if (name != Path.GetFileName(subDirs[i]))
-                            {
-                                StartUpload(subDirs[i], pathTo + Path.GetFileName(subDirs[i]) + "/");
-                            }
-                            else
-                            {
-                                Server.CreateDirectory(pathTo + Path.GetFileName(subDirs[i]));
-                                StartUpload(subDirs[i], pathTo + Path.GetFileName(subDirs[i]) + "/");
-                            }
-                        }
+                        isSameFolder = true;
+                        break;
                     }
                 }
-                else
+                if (!isSameFolder)
                 {
+                    //если совпадений имен не найдено в массиве list, то создаем папку subDirs[i]
                     Server.CreateDirectory(pathTo + Path.GetFileName(subDirs[i]));
                     StartUpload(subDirs[i], pathTo + Path.GetFileName(subDirs[i]) + "/");
-                }
-                
+                }                              
             }
         }
 

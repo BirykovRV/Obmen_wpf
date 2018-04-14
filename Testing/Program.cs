@@ -14,21 +14,11 @@ namespace Testing
     {
         static void Main(string[] args)
         {
-            FTPClient server = new FTPClient("ftp://10.87.6.143/", "support", "trd19afo");
+            FTPClient server = new FTPClient("10.87.6.143", "asku", "QYT4bOYbOxnllqZ");
 
-            var remoutePath = "ToOPS/Test/";
-            var localPath = @"E:\F130\Config";
-
-            //server.Download(remoutePath, localPath);
-
-            StartUpload(localPath, remoutePath);
-
-            //Console.WriteLine(Path.GetFileName(localPath));
-            //for (int i = 0; i < list.Length; i++)
-            //{
-            //    Console.WriteLine($"{i} - {list[i]}");
-            //}
-
+            var remoutePath = "/ToOPS/PostPay/DB";
+            var localPath = @"E:\PostPay\DB";
+            
             Console.WriteLine("Загрузка успешно завершена! Для выхода нажмите Enter.");
             //Console.WriteLine(Environment.ExpandEnvironmentVariables(path));
             //StartUpload(@"G:\Реестр коммунальных платежей", "200001/Реестр коммунальных платежей/");

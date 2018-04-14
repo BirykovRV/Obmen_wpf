@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 
 namespace Testing
@@ -14,11 +15,11 @@ namespace Testing
         private FtpWebResponse ftpResponse = null;
         private Stream ftpStream = null;
         private int bufferSize = 65536;
-        
+
         /* Construct Object */
         public FTPClient(string hostIP, string userName, string password)
         {
-            Uri =  hostIP;
+            Uri = $"ftp://{hostIP}";
             Username = userName;
             Password = password;
         }
@@ -32,42 +33,45 @@ namespace Testing
         {
             try
             {
-                var lines = DirectoryListDetailed(remotePath);               
+                var lines = DirectoryListDetailed(remotePath);
 
-                foreach (var line in lines)
+                for (int i = 0; i < lines.Length - 1; i++)
                 {
-                    string[] tokens = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    // имя файла
-                    string name = tokens[8];
-                    // Тип файла ('d' - папка)
-                    string category = tokens[0];
-                    string combinedLocalPath = Path.Combine(localPath, name);
-                    string fileUrl = remotePath + name;
-
-                    if (category.StartsWith("d"))
+                    if (lines.FirstOrDefault() != "")
                     {
-                        if (!Directory.Exists(combinedLocalPath))
-                        {
-                            Directory.CreateDirectory(combinedLocalPath);
-                        }
+                        string[] tokens = lines[i].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        // имя файла
+                        string name = tokens[8];
+                        // Тип файла ('d' - папка)
+                        string category = tokens[0];
+                        string combinedLocalPath = Path.Combine(localPath, name);
+                        string fileUrl = remotePath + name;
 
-                        Download(fileUrl + "/", combinedLocalPath);
-                    }
-                    else
-                    {
-                        FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(Uri + fileUrl);
-                        downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
-                        downloadRequest.Credentials = new NetworkCredential(Username, Password);
-
-                        using (FtpWebResponse response = (FtpWebResponse)downloadRequest.GetResponse())
-                        using (Stream responseStream = response.GetResponseStream())
-                        using (Stream targetStream = File.Create(combinedLocalPath))
+                        if (category.StartsWith("d"))
                         {
-                            byte[] buffer = new byte[bufferSize];
-                            int bytesRead;
-                            while ((bytesRead = responseStream.Read(buffer, 0, buffer.Length)) > 0)
+                            if (!Directory.Exists(combinedLocalPath))
                             {
-                                targetStream.Write(buffer, 0, bytesRead);
+                                Directory.CreateDirectory(combinedLocalPath);
+                            }
+
+                            Download(fileUrl + "/", combinedLocalPath);
+                        }
+                        else
+                        {
+                            FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(Uri + fileUrl);
+                            downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
+                            downloadRequest.Credentials = new NetworkCredential(Username, Password);
+
+                            using (FtpWebResponse response = (FtpWebResponse)downloadRequest.GetResponse())
+                            using (Stream responseStream = response.GetResponseStream())
+                            using (Stream targetStream = File.Create(combinedLocalPath))
+                            {
+                                byte[] buffer = new byte[bufferSize];
+                                int bytesRead;
+                                while ((bytesRead = responseStream.Read(buffer, 0, buffer.Length)) > 0)
+                                {
+                                    targetStream.Write(buffer, 0, bytesRead);
+                                }
                             }
                         }
                     }
@@ -108,7 +112,7 @@ namespace Testing
                 ftpStream.Close();
                 ftpRequest = null;
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             return;
         }
 
@@ -133,7 +137,7 @@ namespace Testing
                 ftpResponse.Close();
                 ftpRequest = null;
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             return;
         }
 
@@ -160,7 +164,7 @@ namespace Testing
                 ftpResponse.Close();
                 ftpRequest = null;
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             return;
         }
 
@@ -185,7 +189,7 @@ namespace Testing
                 ftpResponse.Close();
                 ftpRequest = null;
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.ToString() + " " + Uri + newDirectory); }
             return;
         }
 
@@ -339,8 +343,20 @@ namespace Testing
                 ftpResponse.Close();
                 ftpRequest = null;
                 /* Return the Directory Listing as a string Array by Parsing 'directoryRaw' with the Delimiter you Append (I use | in This Example) */
-                try { string[] directoryList = directoryRaw.Split("|".ToCharArray()); return directoryList; }
-                catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                try
+                {
+                    if (!String.IsNullOrEmpty(directoryRaw))
+                    {
+                        string[] directoryList = directoryRaw.Split("|".ToCharArray());
+                        return directoryList;
+                    }
+                    return new string[] { "" };
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             /* Return an Empty string Array if an Exception Occurs */
