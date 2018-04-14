@@ -14,11 +14,21 @@ namespace Testing
     {
         static void Main(string[] args)
         {
-            FTPClient server = new FTPClient("10.87.6.143", "asku", "QYT4bOYbOxnllqZ");
+            FTPClient server = new FTPClient("10.87.6.143", "support", "trd19afo");
 
-            var remoutePath = "/ToOPS/PostPay/DB";
+            var remoutePath = "/ToOPS/PostPay/DB/";
             var localPath = @"E:\PostPay\DB";
-            
+
+            var localFile = Directory.GetFiles(localPath).FirstOrDefault();
+            var file = server.DirectoryListSimple(remoutePath).FirstOrDefault();
+            var time = server.GetFileCreatedDateTime(remoutePath + file);
+
+            File.SetLastWriteTime(localFile, time);
+
+            Console.WriteLine(time);
+
+
+
             Console.WriteLine("Загрузка успешно завершена! Для выхода нажмите Enter.");
             //Console.WriteLine(Environment.ExpandEnvironmentVariables(path));
             //StartUpload(@"G:\Реестр коммунальных платежей", "200001/Реестр коммунальных платежей/");
@@ -60,9 +70,9 @@ namespace Testing
                             StartUpload(subDir, pathTo + Path.GetFileName(subDir) + "/");
                         }
                     }
-                    
+
                 }
             }
-        }        
+        }
     }
 }

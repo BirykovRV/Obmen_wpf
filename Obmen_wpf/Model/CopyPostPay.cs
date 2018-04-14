@@ -36,6 +36,14 @@ namespace Obmen_wpf.Model
                 server.StartUpload(postPayRegTo, serverRegTo);
                 server.StartDownload(serverUpdateFrom, postPayUpdateFrom);
                 server.StartDownload(serverDBFrom, postPayDBFrom);
+                // установка времени изменения файла для БД с фтп
+                var dnFile = Directory.GetFiles(postPayDBFrom).FirstOrDefault();
+                var dbTime = server.GetTime(serverDBFrom);
+                File.SetLastWriteTime(dnFile, dbTime);
+                // установка времени изменения файла для update с фтп
+                var updateFile = Directory.GetFiles(postPayUpdateFrom).FirstOrDefault();
+                var dateTime = server.GetTime(serverUpdateFrom);
+                File.SetLastWriteTime(updateFile, dateTime);
             }
             else
             {
@@ -90,7 +98,7 @@ namespace Obmen_wpf.Model
             {
                 DirectoryInfo plugin = new DirectoryInfo(to);           // Куда копировать БД или Модуль
                 DirectoryInfo update = new DirectoryInfo(from);     // От куда копировать
-                // Дата создания плагина или БД на компьютере                
+                // Дата создания плагина или БД                
                 var updateFile = update.GetFiles().FirstOrDefault();
 
                 if (plugin.GetDirectories().FirstOrDefault() == null)
@@ -99,7 +107,7 @@ namespace Obmen_wpf.Model
                 }
                 else   // Дата и время изменения новой БД или плагина больше чем на компьютере?
                 {
-                    return updateFile.LastWriteTime > plugin.GetDirectories().FirstOrDefault().LastWriteTime;
+                    return updateFile.LastWriteTime > plugin.GetFiles().FirstOrDefault().LastWriteTime;
                 }
 
             }

@@ -53,13 +53,26 @@ namespace Obmen_wpf.Model
                     //если совпадений имен не найдено в массиве list, то создаем папку subDirs[i]
                     Server.CreateDirectory(pathTo + Path.GetFileName(subDirs[i]));
                     StartUpload(subDirs[i], pathTo + Path.GetFileName(subDirs[i]) + "/");
-                }                              
+                }
             }
         }
 
         public void StartDownload(string pathFrom, string pathTo)
         {
             Server.Download(pathFrom, pathTo);
+        }
+
+        public DateTime GetTime(string remoutePath)
+        {
+            if (remoutePath == null)
+                throw new ArgumentNullException("Путь не может быть null");
+            else if (String.IsNullOrWhiteSpace(remoutePath))
+                throw new ArgumentException("Путь не может состоять из пробелов");
+
+            var file = Server.DirectoryListSimple(remoutePath).FirstOrDefault();
+            var time = Server.GetFileCreatedDateTime(remoutePath + file);
+
+            return time;
         }
     }
 }

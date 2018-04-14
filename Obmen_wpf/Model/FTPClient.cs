@@ -194,12 +194,12 @@ namespace Obmen_wpf.Model
         }
 
         /* Get the Date/Time a File was Created */
-        public string GetFileCreatedDateTime(string fileName)
+        public DateTime GetFileCreatedDateTime(string fileName)
         {
             try
             {
                 /* Create an FTP Request */
-                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + "/" + fileName);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + fileName);
                 /* Log in to the FTP Server with the User Name and Password Provided */
                 ftpRequest.Credentials = new NetworkCredential(Username, Password);
                 /* When in doubt, use these options */
@@ -210,17 +210,16 @@ namespace Obmen_wpf.Model
                 ftpRequest.Method = WebRequestMethods.Ftp.GetDateTimestamp;
                 /* Establish Return Communication with the FTP Server */
                 ftpResponse = (FtpWebResponse)ftpRequest.GetResponse();
-                /* Establish Return Communication with the FTP Server */
-                ftpStream = ftpResponse.GetResponseStream();
-                /* Get the FTP Server's Response Stream */
-                StreamReader ftpReader = new StreamReader(ftpStream);
-                /* Store the Raw Response */
-                string fileInfo = null;
+                ///* Establish Return Communication with the FTP Server */
+                //ftpStream = ftpResponse.GetResponseStream();
+                ///* Get the FTP Server's Response Stream */
+                //StreamReader ftpReader = new StreamReader(ftpStream);
+                ///* Store the Raw Response */
+                DateTime fileInfo = new DateTime();
                 /* Read the Full Response Stream */
-                try { fileInfo = ftpReader.ReadToEnd(); }
+                try { fileInfo = ftpResponse.LastModified; }
                 catch (Exception ex) { Console.WriteLine(ex.ToString()); }
                 /* Resource Cleanup */
-                ftpReader.Close();
                 ftpStream.Close();
                 ftpResponse.Close();
                 ftpRequest = null;
@@ -229,7 +228,7 @@ namespace Obmen_wpf.Model
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             /* Return an Empty string Array if an Exception Occurs */
-            return "";
+            return new DateTime();
         }
 
         /* Get the Size of a File */
@@ -238,7 +237,7 @@ namespace Obmen_wpf.Model
             try
             {
                 /* Create an FTP Request */
-                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + "/" + fileName);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + fileName);
                 /* Log in to the FTP Server with the User Name and Password Provided */
                 ftpRequest.Credentials = new NetworkCredential(Username, Password);
                 /* When in doubt, use these options */
@@ -277,7 +276,7 @@ namespace Obmen_wpf.Model
             try
             {
                 /* Create an FTP Request */
-                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + "/" + directory);
+                ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + directory);
                 /* Log in to the FTP Server with the User Name and Password Provided */
                 ftpRequest.Credentials = new NetworkCredential(Username, Password);
                 /* When in doubt, use these options */
