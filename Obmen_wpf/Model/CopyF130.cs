@@ -1,10 +1,12 @@
 ﻿using Obmen_wpf.Properties;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Obmen_wpf.Model
 {
@@ -33,12 +35,27 @@ namespace Obmen_wpf.Model
             }
             else
             {
-                // Config
-                Operations.CopyFile(configFrom, configTo, false);
-                // ASKU
-                Operations.CopyFile(f130From, f130To, false);
-                //Delete old files
-               // Operations.DeleteOldObj(f130From);
+                try
+                {
+                    foreach (Process process in Process.GetProcesses())
+                    {
+                        if (process.ProcessName.StartsWith("TransportModule"))
+                        {
+                            process.Kill();
+                            process.WaitForExit();
+                        }                        
+                    }
+                    // Config
+                    Operations.CopyFile(configFrom, configTo, false);
+                    // ASKU
+                    Operations.CopyFile(f130From, f130To, false);
+                    //Delete old files
+                    // Operations.DeleteOldObj(f130From);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }                
             }
         }
     }
