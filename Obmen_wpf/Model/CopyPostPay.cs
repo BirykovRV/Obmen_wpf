@@ -11,7 +11,7 @@ namespace Obmen_wpf.Model
     class CopyPostPay : ICopyFiles
     {
         // Логирование Nlogs
-        private static Logger log = LogManager.GetCurrentClassLogger();        
+        private static Logger log = LogManager.GetCurrentClassLogger();
 
         public void Start(string key, string value, bool isInfoPoint)
         {
@@ -33,17 +33,25 @@ namespace Obmen_wpf.Model
             if (isInfoPoint)
             {
                 ServerFtpModel server = new ServerFtpModel();
-                server.StartUpload(postPayRegTo, serverRegTo);
-                server.StartDownload(serverUpdateFrom, postPayUpdateFrom);
-                server.StartDownload(serverDBFrom, postPayDBFrom);
-                // установка времени изменения файла для БД с фтп
-                var dnFile = Directory.GetFiles(postPayDBFrom).FirstOrDefault();
+
                 var dbTime = server.GetTime(serverDBFrom);
-                File.SetLastWriteTime(dnFile, dbTime);
-                // установка времени изменения файла для update с фтп
-                var updateFile = Directory.GetFiles(postPayUpdateFrom).FirstOrDefault();
-                var dateTime = server.GetTime(serverUpdateFrom);
-                File.SetLastWriteTime(updateFile, dateTime);
+                var ppsTime = server.GetTime(serverUpdateFrom);
+                server.StartUpload(postPayRegTo, serverRegTo);
+
+                if (CheckUpdateFromFTP(dbTime, postPayDBFrom))
+                {
+                    server.StartDownload(serverDBFrom, postPayDBFrom);
+                    // установка времени изменения файла для БД с фтп
+                    var dnFile = Directory.GetFiles(postPayDBFrom).FirstOrDefault();
+                    File.SetLastWriteTime(dnFile, dbTime);
+                }
+                if (CheckUpdateFromFTP(ppsTime, postPayUpdateFrom))
+                {
+                    server.StartDownload(serverUpdateFrom, postPayUpdateFrom);
+                    // установка времени изменения файла для update с фтп
+                    var updateFile = Directory.GetFiles(postPayUpdateFrom).FirstOrDefault();
+                    File.SetLastWriteTime(updateFile, ppsTime);
+                }
             }
             else
             {
@@ -93,7 +101,7 @@ namespace Obmen_wpf.Model
         }
 
         private bool CheckForUpdate(string from, string to)
-        {           
+        {
             try
             {
                 DirectoryInfo plugin = new DirectoryInfo(to);           // Куда копировать БД или Модуль
@@ -110,6 +118,23 @@ namespace Obmen_wpf.Model
                     return updateFile.LastWriteTime > plugin.GetFiles().FirstOrDefault().LastWriteTime;
                 }
 
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            return false;
+        }
+
+        private bool CheckUpdateFromFTP(DateTime from, string to)
+        {
+            try
+            {
+                DirectoryInfo update = new DirectoryInfo(to);
+
+                var updateFile = update.GetFiles().FirstOrDefault();
+
+                return from > updateFile.LastWriteTime;
             }
             catch (Exception ex)
             {
