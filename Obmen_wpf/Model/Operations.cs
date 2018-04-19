@@ -1,4 +1,5 @@
 ﻿using NUnrar.Archive;
+using NUnrar.Common;
 using NLog;
 using System.IO;
 using System.IO.Compression;
@@ -91,13 +92,15 @@ namespace Obmen_wpf.Model
                 if (files[i].Name.Contains(".zip"))
                 {
                     if (dirTo.Exists) dirTo.Delete(true);
-
-                    ZipFile.ExtractToDirectory(_pathFrom, pathTo); // Разархивация .zip
+                    // Разархивация .zip
+                    ZipFile.ExtractToDirectory(_pathFrom, pathTo); 
 
                 }
                 else if (files[i].Name.Contains(".rar"))
-                {
-                    RarArchive.WriteToDirectory(_pathFrom, pathTo); // Разархивация .rar 
+                {                    
+                    if (dirTo.Exists) dirTo.Delete(true);
+                    // Разархивация .rar (ExtractOptions.ExtractFullPath) позволяет разархивировать и папки тоже
+                    RarArchive.WriteToDirectory(_pathFrom, pathTo, ExtractOptions.ExtractFullPath);
                 }
             }
         }

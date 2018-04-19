@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Reflection;
 
 namespace Obmen_wpf.ViewModel
 {
@@ -14,8 +15,31 @@ namespace Obmen_wpf.ViewModel
         private List<ICopyFiles> listOfOperations;
         private bool isComplited;
         private int progress;
+        private string currentTask;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public string Version
+        {
+            get => Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            set
+            {
+                OnPropertyChanged();
+            }
+        }
+
+        public string CurrentOperation
+        {
+            get
+            {
+                return currentTask;
+            }
+            set
+            {
+                currentTask = value;
+                OnPropertyChanged();
+            }
+        }
 
         public bool IsComplited
         {
@@ -90,7 +114,7 @@ namespace Obmen_wpf.ViewModel
                                         // для каждого списка операций вызываем выполнение
                                         foreach (var oper in listOfOperations)
                                         {
-                                            System.Console.WriteLine("{0} - Working with - {1}", item.Value, oper.ToString());
+                                            currentTask =  $"Выполняется копирование: {oper.ToString()}";
                                             oper.Start(item.Key, item.Value, isInfoPoint);
                                             // увеличиваем прогресбар
                                             Progress++;
@@ -103,6 +127,7 @@ namespace Obmen_wpf.ViewModel
                             // Очистка списка usb drives
                             RemovableDisk.RemovableDrives.Clear();
                             // Сброс полоски прогрессбара
+                            currentTask = "";
                             Progress = 0;
                             MessageBox.Show("Копирование файлов завершено.\nМожете закрыть программу.", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
@@ -127,7 +152,7 @@ namespace Obmen_wpf.ViewModel
                 {
                     SettingsView settingsView = new SettingsView();
                     settingsView.ShowDialog();
-                });
+                }, o => IsComplited);
             }
         }
         /// <summary>
@@ -140,6 +165,18 @@ namespace Obmen_wpf.ViewModel
                 return new Command(o =>
                 {
                     Application.Current.Shutdown();
+                }, o => isComplited);
+            }
+        }
+
+        public ICommand About
+        {
+            get
+            {
+                return new Command(o =>
+                {
+                    MessageBox.Show($"Версия сборки: {Version}\n"
+                        +"Автор: Роман Бирюков\n", "О программе", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }, o => isComplited);
             }
         }

@@ -1,7 +1,6 @@
 ﻿using Obmen_wpf.Model;
 using Obmen_wpf.ViewModel;
 using System;
-using System.Reflection;
 using System.Deployment.Application;
 using System.Windows;
 
@@ -15,8 +14,7 @@ namespace Obmen_wpf.View
         public MainWindow()
         {
             InitializeComponent();
-            Version ver = ApplicationDeployment.CurrentDeployment.CurrentVersion;
-            Title = "Офлайн Транспорт    v. " + ver;
-        }        
+            //Version version = ApplicationDeployment.CurrentDeployment.CurrentVersion;
+        }
     }
 }

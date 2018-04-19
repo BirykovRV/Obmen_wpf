@@ -104,20 +104,18 @@ namespace Obmen_wpf.Model
         {
             try
             {
+                DirectoryInfo update = new DirectoryInfo(from);         // От куда копировать
                 DirectoryInfo plugin = new DirectoryInfo(to);           // Куда копировать БД или Модуль
-                DirectoryInfo update = new DirectoryInfo(from);     // От куда копировать
+                
                 // Дата создания плагина или БД                
-                var updateFile = update.GetFiles().FirstOrDefault();
+                var updateDate = update.GetFiles().FirstOrDefault()?.LastWriteTime;
+                var pluginDate = plugin.GetFiles().FirstOrDefault()?.LastWriteTime;
 
-                if (plugin.GetDirectories().FirstOrDefault() == null)
-                {
-                    return updateFile.LastWriteTime > plugin.GetFiles().FirstOrDefault().LastWriteTime;
-                }
-                else   // Дата и время изменения новой БД или плагина больше чем на компьютере?
-                {
-                    return updateFile.LastWriteTime > plugin.GetFiles().FirstOrDefault().LastWriteTime;
-                }
-
+                if (updateDate == null)
+                    throw new ArgumentNullException(from , "Отсутствует архив с обновлением.");
+                else if (pluginDate == null)
+                    return true;
+                return updateDate > pluginDate;
             }
             catch (Exception ex)
             {
@@ -134,6 +132,8 @@ namespace Obmen_wpf.Model
 
                 var updateFile = update.GetFiles().FirstOrDefault();
 
+                if (updateFile == null)
+                    return true;
                 return from > updateFile.LastWriteTime;
             }
             catch (Exception ex)

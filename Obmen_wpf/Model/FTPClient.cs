@@ -200,6 +200,7 @@ namespace Obmen_wpf.Model
             {
                 /* Create an FTP Request */
                 ftpRequest = (FtpWebRequest)WebRequest.Create(Uri + fileName);
+
                 /* Log in to the FTP Server with the User Name and Password Provided */
                 ftpRequest.Credentials = new NetworkCredential(Username, Password);
                 /* When in doubt, use these options */
@@ -207,18 +208,12 @@ namespace Obmen_wpf.Model
                 ftpRequest.UsePassive = true;
                 ftpRequest.KeepAlive = true;
                 /* Specify the Type of FTP Request */
-                ftpRequest.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+                ftpRequest.Method = WebRequestMethods.Ftp.GetDateTimestamp;                
                 /* Establish Return Communication with the FTP Server */
                 ftpResponse = (FtpWebResponse)ftpRequest.GetResponse();
-                ///* Establish Return Communication with the FTP Server */
-                //ftpStream = ftpResponse.GetResponseStream();
-                ///* Get the FTP Server's Response Stream */
-                //StreamReader ftpReader = new StreamReader(ftpStream);
-                ///* Store the Raw Response */
                 DateTime fileInfo = new DateTime();
                 /* Read the Full Response Stream */
-                try { fileInfo = ftpResponse.LastModified; }
-                catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                fileInfo = ftpResponse.LastModified;
                 /* Resource Cleanup */
                 ftpStream.Close();
                 ftpResponse.Close();
@@ -226,8 +221,10 @@ namespace Obmen_wpf.Model
                 /* Return File Created Date Time */
                 return fileInfo;
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
-            /* Return an Empty string Array if an Exception Occurs */
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             return new DateTime();
         }
 
@@ -302,8 +299,19 @@ namespace Obmen_wpf.Model
                 ftpResponse.Close();
                 ftpRequest = null;
                 /* Return the Directory Listing as a string Array by Parsing 'directoryRaw' with the Delimiter you Append (I use | in This Example) */
-                try { string[] directoryList = directoryRaw.Split("|".ToCharArray()); return directoryList; }
-                catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                try
+                {
+                    if (!String.IsNullOrEmpty(directoryRaw))
+                    {
+                        string[] directoryList = directoryRaw.Split("|".ToCharArray());
+                        return directoryList;
+                    }
+                    return new string[] { "" };
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             /* Return an Empty string Array if an Exception Occurs */
