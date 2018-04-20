@@ -16,13 +16,13 @@
         <viewmodel:ViewModelBase/>
     </Window.DataContext>
     <Window.Resources>
-        <Style TargetType="Button">            
+        <Style TargetType="Button">
             <Setter Property="Control.Padding" Value="10"/>
             <Setter Property="Height" Value="40"/>
         </Style>
     </Window.Resources>
     <DockPanel>
-        <Menu DockPanel.Dock="Top" Height="25" VerticalAlignment="Top">
+        <Menu DockPanel.Dock="Top" Height="25" VerticalAlignment="Top" Foreground="Black" Background="White">
             <MenuItem 
                 Header="Настройки"
                 Command="{Binding OnSettings}"/>
@@ -34,10 +34,10 @@
             <Button             
                 Command="{Binding OnClick}"
                 Content="Выполнить обмен"
-                Margin="0 0 40 0"/>
+                Margin="0 0 40 0" Background="White"/>
             <Button            
                 Command="{Binding OnClose}"
-                Content="Выход"/>
+                Content="Выход" Background="White" BorderThickness="0"/>
         </StackPanel>
         <ProgressBar
             DockPanel.Dock="Top"

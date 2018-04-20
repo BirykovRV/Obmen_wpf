@@ -114,7 +114,7 @@ namespace Obmen_wpf.ViewModel
                                         // для каждого списка операций вызываем выполнение
                                         foreach (var oper in listOfOperations)
                                         {
-                                            currentTask =  $"Выполняется копирование: {oper.ToString()}";
+                                            currentTask =  $"Копирование: {oper.ToString()}";
                                             oper.Start(item.Key, item.Value, isInfoPoint);
                                             // увеличиваем прогресбар
                                             Progress++;

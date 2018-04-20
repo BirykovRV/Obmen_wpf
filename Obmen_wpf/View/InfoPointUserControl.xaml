@@ -68,7 +68,7 @@
                     <!--#endregion-->
                 </StackPanel>
             </GroupBox>
-
+            <Separator DockPanel.Dock="Top" Margin="0 10"/>
             <GroupBox  Header="АСКУ:" Padding="5" DockPanel.Dock="Top">
                 <StackPanel>
                     <!--#region first section-->
@@ -116,7 +116,7 @@
 
                 </StackPanel>
             </GroupBox>
-
+            <Separator DockPanel.Dock="Top" Margin="0 10"/>
             <GroupBox Header="Список:" Padding="5" DockPanel.Dock="Bottom">
                 <StackPanel>
                     <!--#region third section-->

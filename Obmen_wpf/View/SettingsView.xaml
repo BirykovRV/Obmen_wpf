@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Obmen_wpf.View"
         xmlns:viewmodel="clr-namespace:Obmen_wpf.ViewModel"
         mc:Ignorable="d"
-        Title="SettingsView"
+        Title="Настройки"
         ResizeMode="NoResize"
         Height="455"
         Width="631">
