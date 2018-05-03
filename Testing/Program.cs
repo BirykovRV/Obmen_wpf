@@ -12,9 +12,6 @@ namespace Testing
 {
     class Program
     {
-        public static object Year { get; set; } = null;
-        public static object Number { get; set; } = 1;
-
         static void Main(string[] args)
         {
             //FTPClient server = new FTPClient("10.87.6.143", "support", "trd19afo");
@@ -28,17 +25,17 @@ namespace Testing
 
             //File.SetLastWriteTime(localFile, time);
 
-            //Console.WriteLine(time);            
-
+            //var list = server.DirectoryListSimple(remoutePath);
+            //for (int i = 0; i < list.Length; i++)
+            //{
+            //    Console.WriteLine(list[i]);
+            //}    
+            Console.WriteLine(DateTime.Today.ToShortDateString());
             //Console.WriteLine("Загрузка успешно завершена! Для выхода нажмите Enter.");
             //Console.WriteLine(Environment.ExpandEnvironmentVariables(path));
             //StartUpload(@"G:\Реестр коммунальных платежей", "200001/Реестр коммунальных платежей/");
 
             Console.ReadKey();
         }
-
-        public override string ToString() => $"{Year}";
-
-
     }
 }

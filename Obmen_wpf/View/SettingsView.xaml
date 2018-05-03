@@ -13,7 +13,7 @@
     <Window.DataContext>
         <viewmodel:SettingsViewModel/>
     </Window.DataContext>
-    <Grid>        
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition Width="*"/>
@@ -32,20 +32,20 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        
+
         <GroupBox Header="Расположение папок:"  Height="auto" Grid.Column="1" Padding="2" Margin="3">
             <ScrollViewer>
                 <StackPanel Grid.Column="1" DataContext="{Binding SelectedOperation}">
                     <UserControl Content="{Binding Path=Control, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
-            </ScrollViewer>            
+            </ScrollViewer>
         </GroupBox>
-        
+
 
         <StackPanel Grid.Column="1" Grid.Row="1" Margin="5" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button Margin="2" Content="Сохранить" Command="{Binding OnSave}"/>
-            <Button Margin="2" Content="По умолчанию" Command="{Binding OnDefault}"/>
+            <Button Margin="2" Content="Сохранить" Command="{Binding OnSave}" Padding="10"/>
+            <Button Margin="2" Content="По умолчанию" Command="{Binding OnDefault}" Padding="10"/>
         </StackPanel>
-        
+
     </Grid>
 </Window>

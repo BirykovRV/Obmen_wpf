@@ -74,5 +74,11 @@ namespace Obmen_wpf.Model
 
             return time;
         }
+
+        public string[] GetDirList(string from)
+        {            
+            var list = Server.DirectoryListSimple(from);
+            return list;
+        }
     }
 }
