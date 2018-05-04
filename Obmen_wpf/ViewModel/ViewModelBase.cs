@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Reflection;
+using System.Deployment.Application;
 
 namespace Obmen_wpf.ViewModel
 {
@@ -73,10 +74,10 @@ namespace Obmen_wpf.ViewModel
         {
             listOfOperations = new List<ICopyFiles>()
             {
-                //new CopyF130(),
-                //new CopyPostPay(),
-                //new CopyEspp(),
-                //new CopyFSG(),
+                new CopyF130(),
+                new CopyPostPay(),
+                new CopyEspp(),
+                new CopyFSG(),
                 new ListCopy()
             };
             IsComplited = true;
