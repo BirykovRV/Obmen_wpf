@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obmen_wpf", "Obmen_wpf\Obmen_wpf.csproj", "{3970F944-E142-49A8-9779-67CBD362D6A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.csproj", "{A62F1527-399B-4C67-A8BB-0804E5D7C9BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Testing\Updater.csproj", "{A62F1527-399B-4C67-A8BB-0804E5D7C9BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

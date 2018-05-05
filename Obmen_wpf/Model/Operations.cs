@@ -13,7 +13,7 @@ namespace Obmen_wpf.Model
     /// <summary>
     /// Определяет методы для копирования файлов, папок, разархивации zip и rar
     /// </summary>
-    class Operations
+    public class Operations
     {
         // Логирование Nlogs
         private static Logger log = LogManager.GetCurrentClassLogger();

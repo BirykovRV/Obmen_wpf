@@ -9,27 +9,29 @@ using Obmen_wpf.Model;
 using Obmen_wpf;
 using System.Xml.Linq;
 using System.Reflection;
+using System.Diagnostics;
 
-namespace Testing
+namespace Updater
 {
     class Program
     {
         static void Main(string[] args)
         {
-            XDocument xdoc = XDocument.Load("Testing.exe.config");
-            XElement root = xdoc.Element("configuration");
-
-            foreach (var item in root.Elements("settings").ToList())
+            foreach (var proc in Process.GetProcesses())
             {
-                if (item.Attribute("name").Value == "version")
+                if (proc.ProcessName.Contains("Obmen_wpf"))
                 {
-                    item.Element("value").Value = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                    var version = new Version(item.Value);
-                    Console.WriteLine(version);
+                    proc.Kill();
+                    proc.WaitForExit();
                 }
             }
 
-            Console.ReadKey();
+            if (RemovableDisk.FindDisk())
+            {
+                var usb = RemovableDisk.RemovableDrives.FirstOrDefault();
+
+
+            }
         }
     }
 }

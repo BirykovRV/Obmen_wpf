@@ -14,17 +14,16 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>ftp://10.86.1.201/Shared/Offline_Helper/</PublishUrl>
+    <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
-    <UpdateUrl>\\10.86.1.201\ftp\Shared\Offline_Helper\</UpdateUrl>
     <ProductName>Offline Helper</ProductName>
     <PublisherName>BRV</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
@@ -126,6 +125,7 @@
     <Compile Include="Model\PasswordHelper.cs" />
     <Compile Include="Model\RemovableDisk.cs" />
     <Compile Include="Model\ServerFtpModel.cs" />
+    <Compile Include="Model\UpdateChecker.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\UserControlViewModel.cs" />
