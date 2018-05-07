@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Reflection;
-using System.Deployment.Application;
+using System.Configuration;
 
 namespace Obmen_wpf.ViewModel
 {
     class ViewModelBase : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Список операций
+        /// </summary>
         private List<ICopyFiles> listOfOperations;
+        // проверка на завершение всех операций
         private bool isComplited;
         private int progress;
         private string currentTask;
@@ -185,11 +189,6 @@ namespace Obmen_wpf.ViewModel
         public void OnPropertyChanged(string param = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(param));
-        }
-
-        private void DoJob()
-        {
-
         }
     }
 }

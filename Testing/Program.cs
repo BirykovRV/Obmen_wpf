@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using Obmen_wpf.Model;
-using Obmen_wpf;
-using System.Xml.Linq;
-using System.Reflection;
 using System.Diagnostics;
+using System.Configuration;
 
 namespace Updater
 {
@@ -30,8 +22,20 @@ namespace Updater
             {
                 var usb = RemovableDisk.RemovableDrives.FirstOrDefault();
 
+                var updateFrom = $"{usb.Key}Offline_Helper";
+                var updateTo = "C:\\Offline_Helper\\";
 
+
+                var fileInfo = Directory.GetFiles(updateFrom);
+
+                foreach (var file in fileInfo)
+                {
+                    File.Copy(file, updateTo + Path.GetFileName(file), true);
+                }
             }
+            System.Windows.Forms.MessageBox.Show("Обновление завершено успешно! Нажмите Ок.", "Внимание", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Asterisk);
+            Process.Start("Obmen_wpf.exe");
         }
     }
 }
+

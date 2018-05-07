@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Obmen_wpf.Model;
 using Obmen_wpf.Properties;
 using Obmen_wpf.View;
-using Microsoft.Win32;
-using System.Windows;
 
 namespace Obmen_wpf.ViewModel
 {
