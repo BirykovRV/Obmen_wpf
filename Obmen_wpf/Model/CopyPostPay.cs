@@ -106,16 +106,21 @@ namespace Obmen_wpf.Model
             {
                 DirectoryInfo update = new DirectoryInfo(from);         // От куда копировать
                 DirectoryInfo plugin = new DirectoryInfo(to);           // Куда копировать БД или Модуль
-                
+
+                if (!plugin.Exists)
+                {
+                    return true;
+                }
                 // Дата создания плагина или БД                
-                var updateDate = update.GetFiles().FirstOrDefault()?.LastWriteTime;
-                var pluginDate = plugin.GetFiles().FirstOrDefault()?.LastWriteTime;
+                var updateDate = update.GetFiles()?.FirstOrDefault()?.LastWriteTime;
+                var pluginDirDate = plugin.GetDirectories()?.FirstOrDefault()?.LastWriteTime;
+                //var pluginFileDate = update.GetFiles().FirstOrDefault()?.LastWriteTime;
 
                 if (updateDate == null)
                     throw new ArgumentNullException(from , "Отсутствует архив с обновлением.");
-                else if (pluginDate == null)
+                else if (pluginDirDate == null)
                     return true;
-                return updateDate > pluginDate;
+                return updateDate > pluginDirDate;
             }
             catch (Exception ex)
             {

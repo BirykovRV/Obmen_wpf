@@ -41,7 +41,7 @@ namespace Obmen_wpf.Model
                     {
                         string[] tokens = lines[i].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                         // имя файла
-                        string name = tokens[8];
+                        string name = tokens[8] + tokens[tokens.Length-1];
                         // Тип файла ('d' - папка)
                         string category = tokens[0];
                         string combinedLocalPath = Path.Combine(localPath, name);

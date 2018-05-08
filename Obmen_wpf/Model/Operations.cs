@@ -91,9 +91,18 @@ namespace Obmen_wpf.Model
                 string _pathFrom = pathFrom + "\\" + files[i].Name;
                 if (files[i].Name.Contains(".zip"))
                 {
-                    if (dirTo.Exists) dirTo.Delete(true);
-                    // Разархивация .zip
-                    ZipFile.ExtractToDirectory(_pathFrom, pathTo); 
+                    if (dirTo.Exists)
+                    {
+                        dirTo.Delete(true);
+                        // Разархивация .zip
+                        ZipFile.ExtractToDirectory(_pathFrom, pathTo);
+                    }
+                    else
+                    {
+                        dirTo.Create();
+                        // Разархивация .zip
+                        ZipFile.ExtractToDirectory(_pathFrom, pathTo);
+                    }
 
                 }
                 else if (files[i].Name.Contains(".rar"))

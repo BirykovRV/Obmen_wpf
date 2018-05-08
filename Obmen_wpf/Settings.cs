@@ -35,9 +35,8 @@ namespace Obmen_wpf.Properties {
         }
         
         private void SettingsSavingEventHandler(object sender, System.ComponentModel.CancelEventArgs e) {
-            // Добавьте здесь код для обработки события SettingsSaving.
-            MessageBox.Show("Настройки успешно сохранены!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            // Добавьте здесь код для обработки события SettingsSaving.            
             IsMyPropertyChanged = false;
-        }
+        }        
     }
 }

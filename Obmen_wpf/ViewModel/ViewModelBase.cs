@@ -78,11 +78,11 @@ namespace Obmen_wpf.ViewModel
         {
             listOfOperations = new List<ICopyFiles>()
             {
-                new CopyF130(),
-                new CopyPostPay(),
-                new CopyEspp(),
+                //new CopyF130(),
+                //new CopyPostPay(),
+                //new CopyEspp(),
                 new CopyFSG(),
-                new ListCopy()
+                //new ListCopy()
             };
             IsComplited = true;
             progress = 0;
@@ -119,7 +119,7 @@ namespace Obmen_wpf.ViewModel
                                         // для каждого списка операций вызываем выполнение
                                         foreach (var oper in listOfOperations)
                                         {
-                                            currentTask =  $"Копирование: {oper.ToString()}";
+                                            //currentTask =  oper.ToString();
                                             oper.Start(item.Key, item.Value, isInfoPoint);
                                             // увеличиваем прогресбар
                                             Progress++;

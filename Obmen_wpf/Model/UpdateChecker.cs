@@ -28,12 +28,13 @@ namespace Obmen_wpf.Model
                 {
                     var remoteFileVersion = new Version(FileVersionInfo.GetVersionInfo(filePath).FileVersion);
                     var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
-
+                    RemovableDisk.RemovableDrives.Clear();
                     return true ? remoteFileVersion > currentVersion : false;
                 }
                 else
                     throw new FileNotFoundException($"Файл не найден.\n{usb.Key}Offline_Helper\\{fileName}");
             }
+            RemovableDisk.RemovableDrives.Clear();
             return false;
         }
     }

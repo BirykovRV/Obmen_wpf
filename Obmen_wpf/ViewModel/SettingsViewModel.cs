@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 using Obmen_wpf.Model;
 using Obmen_wpf.Properties;
@@ -55,6 +56,7 @@ namespace Obmen_wpf.ViewModel
                 return new Command(o =>
                 {
                     Settings.Default.Save();
+                    MessageBox.Show("Настройки успешно сохранены!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                     //System.Windows.Forms.Application.Restart();
                     //Application.Current.Shutdown();
                 }, o => Settings.IsMyPropertyChanged);
