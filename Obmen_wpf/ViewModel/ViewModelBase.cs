@@ -78,11 +78,11 @@ namespace Obmen_wpf.ViewModel
         {
             listOfOperations = new List<ICopyFiles>()
             {
-                //new CopyF130(),
-                //new CopyPostPay(),
-                //new CopyEspp(),
+                new CopyF130(),
+                new CopyPostPay(),
+                new CopyEspp(),
                 new CopyFSG(),
-                //new ListCopy()
+                new ListCopy()
             };
             IsComplited = true;
             progress = 0;

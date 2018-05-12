@@ -14,7 +14,7 @@ namespace Obmen_wpf.Model
         private FtpWebRequest ftpRequest = null;
         private FtpWebResponse ftpResponse = null;
         private Stream ftpStream = null;
-        private int bufferSize = 65536;
+        private int bufferSize = 131_072;
 
         /* Construct Object */
         public FTPClient(string hostIP, string userName, string password)
@@ -33,15 +33,20 @@ namespace Obmen_wpf.Model
         {
             try
             {
-                var lines = DirectoryListDetailed(remotePath);
+                var lines = DirectoryListDetailed(remotePath);                
 
                 for (int i = 0; i < lines.Length - 1; i++)
                 {
                     if (lines.FirstOrDefault() != "")
                     {
+                        string name = "";
                         string[] tokens = lines[i].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                         // имя файла
-                        string name = tokens[8] + tokens[tokens.Length-1];
+                        for (int j = 8; j < tokens.Length; j++)
+                        {
+                            name += " " + tokens[j];
+                        }
+                        name = name.Trim();
                         // Тип файла ('d' - папка)
                         string category = tokens[0];
                         string combinedLocalPath = Path.Combine(localPath, name);
