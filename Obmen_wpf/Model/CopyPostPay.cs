@@ -129,7 +129,7 @@ namespace Obmen_wpf.Model
             return false;
         }
 
-        private bool CheckUpdateFromFTP(DateTime from, string to)
+        public static bool CheckUpdateFromFTP(DateTime from, string to)
         {
             try
             {

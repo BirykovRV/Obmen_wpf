@@ -119,10 +119,17 @@ namespace Obmen_wpf.ViewModel
                                         // для каждого списка операций вызываем выполнение
                                         foreach (var oper in listOfOperations)
                                         {
-                                            //currentTask =  oper.ToString();
-                                            oper.Start(item.Key, item.Value, isInfoPoint);
-                                            // увеличиваем прогресбар
-                                            Progress++;
+                                            try
+                                            {
+                                                //currentTask =  oper.ToString();
+                                                oper.Start(item.Key, item.Value, isInfoPoint);
+                                                // увеличиваем прогресбар
+                                                Progress++;
+                                            }
+                                            catch (System.Exception ex)
+                                            {
+                                                System.Windows.Forms.MessageBox.Show(ex.ToString());
+                                            }
                                         }                                        
                                         // Если необходимо, чтобы вложенная задача выполнялась вместе с внешней, необходимо использовать значение TaskCreationOptions.AttachedToParent
                                     }, TaskCreationOptions.AttachedToParent); 

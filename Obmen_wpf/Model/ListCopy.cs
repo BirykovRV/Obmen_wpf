@@ -41,7 +41,10 @@ namespace Obmen_wpf.Model
                     }
                 }
                 var newFile = listTo + $"Список_террористов_{DateTime.Today.ToShortDateString()}.docx";
-                File.Copy(fileName, newFile, true);                
+                if (File.Exists(fileName))
+                {
+                    File.Copy(fileName, newFile, true);
+                }                               
 
                 //Delete old files
                 // Operations.DeleteOldObj(f130From);

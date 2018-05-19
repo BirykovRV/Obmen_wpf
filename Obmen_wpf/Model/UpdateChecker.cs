@@ -18,24 +18,31 @@ namespace Obmen_wpf.Model
         /// <returns></returns>
         public static bool CheckUpdate(string fileName)
         {
-            if (RemovableDisk.FindDisk())
+            if (Properties.Settings.Default.IsInfoPoinChecked)
             {
-                var usb = RemovableDisk.RemovableDrives.FirstOrDefault();
-
-                var filePath = $"{usb.Key}Offline_Helper\\{fileName}";
-
-                if (File.Exists(filePath))
-                {
-                    var remoteFileVersion = new Version(FileVersionInfo.GetVersionInfo(filePath).FileVersion);
-                    var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
-                    RemovableDisk.RemovableDrives.Clear();
-                    return true ? remoteFileVersion > currentVersion : false;
-                }
-                else
-                    throw new FileNotFoundException($"Файл не найден.\n{usb.Key}Offline_Helper\\{fileName}");
+                return false;
             }
-            RemovableDisk.RemovableDrives.Clear();
-            return false;
+            else
+            {
+                if (RemovableDisk.FindDisk())
+                {
+                    var usb = RemovableDisk.RemovableDrives.FirstOrDefault();
+
+                    var filePath = $"{usb.Key}Offline_Helper\\{fileName}";
+
+                    if (File.Exists(filePath))
+                    {
+                        var remoteFileVersion = new Version(FileVersionInfo.GetVersionInfo(filePath).FileVersion);
+                        var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+                        RemovableDisk.RemovableDrives.Clear();
+                        return true ? remoteFileVersion > currentVersion : false;
+                    }
+                    else
+                        throw new FileNotFoundException($"Файл не найден.\n{usb.Key}Offline_Helper\\{fileName}");
+                }
+                RemovableDisk.RemovableDrives.Clear();
+                return false;
+            }
         }
     }
 }
